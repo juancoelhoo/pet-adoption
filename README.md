@@ -20,4 +20,10 @@ Principais features:
  - Recursos de Compartilhamento em Redes Sociais;
  - Notificações sobre Novos Animais Disponíveis
 
+## Tecnologias
+
+
+
+
+
 
