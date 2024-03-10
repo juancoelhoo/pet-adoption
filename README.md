@@ -22,8 +22,9 @@ Principais features:
 
 ## Tecnologias
 
-
-
-
-
-
+- TypeScript (Linguagem de programação)
+- Express.js (Back-end)
+- React.js (Front-end)
+- SQLite (Banco de dados)
+- Jest (Testes)
+- Figma (Prototipação)
