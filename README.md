@@ -28,3 +28,21 @@ Principais features:
 - SQLite (Banco de dados)
 - Jest (Testes)
 - Figma (Prototipação)
+
+## Backlog do Produto 
+- Como usuário comum, gostaria de criar e deletar um anúncio PET. 
+- Como usuário comum, gostaria de me cadastrar na plataforma. 
+- Como usuário comum, gostaria de adicionar fotos ao anúncio do PET.
+- Como usuário comum, gostaria de entrar em contato com o usuário que cadastrou o pet para tirar possíveis dúvidas.
+- Como usuário comum, gostaria de reagir ao anúncio de um PET para demonstrar interesse.
+- Como usuário comum, gostaria de ter acesso a informações do anúncio do PET. 
+- Como usuário comum, gostaria de editar o anuncio.
+- Como usuário comum, gostaria de ter a possibilidade de postar uma descrição de um animal que estou procurando.
+- Como usuário comum, gostaria de filtrar os anúncios através de tags. 
+- Como usuário comum, gostaria de avaliar outro usuário. 
+- Como usuário comum, gostaria de denunciar perfis e posts de outros usuários. 
+- Como usuário administrador, gostaria de autorizar o anunciou de um PET.
+- Como usuário administrador, gostaria de excluir posts para maior organização do aplicativo.
+- Como usuário administrador, gostaria de banir um usuário comum do aplicativo. 
+- Como usuário administrador, gostaria de censurar avaliações e comentários com conteúdo ofensivo.
+- Como usuário administrador, gostaria de avaliar denuncia de perfis e posts realizadas por usuários comuns. 
