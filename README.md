@@ -41,7 +41,7 @@ Principais features:
 - Como usuário comum, gostaria de filtrar os anúncios através de tags. 
 - Como usuário comum, gostaria de avaliar outro usuário. 
 - Como usuário comum, gostaria de denunciar perfis e posts de outros usuários. 
-- Como usuário administrador, gostaria de autorizar o anunciou de um PET.
+- Como usuário administrador, gostaria de autorizar o anuncio de um PET.
 - Como usuário administrador, gostaria de excluir posts para maior organização do aplicativo.
 - Como usuário administrador, gostaria de banir um usuário comum do aplicativo. 
 - Como usuário administrador, gostaria de censurar avaliações e comentários com conteúdo ofensivo.
