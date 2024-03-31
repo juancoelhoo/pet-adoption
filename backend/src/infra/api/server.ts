@@ -44,7 +44,7 @@ export class SetupServer {
   }
 
   private setupDocs(): void {
-    this.app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs))
+    this.app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
   }
 
   private setupControllers(): void {
