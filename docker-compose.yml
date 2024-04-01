@@ -1,0 +1,13 @@
+version: '3'
+
+services: 
+  backend:
+    build: 
+      context: backend
+    container_name: backend
+    command: yarn dev
+    volumes:
+      - ./backend:/usr/src/app
+    tty: true
+    ports:
+      - "3333:3333"

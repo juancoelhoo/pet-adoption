@@ -1,0 +1,47 @@
+{
+  "name": "pet-adoption-backend",
+  "version": "1.0.0",
+  "description": "Pet Adoption's Backend.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon 'src/index.ts'",
+    "build": "tsc",
+    "start": "yarn build && node dist/src/index.js",
+    "style:check": "prettier --check \"src/**/*.ts\"",
+    "style:fix": "prettier --write \"src/**/*.ts\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juancoelhoo/pet-adoption.git"
+  },
+  "keywords": [],
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/juancoelhoo/pet-adoption/issues"
+  },
+  "homepage": "https://github.com/juancoelhoo/pet-adoption#readme",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/module-alias": "^2.0.4",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.6",
+    "nodemon": "^3.1.0",
+    "prettier": "^3.2.5",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.4.3"
+  },
+  "dependencies": {
+    "chalk": "4.1.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "module-alias": "^2.2.3",
+    "reflect-metadata": "^0.2.2",
+    "sequelize": "^6.37.2",
+    "sequelize-typescript": "^2.1.6",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0"
+  }
+}
