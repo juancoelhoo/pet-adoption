@@ -48,75 +48,57 @@ Principais features:
 
 ## Backlog da Sprint 2
 
-•	História #1: Setup banco de dados 
-•	Tarefas e responsáveis: Rafael Chimicatti
-   1.	Definição das tabelas 
-   2.	Definição dos relacionamentos
-   3.	Definição dos atributos 
-   4.	Criação do BD
+•	História #1: Como usuário comum, quero poder me cadastrar na plataforma.
+•	Tarefas e responsáveis: 
+   1. Setup do Banco de Dados [Rafael Chimicatti] 
+   2. Definição do backend [Eduardo Correia] 
+   3. Definição do frontend [Juan Coelho] 
+   4.	Implementar tela inicial. [Bernardo Viggiano] 
+   5.	Implementar tela de cadastro. [Bernardo Viggiano]
+   6.	Implementar rota de cadastro. [Bernardo Viggiano]
+   7.	Implementar rota de login. [Bernardo Viggiano]
+   8.	Implementar no backend a lógica de autenticação. [Bernardo Viggiano]
 
-•	História #2: Definição do backend
-•	Tarefas e responsáveis: Eduardo Correia 
-   1.	Configurar Docker 
-   2.	Configuração do Express.js
-   3.	Conexão com o BD
-   4.	Setup documentação (backend)
-   5.	Configuração TS para backend
-
-•	História #3: Definição do frontend 
-•	Tarefas e responsáveis: Juan Coelho
-   1.	Configuração do React.js 
-   2.	Configuração TS para frontend
-   3.	Configuração CSS
-
-•	História #4: Como usuário comum, quero poder me cadastrar na plataforma.
-•	Tarefas e responsáveis: Bernardo Viggiano
-   1.	Implementar tela inicial.
-   2.	Implementar tela de cadastro.
-   3.	Implementar rota de cadastro.
-   4.	Implementar rota de login.
-   5.	Implementar no backend a lógica de autenticação. 
-
-•	História #5: Como usuário comum, quero poder criar, deletar e editar um anúncio PET.
-•	Tarefas e responsáveis: Eduardo Correia
-   1.	Implementar tela de gerenciamento de anúncio.
-   2.	Implementar rota de criação.
-   3.	Implementar rota de edição. 
-   4.	Implementar rota de exclusão. 
+•	História #2: Como usuário comum, quero poder criar, deletar e editar um anúncio PET.
+•	Tarefas e responsáveis: 
+   1.	Implementar tela de gerenciamento de anúncio. [Eduardo Correia]
+   2.	Implementar rota de criação. [Eduardo Correia]
+   3.	Implementar rota de edição. [Eduardo Correia]
+   4.	Implementar rota de exclusão. [Eduardo Correia]
 
 
-•	História #6: Como usuário comum, quero poder ter acesso a informações do anúncio do PET.
-•	Tarefas e responsáveis: Juan Coelho
-   1.	Implementação da tela de anúncios. 
-   2.	Implementação da tela de anúncios específicos (um a um).
-   3.	Implementar rota de listagem. 
+•	História #3: Como usuário comum, quero poder ter acesso a informações do anúncio do PET.
+•	Tarefas e responsáveis: 
+   1.	Implementação da tela de anúncios. [Juan Coelho]
+   2.	Implementação da tela de anúncios específicos (um a um). [Juan Coelho]
+   3.	Implementar rota de listagem. [Juan Coelho]
 
-•	História #7: Como usuário comum, gostaria de reagir ao anúncio de um PET para demonstrar interesse. 
-•	Tarefas e responsáveis: Bernardo Viggiano
-   1.	Implementar botões de reação. 
-   2.	Implementar rota de adição de reações. 
+•	História #4: Como usuário comum, gostaria de reagir ao anúncio de um PET para demonstrar interesse. 
+•	Tarefas e responsáveis: 
+   1.	Implementar botões de reação. [Bernardo Viggiano]
+   2.	Implementar rota de adição de reações. [Bernardo Viggiano]
 
-•	História #8: Como usuário comum, gostaria de avaliar outro usuário. 
-•	Tarefas e responsáveis: Rafael Chimicatti 
-   1.	Criação do perfil do usuário. 
-   2.	Criação da lógica de avaliação do usuário. 
-   3.	Implementar rota de avaliação de usuário. 
+•	História #5: Como usuário comum, gostaria de avaliar outro usuário. 
+•	Tarefas e responsáveis: 
+   1.	Criação do perfil do usuário. [Rafael Chimicatti] 
+   2.	Criação da lógica de avaliação do usuário. [Rafael Chimicatti] 
+   3.	Implementar rota de avaliação de usuário. [Rafael Chimicatti] 
 
-•	História #9: Como usuário comum, gostaria de denunciar posts de outros usuários. 
-•	Tarefas e responsáveis: Bernardo Viggiano
-  1.	Criação da lógica de denúncia de posts. 
-  2.	Criação do pop-up. 
-  3.	Implementar rota de denúncia de posts. 
+•	História #6: Como usuário comum, gostaria de denunciar posts de outros usuários. 
+•	Tarefas e responsáveis: 
+  1.	Criação da lógica de denúncia de posts. [Bernardo Viggiano]
+  2.	Criação do pop-up. [Bernardo Viggiano]
+  3.	Implementar rota de denúncia de posts. [Bernardo Viggiano]
 
-•	História #10: Como usuário administrador, quero banir um usuário comum do aplicativo. 
-•	Tarefas e responsáveis: Eduardo Correia
-   1.	Criação de tela de denúncias. 
-   2.	Criação do botão de banir usuário. 
-   3.	Implementação da lógica de banimento do usuário, baseado na permissão. 
-   4.	Implementação da rota de banimento do usuário comum do aplicativo.
+•	História #7: Como usuário administrador, quero banir um usuário comum do aplicativo. 
+•	Tarefas e responsáveis:
+   1.	Criação de tela de denúncias. [Eduardo Correia]
+   2.	Criação do botão de banir usuário. [Eduardo Correia]
+   3.	Implementação da lógica de banimento do usuário, baseado na permissão. [Eduardo Correia]
+   4.	Implementação da rota de banimento do usuário comum do aplicativo. [Eduardo Correia]
 
-•	História #11: Como usuário administrador, gostaria de excluir posts para maior organização do aplicativo. 
-•	Tarefas e responsáveis: Juan Coelho
-   1.	Criação do botão de exclusão de posts, baseado na permissão.
-   2.	Lógica de exclusão de posts. 
-   3.	Implementação da rota da exclusão de posts. 
+•	História #8: Como usuário administrador, gostaria de excluir posts para maior organização do aplicativo. 
+•	Tarefas e responsáveis: 
+   1.	Criação do botão de exclusão de posts, baseado na permissão. [Juan Coelho]
+   2.	Lógica de exclusão de posts. [Juan Coelho]
+   3.	Implementação da rota da exclusão de posts. [Juan Coelho]
