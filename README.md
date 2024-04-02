@@ -1,4 +1,4 @@
-# pet-adoption
+![image](https://github.com/juancoelhoo/pet-adoption/assets/126487673/3e4e3e58-6939-4864-94af-6ab4acacccec)# pet-adoption
 Este repositório contém o código-fonte e os recursos relacionados ao projeto prático desenvolvido como parte da disciplina "Prática em Desenvolvimento de Software". O objetivo principal deste projeto é criar uma plataforma web dedicada à adoção responsável de cães e gatos.
 
 ## Membros da equipe
@@ -13,12 +13,11 @@ O projeto visa desenvolver uma plataforma online que facilite o processo de ado�
 
 Principais features:
 
- - Processo de Candidatura para Adoção;
- - Perfil do Animal com Informações Detalhadas;
- - Pesquisa de Animais para Adoção;
- - Recomendação de Pet ao Usuário;
- - Recursos de Compartilhamento em Redes Sociais;
- - Notificações sobre Novos Animais Disponíveis
+ - Gerenciamento de Anúncios de PETS;
+ - Interação com Anúncios;
+ - Gerenciamento de Perfil e Interações Sociais;
+ - Moderação de Conteúdo;
+ - Gerenciamento de Denúncias e Avaliações;
 
 ## Tecnologias
 
