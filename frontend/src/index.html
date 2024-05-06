@@ -1,11 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pet Adoption</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Adopt - Login</title>
+    <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy|Quicksand:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="root"></div>
+    <div class="container">
+        <div class="left">
+            <div class="content">
+                <h1>PET ADOPT</h1>
+                <p>Bem-vindo ao Pet Adopt! Aqui, estamos apaixonados por conectar corações peludos aos lares certos. Com uma coleção diversificada de amigos de quatro patas à espera de um lar amoroso, oferecemos uma experiência de adoção excepcional. Nossa missão é encontrar o parceiro peludo perfeito para você e sua família. De cães brincalhões a gatos afetuosos, cada animalzinho tem sua própria história e personalidade única. Junte-se a nós nesta jornada de amor e alegria. Cadastre-se hoje e descubra o companheiro peludo que está esperando por você!</p>
+                <p> </p>
+                <ul>
+                    <li>Segurança nas adoções</li>
+                    <li>Organização sem fins lucrativos</li>
+                    <li>Time dedicado a remover spams</li>
+                </ul>
+            </div>
+        </div>
+        <div class="right">
+            <div class="login-container">
+              <h2>LOGIN</h2> 
+              <form action="/submit-your-login-form" method="post">
+                  <label for="email">Email:</label>
+                  <input type="email" id="email" name="email" placeholder="E-mail">
+                  <label for="password">Senha:</label>
+                  <input type="password" id="password" name="password" placeholder="Senha">
+                  <button type="submit">Acessar</button>
+                  <div class="separator">OU</div>
+                  <button type="button">Se cadastrar</button>
+              </form>
+          </div>      
+        </div>
+    </div>
 </body>
 </html>

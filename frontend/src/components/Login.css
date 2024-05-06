@@ -1,41 +1,114 @@
-/* frontend/src/components/Login.css */
+/* LOGIN */
 .login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: left; /* Alinha os itens à direita */
+}
+
+.header-container {
+  align-self: flex-start; /* Alinha ao topo dentro do container */
+  width: 100%;
+  text-align: left; /* Alinha o texto à direita */
+  padding-right: 40%; /* Ajusta o espaçamento para posicionar na terceira metade */
+}
+
+.login-form {
+  width: 100%; /* Garante que o formulário utilize a largura total */
+}
+
+  
+  /* Reset básico para remover paddings e margins padrão */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Paragrafo de texto */
+body, html {
+    height: 100%;
+    font-family: 'Quicksand', sans-serif; /* Define Quicksand como a fonte padrão */
+    font-size: 23px;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh; /* Garante que o container ocupe a altura total da tela */
+}
+
+.left, .right {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-  }
-  
-  .login-form {
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-  }
-  
-  .login-form h2 {
-    text-align: center;
-  }
-  
-  .login-form label {
-    margin-bottom: 5px;
-  }
-  
-  .login-form input {
+}
+
+.left {
+    background: linear-gradient(135deg, #d1ba21 35%, #a3a478 100%); /* Gradiente conforme a imagem */
+    padding: 100px;
+    color: white; /* Cor do texto no lado esquerdo */
+}
+
+.content {
+    max-width: 800px; /* Limita a largura do texto */
+}
+
+/* PET ADOPT */
+h1 {
+    font-family: 'Luckiest Guy', cursive; /* Estilo do título principal */
+    margin-bottom: 30px; /* Espaço abaixo do título */
+    font-size: 50px;
+}
+
+ul {
+    list-style: none; /* Remove estilos de lista */
+}
+
+/* barras brancas */ 
+ul li {
+    padding: 12px 0; /* Espaçamento entre itens de lista */
+    border-top: 1px solid white; /* Linha branca entre itens */
+}
+
+.login-container h2 {
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 50px; /* Ajuste o tamanho da fonte conforme necessário */
+    color: #333;
+    text-align: left;
+    text-justify: left;
+    margin: 30px 0; /* Espaço acima e abaixo para separar dos campos de input */
+}
+
+/* Ajustes adicionais para garantir o alinhamento e o estilo dos inputs */
+input, button {
+    width: 100%;
+    padding: 10px;
     margin-bottom: 10px;
-    padding: 10px;
-    font-size: 16px;
-  }
-  
-  .login-form button {
-    padding: 10px;
-    font-size: 16px;
-    background-color: #007bff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+/* Botões "Acessar" e "Se cadastrar" */
+button {
+    background-color: #a8c256;
     color: white;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
-  }
-  
+    font-size: 20px;
+}
+
+/* Divisão entre "acessar" e "se cadastrar" */
+.separator {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+/* Diminuindo opacidade do que está dentro das caixas de email/senha */
+
+input::placeholder {
+    color: #aaa;
+    font-size: 16px;
+}
