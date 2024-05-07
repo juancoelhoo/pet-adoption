@@ -68,6 +68,7 @@ ul {
 ul li {
     padding: 12px 0; /* Espaçamento entre itens de lista */
     border-top: 1px solid white; /* Linha branca entre itens */
+    margin-top: 10px;
 }
 
 .login-container h2 {

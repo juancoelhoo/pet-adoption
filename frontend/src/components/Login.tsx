@@ -1,5 +1,6 @@
 // frontend/src/components/Login.tsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
 interface LoginProps {
@@ -9,10 +10,15 @@ interface LoginProps {
 const Login: React.FC<LoginProps> = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     onLogin(username, password);
+  };
+
+  const handleRegister = () => {
+    navigate('/register'); // Redireciona para a página de cadastro
   };
 
   return (
@@ -36,6 +42,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
           required
         />
         <button type="submit">Login</button>
+        <button type="button" onClick={handleRegister}>Se cadastrar</button>
       </form>
     </div>
   );
