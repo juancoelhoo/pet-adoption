@@ -11,3 +11,13 @@ services:
     tty: true
     ports:
       - "3333:3333"
+  frontend:
+    build: 
+      context: frontend
+    container_name: frontend
+    command: npm start
+    volumes:
+      - ./frontend:/usr/src/app
+    tty: true
+    ports:
+      - "3000:3000"
