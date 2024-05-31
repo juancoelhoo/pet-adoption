@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Advertisement from "./pages/Advertisement/Advertisement";
+import AdvertisementScreen from "./pages/Advertisement/Advertisement";
 
 import './global.css';
 
@@ -9,7 +9,7 @@ export const App = () => {
         <>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Advertisement/>} />
+                    <Route path="/" element={<AdvertisementScreen/>} />
                 </Routes>
             </BrowserRouter>
         </>
