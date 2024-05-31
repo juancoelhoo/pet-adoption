@@ -8,7 +8,6 @@ import { ErrorsHandler } from "./errors/errorsHandler";
 import { swaggerSpecs } from "./docs/docsSetup";
 import { setupDb } from "./database/dbSetup";
 
-import examplesRouter from "./modules/examples/routes";
 import postsRouter from "./modules/posts/routes";
 
 export class SetupServer {
@@ -49,7 +48,6 @@ export class SetupServer {
   }
 
   private setupControllers(): void {
-    this.app.use("/examples", examplesRouter);
     this.app.use("/posts", postsRouter);
   }
 
