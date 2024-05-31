@@ -2,7 +2,7 @@ version: '3'
 
 services: 
   backend:
-    build: 
+    build:
       context: backend
     container_name: backend
     command: yarn dev
@@ -13,7 +13,7 @@ services:
       - "3333:3333"
 
   frontend:
-    build: 
+    build:
       context: frontend
     container_name: frontend
     command: npm start
@@ -37,9 +37,8 @@ services:
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin
-    environment:
-      PGADMIN_DEFAULT_EMAIL: "root@mail.com"
-      PGADMIN_DEFAULT_PASSWORD: "root"
+    env_file:
+      - ./database/.env
     ports:
       - "16543:80"
     depends_on:
