@@ -1,0 +1,23 @@
+.advertisement-container {
+    display: flex;
+}
+  
+.ad-screen {
+    flex: 1;
+    padding: 50px;
+    font-size: 2rem;
+    position: relative;
+}
+
+.ad-screen img{
+    margin-right: 20px;
+}
+
+.ad-screen::after {
+    content: '';
+    position: absolute;
+    top: 15%;
+    left: 50px;
+    width: calc(100% - 100px); 
+    border-bottom: 3px solid black;
+  }
