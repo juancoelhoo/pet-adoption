@@ -33,7 +33,7 @@
 }
 
 .ad-screen img {
-    margin-right: 15px;
+    margin-right: 5px;
 }
 
 .ad-screen::after {
@@ -53,12 +53,3 @@
     margin-top: 15px;
 }
 
-.content{
-    font-size: 0.5rem;
-}
-
-.pet-info {
-    font-family: "Quicksand", sans-serif; /* Use your desired font-family */
-    font-weight: 700; /* Use the desired font weight */
-    color: #333; /* Use the desired color */
-  }
