@@ -12,7 +12,7 @@ services:
     ports:
       - "3333:3333"
     networks:
-      - postgres_ntwk
+      - pet_adopt_network
 
   frontend:
     build:
@@ -24,6 +24,8 @@ services:
     tty: true
     ports:
       - "3000:3000"
+    networks:
+      - pet_adopt_network
 
   postgres:
     build:
@@ -34,7 +36,7 @@ services:
     ports:
       - "5432:5432"
     networks:
-      - postgres_ntwk
+      - pet_adopt_network
 
   pgadmin:
     image: dpage/pgadmin4
@@ -46,8 +48,9 @@ services:
     depends_on:
       - postgres
     networks:
-      - postgres_ntwk
+      - pet_adopt_network
 
 networks:
-  postgres_ntwk:
+  pet_adopt_network:
+    name: pet_adopt_network
     driver: bridge
