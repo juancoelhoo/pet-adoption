@@ -13,9 +13,11 @@ const Login = () => {
                     <input type="email" id="email" placeholder="Por favor, preencha com seu email." />
                     <label htmlFor="password">Senha:</label>
                     <input type="password" id="password" placeholder="Por favor, preencha com sua senha." />
-                    <button type="submit" className="access-button">Acessar</button>
-                    <div className="signup">
-                        <a href="/signup">Se cadastrar</a>
+                    <div className="button-group">
+                        <button type="submit" className="access-button">Acessar</button>
+                        <div className="signup">
+                            <a href="/signup">Se cadastrar</a>
+                    </div>
                     </div>
                 </form>
             </div>
