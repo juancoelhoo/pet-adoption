@@ -78,7 +78,9 @@
     border-radius: 25px;
     text-decoration: none;
     transition: background-color 0.3s ease;
-    width: 60%;
+    width: 21%;
+    position: absolute;
+    left: 972px;
 }
 
 .signup a:hover {
