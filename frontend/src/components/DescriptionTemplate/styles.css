@@ -1,0 +1,54 @@
+* {
+    margin: 0;
+}
+
+.petAdoptContainer {
+    width: 60%;
+    background: linear-gradient(to bottom right, #d1ba21, #6f6a2a);
+    color: white;
+    padding: 120px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: -10px;
+    height: 100vh;
+}
+
+.content {
+    max-width: 600px;
+}
+
+.title {
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+.description {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.features {
+    font-family: 'Quicksand', sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+}
+
+.featureIcon {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.featureText {
+    font-size: 18px;
+}
