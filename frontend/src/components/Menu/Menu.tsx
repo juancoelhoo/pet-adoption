@@ -7,7 +7,7 @@ import report from '../../public/menu/report.svg';
 import search from '../../public/menu/search.svg';
 import logout from '../../public/menu/logout.svg';
 import profile from '../../public/menu/profile.svg';
-import config from '../../public/menu/config.svg';
+import config from "../../public/menu/config.svg";
 
 const Menu = () => {
   return (
