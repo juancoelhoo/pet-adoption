@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+}
+
+.pet-ad {
+    cursor: pointer;
+    width: 20vw;
+    height: 47vh;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 4px 4px 5px 5px rgba(0, 0, 0, 0.2);
+    position: relative;
+    font-size: 1rem;
+    display: flex; /* Add flex display */
+    flex-direction: column; /* Ensure the children are in a column */
+    align-items: center; /* Center horizontally */
+}
+
+.pet-inf {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Adjust the value to set the desired vertical gap */
+    width: 100%; /* Ensure the pet-inf takes full width of pet-ad */
+}
+
+
+.pet-ad img {
+    max-width: 100%; /* Ensure the image fits within the parent container */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.content{
+    font-size: 0.5rem;
+}
+
+.pet-info {
+    font-family: "Quicksand", sans-serif; /* Use your desired font-family */
+    font-weight: 700; /* Use the desired font weight */
+    color: #333; /* Use the desired color */
+}

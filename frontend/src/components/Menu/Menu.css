@@ -1,0 +1,131 @@
+* {
+    margin: 0;
+    font-family: "Luckiest Guy";
+}
+
+.bar {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Set height to 100% of the viewport height */
+    background-color: #535204;
+    width: 20vw;
+    position: fixed;
+}
+
+
+.itens {
+    margin: 30px 25px;
+}
+
+h1 {
+    color: #fff;
+}
+
+a {
+    font-family: "Quicksand";
+    text-decoration: none;
+    color: #fff;
+}
+
+.title_logo {
+    display: flex;
+    align-content: center;
+    margin-bottom: 50px;
+}
+
+.title_logo .logo {
+    margin-right: 20px;
+}
+
+.menu {
+    font-family: "Quicksand";
+    color: #fff;
+    font-size: 1.3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.menu-items {
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 1.0rem;
+    display: flex;
+    flex-direction: column;
+    gap:15px;
+}
+
+.menu-items .ads {
+    display: flex;
+    align-items: center;
+}
+
+.menu-items img {
+    margin-right: 5px;
+}
+.menu a:hover {
+    color: #FBF345;
+}
+
+.search a{
+    position: relative;
+    bottom: 13px;
+}
+
+.reports{
+    position:relative;
+    bottom: 5px;
+}
+
+.reports a{
+    position:relative;
+    bottom: 13px;
+}
+
+.options{
+    margin-top: 30px;
+    font-family: "Quicksand";
+    color: #fff;
+    font-size: 1.3rem;
+}
+
+.log-out{
+    margin-top: 20px;
+    font-size: 1.0rem;
+}
+
+.log-out img{
+    margin-right: 5px;
+}
+
+.log-out a{
+    position:relative;
+    bottom: 13px;
+}
+
+.profile-access{
+    display: flex;
+    align-items: center;
+    margin-top: auto;
+    position: relative;
+}
+
+.profile-access img{
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.profile-access img:last-child {
+    margin-left: auto; /* Push the last image to the end */
+}
+
+.profile-access::before {
+    content: '';
+    position: absolute; /* Position the line absolutely */
+    top: -10px; /* Place the line above the profile-access div */
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: white; /* Color of the line */
+}

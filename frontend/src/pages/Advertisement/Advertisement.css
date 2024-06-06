@@ -1,0 +1,55 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Luckiest Guy";
+}
+
+.bar {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #535204;
+    width: 20vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.advertisement-container {
+    display: flex;
+    margin-left: 20vw; 
+    width: calc(100vw - 20vw); 
+    height: 100vh; 
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.ad-screen {
+    flex: 1;
+    padding: 30px;
+    font-size: 2rem;
+    position: relative;
+}
+
+.ad-screen img {
+    margin-right: 5px;
+}
+
+.ad-screen::after {
+    content: '';
+    position: absolute;
+    top: 13%;
+    left: 20px;
+    width: calc(100% - 60px);
+    border-bottom: 2px solid black;
+}
+
+.pet-ads {
+    padding: 30px;
+    display: grid;
+    grid-template-columns: 22vw 22vw 22vw;
+    gap: 15px;
+    margin-top: 15px;
+}
+
