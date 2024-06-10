@@ -22,7 +22,11 @@ export class SequelizeUsersRepository implements UsersRepository {
         permissions: user.permissions
       }));
     } catch (error) {
-      throw new QueryError("Error in listing users: " + error);
+      if (error instanceof Error) {
+        throw new QueryError("Error in listing users: " + error.message);
+      } else {
+        throw new QueryError("Unknown error in listing users");
+      }
     }
   }
 
@@ -48,7 +52,11 @@ export class SequelizeUsersRepository implements UsersRepository {
         permissions: user.permissions
       };
     } catch (error) {
-      throw new QueryError("Error in listing specific user: " + error);
+      if (error instanceof Error) {
+        throw new QueryError("Error in listing specific user: " + error.message);
+      } else {
+        throw new QueryError("Unknown error in listing specific user");
+      }
     }
   }
 
@@ -65,7 +73,11 @@ export class SequelizeUsersRepository implements UsersRepository {
         permissions: user.permissions || 0
       });
     } catch (error) {
-      throw new QueryError("Error in creating user: " + error);
+      if (error instanceof Error) {
+        throw new QueryError("Error in creating user: " + error.message);
+      } else {
+        throw new QueryError("Unknown error in creating user");
+      }
     }
   }
 
@@ -89,7 +101,11 @@ export class SequelizeUsersRepository implements UsersRepository {
         }
       );
     } catch (error) {
-      throw new QueryError("Error in updating user: " + error);
+      if (error instanceof Error) {
+        throw new QueryError("Error in updating user: " + error.message);
+      } else {
+        throw new QueryError("Unknown error in updating user");
+      }
     }
   }
 
@@ -101,7 +117,11 @@ export class SequelizeUsersRepository implements UsersRepository {
         }
       });
     } catch (error) {
-      throw new QueryError("Error in deleting user: " + error);
+      if (error instanceof Error) {
+        throw new QueryError("Error in deleting user: " + error.message);
+      } else {
+        throw new QueryError("Unknown error in deleting user");
+      }
     }
   }
 }
