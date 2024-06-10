@@ -3,6 +3,8 @@ import { UsersRepository } from "@src/modules/users/domain/interfaces/usersRepos
 import { UserModel } from "./usersModel";
 import { CreateUserRequest } from "@src/modules/users/domain/entities/createUserRequest";
 import { UpdateUserRequest } from "@src/modules/users/domain/entities/updateUserRequest";
+import { InvalidParamError } from "@src/infra/api/errors/InvalidParamError";
+import { QueryError } from "@src/infra/api/errors/QueryError";
 
 export class SequelizeUsersRepository implements UsersRepository {
   async findAll(): Promise<User[]> {
@@ -20,8 +22,7 @@ export class SequelizeUsersRepository implements UsersRepository {
         permissions: user.permissions
       }));
     } catch (error) {
-      console.log(error);
-      throw new Error("Error in listing users: " + error);
+      throw new QueryError("Error in listing users: " + error);
     }
   }
 
@@ -47,8 +48,7 @@ export class SequelizeUsersRepository implements UsersRepository {
         permissions: user.permissions
       };
     } catch (error) {
-      console.log(error);
-      throw new Error("Error in listing specific user: " + error);
+      throw new QueryError("Error in listing specific user: " + error);
     }
   }
 
@@ -65,8 +65,7 @@ export class SequelizeUsersRepository implements UsersRepository {
         permissions: user.permissions || 0
       });
     } catch (error) {
-      console.log(error);
-      throw new Error("Error in creating user: " + error);
+      throw new QueryError("Error in creating user: " + error);
     }
   }
 
@@ -90,8 +89,7 @@ export class SequelizeUsersRepository implements UsersRepository {
         }
       );
     } catch (error) {
-      console.log(error);
-      throw new Error("Error in updating user: " + error);
+      throw new QueryError("Error in updating user: " + error);
     }
   }
 
@@ -103,8 +101,7 @@ export class SequelizeUsersRepository implements UsersRepository {
         }
       });
     } catch (error) {
-      console.log(error);
-      throw new Error("Error in deleting user: " + error);
+      throw new QueryError("Error in deleting user: " + error);
     }
   }
 }

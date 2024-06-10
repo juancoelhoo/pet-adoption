@@ -2,6 +2,8 @@ import { CreateUserRequest } from "@src/modules/users/domain/entities/createUser
 import { UpdateUserRequest } from "@src/modules/users/domain/entities/updateUserRequest";
 import { createUserFactory, deleteUserFactory, getAllUsersFactory, getSpecificUserFactory, updateUserFactory } from "@src/modules/users/factory";
 import { Request, Response, NextFunction } from "express";
+import { InvalidParamError } from "../../errors/InvalidParamError";
+import { QueryError } from "../../errors/QueryError";
 
 class UsersController {
   /**
@@ -31,6 +33,9 @@ class UsersController {
         body: users,
       });
     } catch (error) {
+      if (error instanceof QueryError) {
+        return res.status(400).json({ error: error.message });
+      }
       return next(error);
     }
   }
@@ -60,7 +65,7 @@ class UsersController {
     try {
       const { id } = req.params;
 
-      if (!id) throw new Error("Missing property 'id'!");
+      if (!id) throw new InvalidParamError("Missing property 'id'!");
 
       const usersFactory = getSpecificUserFactory();
 
@@ -71,6 +76,12 @@ class UsersController {
         body: user,
       });
     } catch (error) {
+      if (error instanceof InvalidParamError) {
+        return res.status(400).json({ error: error.message });
+      }
+      if (error instanceof QueryError) {
+        return res.status(404).json({ error: "User not found" });
+      }
       return next(error);
     }
   }
@@ -103,6 +114,9 @@ class UsersController {
         message: "User created successfully!"
       });
     } catch (error) {
+      if (error instanceof InvalidParamError || error instanceof QueryError) {
+        return res.status(400).json({ error: error.message });
+      }
       return next(error);
     }
   }
@@ -135,6 +149,9 @@ class UsersController {
         message: "User updated successfully!"
       });
     } catch (error) {
+      if (error instanceof InvalidParamError || error instanceof QueryError) {
+        return res.status(400).json({ error: error.message });
+      }
       return next(error);
     }
   }
@@ -160,7 +177,7 @@ class UsersController {
     try {
       const { id } = req.params;
 
-      if (!id) throw new Error("Missing property 'id'!");
+      if (!id) throw new InvalidParamError("Missing property 'id'!");
 
       const usersFactory = deleteUserFactory();
 
@@ -170,6 +187,12 @@ class UsersController {
         message: "User deleted successfully!"
       });
     } catch (error) {
+      if (error instanceof InvalidParamError) {
+        return res.status(400).json({ error: error.message });
+      }
+      if (error instanceof QueryError) {
+        return res.status(404).json({ error: "User not found" });
+      }
       return next(error);
     }
   }
