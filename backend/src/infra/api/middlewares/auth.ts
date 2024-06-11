@@ -108,3 +108,12 @@ export function checkPermission(requiredPermission: number) {
         }
     }
 }
+
+// Responsible for the user logout process
+export function logout(req: Request, res: Response) {
+    res.clearCookie("jwt", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV !== "development"
+    });
+    res.status(200).json({ message: "Logout successful!" });
+}
