@@ -6,7 +6,7 @@ import { NotAuthorizedError } from "../errors/NotAuthorizedError";
 import { PermissionError } from "../errors/PermissionError";
 import { UserModel } from "@src/infra/services/sequelize/users/usersModel";
 
-// Gera um token JWT para um usuário autenticado 
+// Generates a JWT token for an authenticated user
 function generateJWT(user: any, res: Response) {
     const body = {
         id: user.id,
@@ -21,4 +21,13 @@ function generateJWT(user: any, res: Response) {
         httpOnly: true,
         secure: process.env.NODE_ENV !== "development"
     });
+}
+
+// Extracts the JWT token from the request's HTTP cookie
+function cookieExtractor(req: Request) {
+    let token = null;
+    if (req.cookies) {
+        token = req.cookies["jwt"];
+    }
+    return token;
 }
