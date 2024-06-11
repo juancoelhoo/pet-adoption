@@ -31,3 +31,20 @@ function cookieExtractor(req: Request) {
     }
     return token;
 }
+
+// Checks if the JWT token is present in the request, and if so, checks if it is valid
+export function verifyJWT(req: Request, res: Response, next: NextFunction) {
+    try {
+        const token = cookieExtractor(req);
+        if (token) {
+            const decoded = verify(token, process.env.SECRET_KEY || "") as JwtPayload;
+            req.user = decoded.user;
+        }
+        if (req.user == null) {
+            throw new TokenError("You need to be logged in to perform this action!");
+        }
+        next();
+    } catch (error) {
+        next(error);
+    }
+}
