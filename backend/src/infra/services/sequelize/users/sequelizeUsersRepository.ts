@@ -5,8 +5,15 @@ import { CreateUserRequest } from "@src/modules/users/domain/entities/createUser
 import { UpdateUserRequest } from "@src/modules/users/domain/entities/updateUserRequest";
 import { InvalidParamError } from "@src/infra/api/errors/InvalidParamError";
 import { QueryError } from "@src/infra/api/errors/QueryError";
+import bcrypt from 'bcrypt';
 
 export class SequelizeUsersRepository implements UsersRepository {
+  async encryptPassword(password: string){
+    const saltRounds = 10; 
+    const encryped = bcrypt.hash(password, saltRounds);
+    return encryped;
+  }
+
   async findAll(): Promise<User[]> {
     try {
       const users: UserModel[] = await UserModel.findAll();
@@ -62,10 +69,11 @@ export class SequelizeUsersRepository implements UsersRepository {
 
   async create(user: CreateUserRequest): Promise<void> {
     try {
+      const encryptedPassword = await this.encryptPassword(user.password);
       await UserModel.create({
         name: user.name,
         email: user.email,
-        password: user.password,
+        password: encryptedPassword,
         photo_url: user.profilePhoto,
         description: user.description,
         address: user.address,
@@ -80,7 +88,7 @@ export class SequelizeUsersRepository implements UsersRepository {
       }
     }
   }
-
+  
   async update(id: number, user: Omit<UpdateUserRequest, 'id' | 'email'>): Promise<void> {
     try {
       await UserModel.update(

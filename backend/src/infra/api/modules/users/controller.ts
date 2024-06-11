@@ -105,9 +105,7 @@ class UsersController {
   async create(req: Request, res: Response, next: NextFunction) {
     try {
       const usersFactory = createUserFactory();
-
       const user: Required<CreateUserRequest> = req.body;
-
       await usersFactory.execute(user);
 
       return res.status(201).json({
