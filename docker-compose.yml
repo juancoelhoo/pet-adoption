@@ -13,6 +13,8 @@ services:
       - "3333:3333"
     networks:
       - pet_adopt_network
+    env_file:
+      - ./backend/.env
 
   frontend:
     build:
@@ -28,13 +30,14 @@ services:
       - pet_adopt_network
 
   postgres:
-    build:
-      context: ./database
+    image: postgres:latest
     container_name: postgres
     env_file:
       - ./database/.env
     ports:
       - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     networks:
       - pet_adopt_network
 
@@ -54,3 +57,6 @@ networks:
   pet_adopt_network:
     name: pet_adopt_network
     driver: bridge
+
+volumes:
+  postgres_data:

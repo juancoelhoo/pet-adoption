@@ -123,10 +123,17 @@ class UsersController {
 
   /**
    * @swagger
-   * /users:
+   * /users/{id}:
    *   put:
    *     summary: Update an existing user
    *     tags: [Users]
+   *     parameters:
+   *       - in: path
+   *         name: id
+   *         schema:
+   *           type: number
+   *         required: true
+   *         description: The user id
    *     requestBody:
    *       required: true
    *       content:
@@ -139,11 +146,15 @@ class UsersController {
    */
   async update(req: Request, res: Response, next: NextFunction) {
     try {
+      const { id } = req.params;
+
+      if (!id) throw new InvalidParamError("Missing property 'id'!");
+
       const usersFactory = updateUserFactory();
 
-      const user: Required<UpdateUserRequest> = req.body;
+      const { email, id: bodyId, ...user }: UpdateUserRequest = req.body; // Excluir `email` e `id` do corpo da requisição
 
-      await usersFactory.execute(user);
+      await usersFactory.execute({ ...user, id: Number(id) });
 
       return res.status(200).json({
         message: "User updated successfully!"
