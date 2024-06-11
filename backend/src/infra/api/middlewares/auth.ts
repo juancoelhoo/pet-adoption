@@ -1,10 +1,11 @@
 import { Request, Response, NextFunction } from "express";
-import compare from 'bcrypt';
+import { compare } from 'bcrypt';
 import { JwtPayload, sign, verify } from 'jsonwebtoken';
 import { TokenError } from "../errors/TokenError";
 import { NotAuthorizedError } from "../errors/NotAuthorizedError";
 import { PermissionError } from "../errors/PermissionError";
 import { UserModel } from "@src/infra/services/sequelize/users/usersModel";
+import { LoginError } from "../errors/LoginError";
 
 // Generates a JWT token for an authenticated user
 function generateJWT(user: any, res: Response) {
@@ -44,6 +45,31 @@ export function verifyJWT(req: Request, res: Response, next: NextFunction) {
             throw new TokenError("You need to be logged in to perform this action!");
         }
         next();
+    } catch (error) {
+        next(error);
+    }
+}
+
+export async function login(req: Request, res: Response, next: NextFunction) {
+    const { email, password } = req.body;
+
+    try {
+        // Check if user exists
+        const user = await UserModel.findOne({ where: { email } });
+        if (!user) {
+            throw new LoginError("Invalid email or password");
+        }
+
+        // Verify password
+        const passwordMatch = await compare(password, user.password);
+        if (!passwordMatch) {
+            throw new LoginError("Invalid email or password");
+        }
+
+        // Generate JWT and set cookie
+        generateJWT(user, res);
+
+        return res.status(200).json({ message: "Login successful!" });
     } catch (error) {
         next(error);
     }
