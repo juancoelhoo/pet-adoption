@@ -64,7 +64,7 @@ const router = Router();
 router.get("/all", usersController.getAll);
 router.get("/:id", usersController.getOne);
 router.post("/", usersController.create);
-router.put("/", usersController.update);
+router.put("/:id", usersController.update); 
 router.delete("/:id", usersController.delete);
 
 export default router;

@@ -81,12 +81,11 @@ export class SequelizeUsersRepository implements UsersRepository {
     }
   }
 
-  async update(id: number, user: UpdateUserRequest): Promise<void> {
+  async update(id: number, user: Omit<UpdateUserRequest, 'id' | 'email'>): Promise<void> {
     try {
       await UserModel.update(
         {
           name: user.name,
-          email: user.email,
           password: user.password,
           photo_url: user.profilePhoto,
           description: user.description,
