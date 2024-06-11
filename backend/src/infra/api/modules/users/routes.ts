@@ -66,7 +66,7 @@ router.post("/logout", logout);
 
 router.get("/all", verifyJWT, usersController.getAll);
 router.get("/:id", verifyJWT, usersController.getOne);
-router.post("/", verifyJWT, usersController.create);
+router.post("/", usersController.create);
 router.put("/:id", verifyJWT, usersController.update); 
 router.delete("/:id", verifyJWT, checkPermission(1), usersController.delete);
 

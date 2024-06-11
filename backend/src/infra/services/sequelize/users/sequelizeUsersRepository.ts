@@ -6,6 +6,7 @@ import { UpdateUserRequest } from "@src/modules/users/domain/entities/updateUser
 import { InvalidParamError } from "@src/infra/api/errors/InvalidParamError";
 import { QueryError } from "@src/infra/api/errors/QueryError";
 import bcrypt from 'bcrypt';
+import { isValidEmail, isValidPassword } from "@src/utils/validators";
 
 export class SequelizeUsersRepository implements UsersRepository {
   async findAll(): Promise<User[]> {
@@ -69,6 +70,14 @@ export class SequelizeUsersRepository implements UsersRepository {
 
   async create(user: CreateUserRequest): Promise<void> {
     try {
+      if (!isValidEmail(user.email)) {
+        throw new InvalidParamError("Invalid email format");
+      }
+
+      if (!isValidPassword(user.password)) {
+        throw new InvalidParamError("Password does not meet security criteria");
+      }
+
       const encryptedPassword = await this.encryptPassword(user.password);
       await UserModel.create({
         name: user.name,
