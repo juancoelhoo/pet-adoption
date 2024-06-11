@@ -77,18 +77,34 @@ export async function login(req: Request, res: Response, next: NextFunction) {
     }
 }
 
-// Checa se o usuário ainda não está logado
+// Checks if the user is not already logged in
 export function notLoggedIn(req: Request, res: Response, next: NextFunction) {
     try {
         const token = cookieExtractor(req);
         if (token) {
             const decoded = verify(token, process.env.SECRET_KEY || "") as JwtPayload;
             if (decoded.user) {
-                throw new PermissionError("Você já está logado");
+                throw new PermissionError("You are already logged in");
             }
         }
         next();
     } catch (error) {
         next(error);
+    }
+}
+
+// Checks if the user has the required permission level to access the route
+export function checkPermission(requiredPermission: number) {
+    return (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const userPermission = res.locals.user?.permissions;
+            if (userPermission === undefined || userPermission < requiredPermission) {
+                throw new NotAuthorizedError("You are not authorized to perform this action!");
+            }
+
+            next();
+        } catch (error) {
+            next(error);
+        }
     }
 }
