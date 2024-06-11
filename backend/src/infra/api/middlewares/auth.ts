@@ -7,13 +7,13 @@ import { PermissionError } from "../errors/PermissionError";
 import { UserModel } from "@src/infra/services/sequelize/users/usersModel";
 import { LoginError } from "../errors/LoginError";
 
-// Generates a JWT token for an authenticated user
-function generateJWT(user: any, res: Response) {
+// Gera um token JWT para um usuário autenticado
+function generateJWT(user: UserModel, res: Response) {
     const body = {
         id: user.id,
         email: user.email,
-        permissions: user.permissions,
-        name: user.name
+        name: user.name,
+        permissions: user.permissions
     };
 
     const token = sign({ user: body }, process.env.SECRET_KEY || "", { expiresIn: process.env.JWT_EXPIRATION });
@@ -24,7 +24,7 @@ function generateJWT(user: any, res: Response) {
     });
 }
 
-// Extracts the JWT token from the request's HTTP cookie
+// Extrai o token JWT do cookie HTTP da solicitação
 function cookieExtractor(req: Request) {
     let token = null;
     if (req.cookies) {
@@ -33,16 +33,16 @@ function cookieExtractor(req: Request) {
     return token;
 }
 
-// Checks if the JWT token is present in the request, and if so, checks if it is valid
+// Verifica se o token JWT está presente na solicitação e, se estiver, verifica se é válido
 export function verifyJWT(req: Request, res: Response, next: NextFunction) {
     try {
         const token = cookieExtractor(req);
         if (token) {
             const decoded = verify(token, process.env.SECRET_KEY || "") as JwtPayload;
-            req.user = decoded.user;
+            res.locals.user = decoded.user; // Adiciona o usuário decodificado a res.locals
         }
-        if (req.user == null) {
-            throw new TokenError("You need to be logged in to perform this action!");
+        if (!res.locals.user) {
+            throw new TokenError("Você precisa estar logado para realizar essa ação!");
         }
         next();
     } catch (error) {
@@ -50,26 +50,28 @@ export function verifyJWT(req: Request, res: Response, next: NextFunction) {
     }
 }
 
+// Responsável pelo processo de login do usuário
 export async function login(req: Request, res: Response, next: NextFunction) {
-    const { email, password } = req.body;
-
     try {
-        // Check if user exists
-        const user = await UserModel.findOne({ where: { email } });
+        const user = await UserModel.findOne({
+            where: {
+                email: req.body.email
+            }
+        });
+
         if (!user) {
-            throw new LoginError("Invalid email or password");
+            throw new PermissionError("Email e/ou senha incorretos!");
         }
 
-        // Verify password
-        const passwordMatch = await compare(password, user.password);
-        if (!passwordMatch) {
-            throw new LoginError("Invalid email or password");
+        const match = await compare(req.body.password, user.password);
+
+        if (!match) {
+            throw new PermissionError("Email e/ou senha incorretos!");
         }
 
-        // Generate JWT and set cookie
         generateJWT(user, res);
 
-        return res.status(200).json({ message: "Login successful!" });
+        res.status(200).json("Login realizado com sucesso!");
     } catch (error) {
         next(error);
     }

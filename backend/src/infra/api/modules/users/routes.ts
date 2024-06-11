@@ -1,6 +1,6 @@
 import { Router } from "express";
-
 import usersController from "./controller";
+import { verifyJWT, login } from "../../middlewares/auth";
 
 /**
  * @swagger
@@ -61,8 +61,9 @@ import usersController from "./controller";
 
 const router = Router();
 
-router.get("/all", usersController.getAll);
+router.get("/all", verifyJWT, usersController.getAll);
 router.get("/:id", usersController.getOne);
+router.post("/login", login);
 router.post("/", usersController.create);
 router.put("/:id", usersController.update); 
 router.delete("/:id", usersController.delete);

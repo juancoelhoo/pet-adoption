@@ -38,13 +38,13 @@
         "emitDecoratorMetadata": true,
         "typeRoots": [
             "./node_modules/@types",
-            "./custom.d.ts"
+            "./@types"
         ]
     },
     "include": [
         "./src/**/*.ts",
         "./test/**/*.ts",
-        "./custom.d.ts"
+        "./@types/**/*.d.ts"
     ],
     "exclude": [
         "./node_modules/*",
