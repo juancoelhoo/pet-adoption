@@ -7,7 +7,7 @@ import { PermissionError } from "../errors/PermissionError";
 import { UserModel } from "@src/infra/services/sequelize/users/usersModel";
 import { LoginError } from "../errors/LoginError";
 
-// Gera um token JWT para um usuário autenticado
+// Generates a JWT token for an authenticated user
 function generateJWT(user: UserModel, res: Response) {
     const body = {
         id: user.id,
@@ -24,7 +24,7 @@ function generateJWT(user: UserModel, res: Response) {
     });
 }
 
-// Extrai o token JWT do cookie HTTP da solicitação
+// Extracts the JWT token from the HTTP cookie of the request
 function cookieExtractor(req: Request) {
     let token = null;
     if (req.cookies) {
@@ -33,16 +33,16 @@ function cookieExtractor(req: Request) {
     return token;
 }
 
-// Verifica se o token JWT está presente na solicitação e, se estiver, verifica se é válido
+// Checks if the JWT token is present in the request, and if so, verifies if it's valid
 export function verifyJWT(req: Request, res: Response, next: NextFunction) {
     try {
         const token = cookieExtractor(req);
         if (token) {
             const decoded = verify(token, process.env.SECRET_KEY || "") as JwtPayload;
-            res.locals.user = decoded.user; // Adiciona o usuário decodificado a res.locals
+            res.locals.user = decoded.user; 
         }
         if (!res.locals.user) {
-            throw new TokenError("Você precisa estar logado para realizar essa ação!");
+            throw new TokenError("You need to be logged in to perform this action!");
         }
         next();
     } catch (error) {
@@ -50,7 +50,7 @@ export function verifyJWT(req: Request, res: Response, next: NextFunction) {
     }
 }
 
-// Responsável pelo processo de login do usuário
+// Responsible for the user login process
 export async function login(req: Request, res: Response, next: NextFunction) {
     try {
         const user = await UserModel.findOne({
@@ -60,18 +60,34 @@ export async function login(req: Request, res: Response, next: NextFunction) {
         });
 
         if (!user) {
-            throw new PermissionError("Email e/ou senha incorretos!");
+            throw new PermissionError("Incorrect email and/or password!");
         }
 
         const match = await compare(req.body.password, user.password);
 
         if (!match) {
-            throw new PermissionError("Email e/ou senha incorretos!");
+            throw new PermissionError("Incorrect email and/or password!");
         }
 
         generateJWT(user, res);
 
-        res.status(200).json("Login realizado com sucesso!");
+        res.status(200).json("Login successful!");
+    } catch (error) {
+        next(error);
+    }
+}
+
+// Checa se o usuário ainda não está logado
+export function notLoggedIn(req: Request, res: Response, next: NextFunction) {
+    try {
+        const token = cookieExtractor(req);
+        if (token) {
+            const decoded = verify(token, process.env.SECRET_KEY || "") as JwtPayload;
+            if (decoded.user) {
+                throw new PermissionError("Você já está logado");
+            }
+        }
+        next();
     } catch (error) {
         next(error);
     }
