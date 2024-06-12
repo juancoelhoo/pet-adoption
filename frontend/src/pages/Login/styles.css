@@ -13,14 +13,14 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center; /* Centraliza o conteúdo dentro da seção */
+    align-items: center; 
 }
 
 .login-title {
     font-family: 'Luckiest Guy', cursive;
     font-size: 36px;
     margin-bottom: 30px;
-    text-align: center; /* Centraliza o título */
+    text-align: center; 
 }
 
 .login-form {
@@ -32,16 +32,16 @@
     width: 100%;
     padding: 12px;
     margin: 10px 0;
-    border: 2px solid #ccc;
+    border: px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
 }
 
 .button-group {
     display: flex;
-    flex-direction: column; /* Mantém os botões empilhados */
+    flex-direction: column; 
     align-items: center;
-    width: 100%; /* Garante que o grupo de botões ocupe toda a largura */
+    width: 100%; 
     margin-top: 20px;
 }
 

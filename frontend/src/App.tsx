@@ -14,10 +14,10 @@ export const App = () => {
         <>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Login/>} />
+                    <Route path="/login" element={<Login/>} />
                     <Route path ="/signup" element= {<SignUp/>} />
                     {/*<Route path="/posts" element={<Posts/>} />*/}
-                    <Route path="/posts" element={<AdvertisementScreen/>} />
+                    <Route path="/" element={<AdvertisementScreen/>} />
                 </Routes>
             </BrowserRouter>
         </>
