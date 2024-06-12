@@ -30,7 +30,8 @@ services:
       - pet_adopt_network
 
   postgres:
-    image: postgres:latest
+    build:
+      context: ./database
     container_name: postgres
     env_file:
       - ./database/.env
