@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 
 const useSignUp = () => {
-    const [nome, setNome] = useState("");
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -18,12 +18,12 @@ const useSignUp = () => {
             setErrorMessage("");
             try {
                 await axios.post("http://localhost:3333/users", {
-                    name: nome,
+                    name: name,
                     email: email,
                     password: password
                 });
                 setSuccessMessage("Cadastro realizado com sucesso!");
-                setNome("");
+                setName("");
                 setEmail("");
                 setPassword("");
                 setConfirmPassword("");
@@ -35,8 +35,8 @@ const useSignUp = () => {
     };
 
     return {
-        nome,
-        setNome,
+        name,
+        setName,
         email,
         setEmail,
         password,
