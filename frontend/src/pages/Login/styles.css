@@ -3,6 +3,7 @@
     width: 100%;
     height: 100vh;
     align-items: center;
+    
 }
 
 .login-section {
@@ -12,12 +13,18 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center; /* Centraliza o conteúdo dentro da seção */
 }
 
-.login-title{
+.login-title {
     font-family: 'Luckiest Guy', cursive;
     font-size: 36px;
     margin-bottom: 30px;
+    text-align: center; /* Centraliza o título */
+}
+
+.login-form {
+    width: 100%;
 }
 
 .login-form input {
@@ -28,6 +35,14 @@
     border: 2px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column; /* Mantém os botões empilhados */
+    align-items: center;
+    width: 100%; /* Garante que o grupo de botões ocupe toda a largura */
+    margin-top: 20px;
 }
 
 .login-form button {
@@ -41,7 +56,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 70%;
+    width: 100%; 
+    margin-bottom: 10px; 
 }
 
 .login-form button:hover {
@@ -54,20 +70,18 @@
     transition: margin 0.3s ease;
 }
 
-.access-button{
+.access-button {
     margin-top: 5px;
-    align-items: center;
-    width: 70%;
-    }
+}
 
 .login-form button:hover::after {
     margin-left: 15px;
 }
 
 .signup {
-    text-align: center;
-    margin-top: 20px;
-    width: 60%;
+    width: 100%; 
+    display: flex;
+    justify-content: center; 
 }
 
 .signup a {
@@ -78,18 +92,11 @@
     border-radius: 25px;
     text-decoration: none;
     transition: background-color 0.3s ease;
-    width: 21%;
-    position: absolute;
-    left: 972px;
+    width: 100%; 
+    text-align: center;
 }
 
 .signup a:hover {
     background-color: #4CAF50;
     color: white;
-}
-
-.button-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }

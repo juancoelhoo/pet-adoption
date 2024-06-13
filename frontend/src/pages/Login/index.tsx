@@ -17,7 +17,7 @@ const Login = () => {
                         <button type="submit" className="access-button">Acessar</button>
                         <div className="signup">
                             <a href="/signup">Se cadastrar</a>
-                    </div>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -25,4 +25,4 @@ const Login = () => {
     );
 }
 
-export default Login; 
+export default Login;
