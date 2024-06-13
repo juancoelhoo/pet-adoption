@@ -10,7 +10,7 @@
         "outDir": "dist",
         "strict": true,
         "noImplicitAny": true,
-        //"strictNullChecks": true,
+        "strictNullChecks": true,
         "strictFunctionTypes": true,
         "noImplicitThis": true,
         "skipLibCheck": true,
@@ -35,11 +35,16 @@
             "./test"
         ],
         "experimentalDecorators": true,
-        "emitDecoratorMetadata": true
+        "emitDecoratorMetadata": true,
+        "typeRoots": [
+            "./node_modules/@types",
+            "./@types"
+        ]
     },
     "include": [
         "./src/**/*.ts",
-        "./test/**/*.ts"
+        "./test/**/*.ts",
+        "./@types/**/*.d.ts"
     ],
     "exclude": [
         "./node_modules/*",

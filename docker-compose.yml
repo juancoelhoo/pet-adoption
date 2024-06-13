@@ -31,7 +31,7 @@ services:
 
   postgres:
     build:
-      context: database
+      context: ./database
     container_name: postgres
     env_file:
       - ./database/.env

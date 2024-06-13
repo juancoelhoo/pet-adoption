@@ -1,4 +1,5 @@
 import bodyParser from "body-parser";
+import cookieParser from "cookie-parser"; 
 import cors from "cors";
 import express, { Application } from "express";
 import swaggerUi from "swagger-ui-express";
@@ -9,7 +10,7 @@ import { swaggerSpecs } from "./docs/docsSetup";
 import { setupDb } from "./database/dbSetup";
 
 import postsRouter from "./modules/posts/routes";
-import usersRouter from "./modules/users/routes";
+import usersRouter from "./modules/users/routes"; 
 
 export class SetupServer {
   private static LOG_TAG = "SetupServer";
@@ -41,6 +42,7 @@ export class SetupServer {
 
   private setupMiddlewares(): void {
     this.app.use(bodyParser.json());
+    this.app.use(cookieParser()); 
     this.app.use(cors());
   }
 
@@ -50,7 +52,7 @@ export class SetupServer {
 
   private setupControllers(): void {
     this.app.use("/posts", postsRouter);
-    this.app.use("/users", usersRouter);
+    this.app.use("/users", usersRouter); 
   }
 
   private setupErrorHandler(): void {

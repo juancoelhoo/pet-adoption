@@ -5,6 +5,8 @@ import { CreateUserRequest } from "@src/modules/users/domain/entities/createUser
 import { UpdateUserRequest } from "@src/modules/users/domain/entities/updateUserRequest";
 import { InvalidParamError } from "@src/infra/api/errors/InvalidParamError";
 import { QueryError } from "@src/infra/api/errors/QueryError";
+import bcrypt from 'bcrypt';
+import { isValidEmail, isValidPassword } from "@src/utils/validators";
 
 export class SequelizeUsersRepository implements UsersRepository {
   async findAll(): Promise<User[]> {
@@ -60,12 +62,27 @@ export class SequelizeUsersRepository implements UsersRepository {
     }
   }
 
+  async encryptPassword(password: string): Promise<string> {
+    const saltRounds = 10; 
+    const encrypted = await bcrypt.hash(password, saltRounds);
+    return encrypted;
+  }
+
   async create(user: CreateUserRequest): Promise<void> {
     try {
+      if (!isValidEmail(user.email)) {
+        throw new InvalidParamError("Invalid email format");
+      }
+
+      if (!isValidPassword(user.password)) {
+        throw new InvalidParamError("Password does not meet security criteria");
+      }
+
+      const encryptedPassword = await this.encryptPassword(user.password);
       await UserModel.create({
         name: user.name,
         email: user.email,
-        password: user.password,
+        password: encryptedPassword,
         photo_url: user.profilePhoto,
         description: user.description,
         address: user.address,
@@ -83,10 +100,11 @@ export class SequelizeUsersRepository implements UsersRepository {
 
   async update(id: number, user: Omit<UpdateUserRequest, 'id' | 'email'>): Promise<void> {
     try {
+      const encryptedPassword = user.password ? await this.encryptPassword(user.password) : undefined;
       await UserModel.update(
         {
           name: user.name,
-          password: user.password,
+          password: encryptedPassword || user.password,
           photo_url: user.profilePhoto,
           description: user.description,
           address: user.address,
