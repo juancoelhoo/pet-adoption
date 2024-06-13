@@ -65,7 +65,6 @@
 }
 
 .login-form button::after {
-    content: "➔";
     margin-left: 6px;
     transition: margin 0.3s ease;
 }

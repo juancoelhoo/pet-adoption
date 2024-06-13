@@ -1,47 +1,22 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import React from "react";
 import DescriptionPage from "../../components/DescriptionTemplate";
+import useSignUp from "../../hooks/useSignUp";
 import "./styles.css";
 
 const SignUp: React.FC = () => {
-    const [nome, setNome] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [errorMessage, setErrorMessage] = useState("");
-    const [successMessage, setSuccessMessage] = useState("");
-
-    const navigate = useNavigate();
-
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        if (password !== confirmPassword) {
-            setErrorMessage("As senhas não coincidem. Por favor, tente novamente.");
-            setSuccessMessage("");
-        } else {
-            setErrorMessage("");
-            try {
-                const response = await axios.post("http://localhost:3333/users", {
-                    name: nome,
-                    email: email,
-                    password: password
-                });
-                setSuccessMessage("Cadastro realizado com sucesso!");
-                setNome("");
-                setEmail("");
-                setPassword("");
-                setConfirmPassword("");
-            } catch (error) {
-                setErrorMessage("Erro ao realizar cadastro. Por favor, tente novamente.");
-                setSuccessMessage("");
-            }
-        }
-    };
-
-    const goToLogin = () => {
-        navigate("/login");
-    };
+    const {
+        nome,
+        setNome,
+        email,
+        setEmail,
+        password,
+        setPassword,
+        confirmPassword,
+        setConfirmPassword,
+        errorMessage,
+        successMessage,
+        handleSubmit
+    } = useSignUp();
 
     return (
         <div className="signup-page">
@@ -74,6 +49,8 @@ const SignUp: React.FC = () => {
                         placeholder="Por favor, preencha com sua senha." 
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}"
+                        title="A senha deve possuir entre 8 e 16 caracteres, pelo menos uma letra maiúscula, uma letra minúscula, um dígito e um caractere especial (@, $, !, %, *, ?, &)"
                         required
                     />
                     <label htmlFor="confirm-password">Confirmar senha:</label>
@@ -87,8 +64,8 @@ const SignUp: React.FC = () => {
                     />
                     <button type="submit" className="access-button">Finalizar cadastro</button>
                     <div className="message">
-                        {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-                        {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
+                        {errorMessage && <p style={{ color: 'red', fontFamily: 'Quicksand' }}>{errorMessage}</p>}
+                        {successMessage && <p style={{ color: 'green', fontFamily: 'Quicksand' }}>{successMessage}</p>}
                     </div>
                 </form>
                 <div className="signup-links">
