@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import DescriptionPage from "../../components/DescriptionTemplate";
 import "./styles.css";
@@ -10,6 +11,8 @@ const SignUp: React.FC = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -34,6 +37,10 @@ const SignUp: React.FC = () => {
                 setSuccessMessage("");
             }
         }
+    };
+
+    const goToLogin = () => {
+        navigate("/login");
     };
 
     return (
@@ -79,9 +86,14 @@ const SignUp: React.FC = () => {
                         required
                     />
                     <button type="submit" className="access-button">Finalizar cadastro</button>
-                    {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-                    {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
+                    <div className="message">
+                        {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+                        {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
+                    </div>
                 </form>
+                <div className="signup-links">
+                    <a href="/login">Já tem uma conta? Faça login</a>
+                </div>
             </div>
         </div>
     );

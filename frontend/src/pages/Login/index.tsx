@@ -15,9 +15,8 @@ const Login: React.FC = () => {
                 email: email,
                 password: password
             });
-            // Sucesso no login
             document.cookie = `jwt=${response.data.token}; path=/;`;
-            window.location.href = "/"; // Redirecionar para a página inicial após o login
+            window.location.href = "/"; 
         } catch (error) {
             setErrorMessage("Email ou senha inválidos. Por favor, tente novamente.");
         }

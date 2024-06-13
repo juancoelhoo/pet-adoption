@@ -46,7 +46,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%; 
+    width: 100%;
 }
 
 .signup-form button:hover {
@@ -82,4 +82,9 @@
 .signup-links a:hover {
     background-color: #4CAF50;
     color: white;
+}
+
+.message {
+    text-align: center;
+    margin-top: 15px; 
 }
