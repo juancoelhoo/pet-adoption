@@ -84,7 +84,7 @@ export function notLoggedIn(req: Request, res: Response, next: NextFunction) {
         if (token) {
             const decoded = verify(token, process.env.SECRET_KEY || "") as JwtPayload;
             if (decoded.user) {
-                throw new PermissionError("You are already logged in");
+                throw new LoginError("You are already logged in");
             }
         }
         next();
