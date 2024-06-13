@@ -1,4 +1,5 @@
 import React from "react";
+import logo from '../../public/logoPetAdopt.png'
 import './styles.css';
 
 function DescriptionPage(){
