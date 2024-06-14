@@ -7,8 +7,8 @@ import SignUp from "./pages/SignUp";
 import Posts from "./pages/Posts";
 
 import { AuthProvider } from './contexts/AuthContext';
-import PrivateRoute from './hoc/PrivateRoute';
-import PublicRoute from './hoc/PublicRoute';
+import PrivateRoute from './routes/PrivateRoute';
+import PublicRoute from './routes/PublicRoute';
 
 
 import './global.css';
