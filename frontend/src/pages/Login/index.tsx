@@ -4,14 +4,7 @@ import useLogin from "../../hooks/useLogin";
 import './styles.css';
 
 const Login: React.FC = () => {
-    const {
-        email,
-        setEmail,
-        password,
-        setPassword,
-        errorMessage,
-        handleSubmit
-    } = useLogin();
+    const { email, setEmail, password, setPassword, errorMessage, handleSubmit } = useLogin();
 
     return (
         <div className="login-page">
