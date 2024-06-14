@@ -3,6 +3,7 @@ import PetAd from '../../components/PetAd/PetAd';
 
 import './Advertisement.css';
 import ad from '../../public/advertisement/advertisement.svg';
+import withAuth from '../../hoc/withAuth';
 
 const AdvertisementScreen = () => {
   return (
@@ -24,4 +25,4 @@ const AdvertisementScreen = () => {
   );
 };
 
-export default AdvertisementScreen;
+export default withAuth(AdvertisementScreen);

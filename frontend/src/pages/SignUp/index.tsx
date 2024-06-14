@@ -5,8 +5,8 @@ import "./styles.css";
 
 const SignUp: React.FC = () => {
     const {
-        nome,
-        setNome,
+        name,
+        setName,
         email,
         setEmail,
         password,
@@ -29,8 +29,8 @@ const SignUp: React.FC = () => {
                         type="text" 
                         id="nome" 
                         placeholder="Por favor, preencha com seu nome." 
-                        value={nome}
-                        onChange={(e) => setNome(e.target.value)}
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                         required
                     />
                     <label htmlFor="email">Email:</label>
