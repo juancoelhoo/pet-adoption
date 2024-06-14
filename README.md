@@ -51,28 +51,28 @@ Principais features:
 
 •	História #1: Como usuário comum, quero poder me cadastrar na plataforma.
 •	Tarefas e responsáveis: 
-   1. Setup do Banco de Dados [Rafael Chimicatti] 
-   2. Definição do backend [Eduardo Correia] 
-   3. Definição do frontend [Juan Coelho] 
-   4.	Implementar tela inicial. [Bernardo Viggiano] 
-   5.	Implementar tela de cadastro. [Bernardo Viggiano]
-   6.	Implementar rota de cadastro. [Bernardo Viggiano]
-   7.	Implementar rota de login. [Bernardo Viggiano]
-   8.	Implementar no backend a lógica de autenticação. [Bernardo Viggiano]
+   1. Setup do Banco de Dados [Rafael Chimicatti] ✅
+   2. Definição do backend [Eduardo Correia] ✅
+   3. Definição do frontend [Juan Coelho] ✅
+   4.	Implementar tela inicial. [Bernardo Viggiano] ✅
+   5.	Implementar tela de cadastro. [Bernardo Viggiano] ✅
+   6.	Implementar rota de cadastro. [Bernardo Viggiano] ✅
+   7.	Implementar rota de login. [Bernardo Viggiano] ✅
+   8.	Implementar no backend a lógica de autenticação. [Bernardo Viggiano] ✅
 
 •	História #2: Como usuário comum, quero poder criar, deletar e editar um anúncio PET.
 •	Tarefas e responsáveis: 
    1.	Implementar tela de gerenciamento de anúncio. [Eduardo Correia]
-   2.	Implementar rota de criação. [Eduardo Correia]
-   3.	Implementar rota de edição. [Eduardo Correia]
-   4.	Implementar rota de exclusão. [Eduardo Correia]
+   2.	Implementar rota de criação. [Eduardo Correia] ✅
+   3.	Implementar rota de edição. [Eduardo Correia] ✅
+   4.	Implementar rota de exclusão. [Eduardo Correia] ✅
 
 
 •	História #3: Como usuário comum, quero poder ter acesso a informações do anúncio do PET.
 •	Tarefas e responsáveis: 
-   1.	Implementação da tela de anúncios. [Juan Coelho]
+   1.	Implementação da tela de anúncios. [Juan Coelho] ✅
    2.	Implementação da tela de anúncios específicos (um a um). [Juan Coelho]
-   3.	Implementar rota de listagem. [Juan Coelho]
+   3.	Implementar rota de listagem. [Juan Coelho] ✅
 
 •	História #4: Como usuário comum, gostaria de reagir ao anúncio de um PET para demonstrar interesse. 
 •	Tarefas e responsáveis: 

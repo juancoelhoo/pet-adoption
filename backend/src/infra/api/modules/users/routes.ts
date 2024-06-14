@@ -62,7 +62,7 @@ import { verifyJWT, login, notLoggedIn, checkPermission, logout } from "../../mi
 const router = Router();
 
 router.post("/login", notLoggedIn, login);
-router.post("/logout", logout);
+router.post("/logout", verifyJWT, logout);
 
 router.get("/all", verifyJWT, usersController.getAll);
 router.get("/:id", verifyJWT, usersController.getOne);

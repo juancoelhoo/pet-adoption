@@ -17,7 +17,7 @@ const useLogin = () => {
                 password: password
             });
             document.cookie = `jwt=${response.data.token}; path=/;`;
-            navigate("/"); // Redirecionar para a página inicial após o login        
+            navigate("/posts");      
         } catch (error) {
             setErrorMessage("Email ou senha inválidos. Por favor, tente novamente.");
         }
