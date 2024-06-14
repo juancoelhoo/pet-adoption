@@ -8,6 +8,7 @@ import Posts from "./pages/Posts";
 
 import { AuthProvider } from './contexts/AuthContext';
 import PrivateRoute from './hoc/PrivateRoute';
+import PublicRoute from './hoc/PublicRoute';
 
 
 import './global.css';
@@ -18,10 +19,10 @@ export const App = () => {
         <AuthProvider>
                 <BrowserRouter>
                     <Routes>
-                        <Route path="/login" element={<Login/>} />
-                        <Route path ="/signup" element= {<SignUp/>} />
-                        {/*<Route path="/posts" element={<Posts/>} />*/}
-                        <Route path="/posts" element={<PrivateRoute element={<AdvertisementScreen />} />} />
+                    <Route path="/login" element={<PublicRoute element={<Login />} />} />
+                    <Route path="/signup" element={<PublicRoute element={<SignUp />} />} />
+                    {/*<Route path="/posts" element={<Posts/>} />*/}
+                    <Route path="/posts" element={<PrivateRoute element={<AdvertisementScreen />} />} />
                     </Routes>
                 </BrowserRouter>
         </AuthProvider>
