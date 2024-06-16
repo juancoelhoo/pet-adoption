@@ -11,6 +11,8 @@ import { setupDb } from "./database/dbSetup";
 
 import postsRouter from "./modules/posts/routes";
 import usersRouter from "./modules/users/routes"; 
+import complaintsRouter from "./modules/complaints/routes"; 
+
 
 export class SetupServer {
   private static LOG_TAG = "SetupServer";
@@ -53,6 +55,7 @@ export class SetupServer {
   private setupControllers(): void {
     this.app.use("/posts", postsRouter);
     this.app.use("/users", usersRouter); 
+    this.app.use("/complaints", complaintsRouter);
   }
 
   private setupErrorHandler(): void {
