@@ -76,8 +76,8 @@ Principais features:
 
 •	História #4: Como usuário comum, gostaria de reagir ao anúncio de um PET para demonstrar interesse. 
 •	Tarefas e responsáveis: 
-   1.	Implementar botões de reação. [Bernardo Viggiano]
-   2.	Implementar rota de adição de reações. [Bernardo Viggiano]
+   1.	Implementar botões de reação. [Bernardo Viggiano] 
+   2.	Implementar rota de adição de reações. [Bernardo Viggiano] ✅
 
 •	História #5: Como usuário comum, gostaria de avaliar outro usuário. 
 •	Tarefas e responsáveis: 
@@ -87,9 +87,9 @@ Principais features:
 
 •	História #6: Como usuário comum, gostaria de denunciar posts de outros usuários. 
 •	Tarefas e responsáveis: 
-  1.	Criação da lógica de denúncia de posts. [Bernardo Viggiano]
-  2.	Criação do pop-up. [Bernardo Viggiano]
-  3.	Implementar rota de denúncia de posts. [Bernardo Viggiano]
+  1.	Criação da lógica de denúncia de posts. [Bernardo Viggiano] ✅
+  2.	Criação do pop-up. [Bernardo Viggiano] ✅
+  3.	Implementar rota de denúncia de posts. [Bernardo Viggiano] ✅
 
 •	História #7: Como usuário administrador, quero banir um usuário comum do aplicativo. 
 •	Tarefas e responsáveis:
@@ -101,5 +101,5 @@ Principais features:
 •	História #8: Como usuário administrador, gostaria de excluir posts para maior organização do aplicativo. 
 •	Tarefas e responsáveis: 
    1.	Criação do botão de exclusão de posts, baseado na permissão. [Juan Coelho]
-   2.	Lógica de exclusão de posts. [Juan Coelho]
-   3.	Implementação da rota da exclusão de posts. [Juan Coelho]
+   2.	Lógica de exclusão de posts. [Juan Coelho] 
+   3.	Implementação da rota da exclusão de posts. [Juan Coelho] ✅
