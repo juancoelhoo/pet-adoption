@@ -1,0 +1,78 @@
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    z-index: 1000; /* Ensure it's above other content */
+  }
+  
+  .popup {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 400px; /* Adjust as needed */
+    height: 100%;
+    background-color: #fff;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5); /* Shadow on the left */
+    z-index: 1001; /* Ensure it's above the overlay */
+    overflow-y: auto; /* Enable scrolling if content overflows */
+  }
+  
+  .popup-content {
+    padding: 20px;
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .close-btn img {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .popup-content h2 {
+    color: #333; /* Title color */
+    margin-bottom: 10px;
+  }
+  
+  .popup-content p {
+    margin: 10px 0;
+    font-family: "Quicksand", sans-serif;
+  }
+  
+  .popup-content strong {
+    color: #555; /* Label color */
+  }
+  
+  .contact {
+    background-color: #4CAF50; /* Green background color */
+    color: white; /* Text color */
+    border: none;
+    width: 100%;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: "Quicksand", sans-serif;
+  }
+  
+  .contact:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
+
+  .btn-image{
+    margin-left: 8px;
+  }
+  
