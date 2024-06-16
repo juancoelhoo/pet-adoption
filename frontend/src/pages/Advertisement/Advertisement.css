@@ -1,3 +1,4 @@
+/* Global styles */
 * {
     margin: 0;
     padding: 0;
@@ -36,14 +37,6 @@
     margin-right: 5px;
 }
 
-.ad-screen::after {
-    content: '';
-    position: absolute;
-    top: 13%;
-    left: 20px;
-    width: calc(100% - 60px);
-    border-bottom: 2px solid black;
-}
 
 .pet-ads {
     padding: 30px;
@@ -51,5 +44,53 @@
     grid-template-columns: 22vw 22vw 22vw;
     gap: 15px;
     margin-top: 15px;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 1200px) {
+    .ad-screen::after {
+        left: 15px;
+        width: calc(100% - 40px);
+    }
+}
+
+@media (max-width: 992px) {
+    .ad-screen::after {
+        left: 10px;
+        width: calc(100% - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .ad-screen::after {
+        left: 5px;
+        width: calc(100% - 10px);
+    }
+}
+
+@media (max-width: 576px) {
+    .ad-screen::after {
+        left: 2px;
+        width: calc(100% - 4px);
+    }
+}
+
+/* Responsive styles for larger screens */
+@media (min-width: 1600px) {
+    .ad-screen::after {
+        left: 30px;
+        width: calc(100% - 90px);
+    }
+}
+
+@media (min-width: 1920px) {
+    .ad-screen::after {
+        left: 40px;
+        width: calc(100% - 120px);
+    }
+}
+
+.post-title{
+    margin-left: 29px;
 }
 

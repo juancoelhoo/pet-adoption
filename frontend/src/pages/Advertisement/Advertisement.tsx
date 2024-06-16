@@ -9,8 +9,10 @@ const AdvertisementScreen = () => {
     <div className="advertisement-container">
       <Menu />
       <div className="ad-screen">
+        <div className="post-title">
         <img src={ad} alt="ad-logo" />
-        Anúncios
+          Anúncios
+        </div>
         <div className="pet-ads">
           <PetAd></PetAd> 
           <PetAd></PetAd> 
