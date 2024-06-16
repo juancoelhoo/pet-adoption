@@ -5,6 +5,22 @@ import { QueryError } from "../../errors/QueryError";
 import { SequelizeReactionsRepository } from "@src/infra/services/sequelize/reactions/sequelizeReactionsRepository";
 
 class ReactionsController {
+  /**
+   * @swagger
+   * /reactions:
+   *   get:
+   *     summary: Returns the list of all reactions
+   *     tags: [Reactions]
+   *     responses:
+   *       200:
+   *         description: The list of the reactions
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: array
+   *               items:
+   *                 $ref: '#/components/schemas/Reaction'
+   */
   async getAll(req: Request, res: Response, next: NextFunction) {
     try {
       const reactionsFactory = getAllReactionsFactory();
@@ -21,6 +37,27 @@ class ReactionsController {
     }
   }
 
+  /**
+   * @swagger
+   * /reactions/{id}:
+   *   get:
+   *     summary: Returns the information of a specific reaction
+   *     tags: [Reactions]
+   *     parameters:
+   *       - in: path
+   *         name: id
+   *         schema:
+   *           type: number
+   *         required: true
+   *         description: The reaction id
+   *     responses:
+   *       200:
+   *         description: The information of the specified reaction
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Reaction'
+   */
   async getOne(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
@@ -44,6 +81,22 @@ class ReactionsController {
     }
   }
 
+  /**
+   * @swagger
+   * /reactions:
+   *   post:
+   *     summary: Create a new reaction
+   *     tags: [Reactions]
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             $ref: '#/components/schemas/Reaction'
+   *     responses:
+   *       201:
+   *         description: The reaction was created successfully
+   */
   async create(req: Request, res: Response, next: NextFunction) {
     try {
       const { userId, postId } = req.body;
@@ -63,6 +116,23 @@ class ReactionsController {
     }
   }
 
+  /**
+   * @swagger
+   * /reactions/{id}:
+   *   delete:
+   *     summary: Deletes a specified reaction
+   *     tags: [Reactions]
+   *     parameters:
+   *       - in: path
+   *         name: id
+   *         schema:
+   *           type: number
+   *         required: true
+   *         description: The reaction id
+   *     responses:
+   *       200:
+   *         description: The specified reaction was deleted
+   */
   async delete(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
@@ -85,6 +155,31 @@ class ReactionsController {
     }
   }
 
+  /**
+   * @swagger
+   * /reactions/toggleLike:
+   *   post:
+   *     summary: Toggles a like reaction for a post by a user
+   *     tags: [Reactions]
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             type: object
+   *             properties:
+   *               userId:
+   *                 type: number
+   *                 description: The ID of the user
+   *               postId:
+   *                 type: number
+   *                 description: The ID of the post
+   *     responses:
+   *       200:
+   *         description: Like removed successfully
+   *       201:
+   *         description: Like added successfully
+   */
   async toggleLike(req: Request, res: Response, next: NextFunction) {
     try {
       const { userId, postId } = req.body;
