@@ -45,5 +45,6 @@ router.get("/all", verifyJWT, reactionsController.getAll);
 router.get("/:id", verifyJWT, reactionsController.getOne);
 router.post("/", verifyJWT, reactionsController.create);
 router.delete("/:id", verifyJWT, reactionsController.delete);
+router.post("/toggleLike", verifyJWT, reactionsController.toggleLike);
 
 export default router;

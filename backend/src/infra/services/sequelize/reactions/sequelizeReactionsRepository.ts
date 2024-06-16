@@ -78,4 +78,47 @@ export class SequelizeReactionsRepository implements ReactionsRepository {
       }
     }
   }
+
+  async findByUserAndPost(userId: number, postId: number): Promise<Reaction | null> {
+    try {
+      const reaction = await ReactionModel.findOne({
+        where: {
+          user_id: userId,
+          post_id: postId
+        }
+      });
+
+      if (reaction == null) return null;
+
+      return {
+        id: reaction.id,
+        userId: reaction.user_id,
+        postId: reaction.post_id,
+        createdAt: reaction.created_at,
+      };
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new QueryError("Error in finding reaction: " + error.message);
+      } else {
+        throw new QueryError("Unknown error in finding reaction");
+      }
+    }
+  }
+
+  async deleteByUserAndPost(userId: number, postId: number): Promise<void> {
+    try {
+      await ReactionModel.destroy({
+        where: {
+          user_id: userId,
+          post_id: postId
+        }
+      });
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new QueryError("Error in deleting reaction: " + error.message);
+      } else {
+        throw new QueryError("Unknown error in deleting reaction");
+      }
+    }
+  }
 }
