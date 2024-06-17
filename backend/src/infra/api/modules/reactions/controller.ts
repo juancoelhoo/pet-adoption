@@ -180,30 +180,44 @@ class ReactionsController {
    *       201:
    *         description: Like added successfully
    */
+
   async toggleLike(req: Request, res: Response, next: NextFunction) {
     try {
       const { userId, postId } = req.body;
+      console.log('toggleLike called with:', { userId, postId });
+  
+      if (!userId || !postId) {
+        console.error('Invalid parameters:', { userId, postId });
+        throw new InvalidParamError("Missing property 'userId' or 'postId'!");
+      }
+  
       const reactionsRepository = new SequelizeReactionsRepository();
       const existingReaction = await reactionsRepository.findByUserAndPost(userId, postId);
-
+  
       if (existingReaction) {
         await reactionsRepository.deleteByUserAndPost(userId, postId);
+        console.log('Like removed for:', { userId, postId });
         return res.status(200).json({
           message: "Like removed successfully!"
         });
       } else {
         await reactionsRepository.create({ userId, postId });
+        console.log('Like added for:', { userId, postId });
         return res.status(201).json({
           message: "Like added successfully!"
         });
       }
     } catch (error) {
       if (error instanceof InvalidParamError || error instanceof QueryError) {
+        console.error('Known error:', error.message);
         return res.status(400).json({ error: error.message });
       }
+      console.error('Internal Server Error:', error); 
       return next(error);
     }
   }
+  
+  
 }
 
 export default new ReactionsController();
