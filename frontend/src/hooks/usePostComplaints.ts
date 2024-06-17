@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import api from '../api/api';
 
 const usePostComplaints = (userId: number, postId: number) => {
   const [showPopup, setShowPopup] = useState(false);
@@ -16,7 +16,7 @@ const usePostComplaints = (userId: number, postId: number) => {
 
   const handleSubmit = async () => {
     try {
-      await axios.post('http://localhost:3333/complaints', {
+      await api.post('/complaints', {
         reporterUserId: userId,
         reportedPostId: postId,
         reason: reason,

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "../api/api";
 
 const useLogin = () => {
     const [email, setEmail] = useState("");
@@ -12,12 +12,12 @@ const useLogin = () => {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            const response = await axios.post("http://localhost:3333/users/login", {
+            const response = await api.post("/users/login", {
                 email: email,
                 password: password
             });
             document.cookie = `jwt=${response.data.token}; path=/;`;
-            navigate("/posts");      
+            navigate("/posts");
         } catch (error) {
             setErrorMessage("Email ou senha inválidos. Por favor, tente novamente.");
         }

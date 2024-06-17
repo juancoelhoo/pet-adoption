@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import api from "../api/api";
 
 const useSignUp = () => {
     const [name, setName] = useState("");
@@ -17,7 +17,7 @@ const useSignUp = () => {
         } else {
             setErrorMessage("");
             try {
-                await axios.post("http://localhost:3333/users", {
+                await api.post("/users", {
                     name: name,
                     email: email,
                     password: password
