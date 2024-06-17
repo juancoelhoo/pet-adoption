@@ -1,0 +1,134 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Luckiest Guy";
+  }
+  
+  .profile-container {
+    display: flex;
+    margin-left: 20vw;
+    width: calc(100vw - 20vw); 
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: scroll; 
+  }
+  
+  .profile-screen {
+    flex: 1;
+    /* padding-top: 111px;
+    padding-left: 115px;
+    padding-right: 115px; */
+    font-size: 2rem;
+    position: relative;
+  }
+  
+  .profile-info {
+    margin-top: 5%;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .profile-top {
+    display: flex;
+    margin-left: 5rem;
+    width: 100%;
+    height: 40%;
+  }
+  
+  .profile-pic img{
+    width: 100%;
+    box-shadow: none;
+    height: 80%;
+  }
+  
+  .profile-pic{
+    align-items:baseline
+  }
+
+
+
+  
+  .profile-description {
+    width: 40%;
+    padding: 15px;
+  }
+
+  .profile-string {
+    font-family: "Quicksand", sans-serif; 
+    font-size: 16px;
+    color: #000; 
+    margin: 7px;
+}
+
+.profile-rating{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.profile-rating img{
+    margin-right: 7px;
+}
+
+.rating {
+    font-family: "Quicksand", sans-serif; 
+    font-weight: bold;
+    font-size: 12px;
+    color: #000; 
+}
+
+.profile-location{
+    display: flex;
+    align-items: center;
+    margin-bottom: 7px;
+}
+
+
+.profile-text{
+    display: flex;
+    align-items: start;
+}
+
+.profile-text img{
+    margin-top: 5px;
+}
+
+.dropDownMenu {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dropDownMenuBtn{
+  position: right;
+  align-self: center;
+  padding: 5px;
+}
+
+.profile-bottom {
+    width: 100%;
+    height: 50%;
+  }
+
+
+.line-divider{
+  position:relative;
+  top: 10px;
+  height: 1px;
+  width: 80%;
+  background-color: #000;
+}
+
+.profile-posts{
+  position: relative;
+  top: 10px;
+  display: grid;
+  grid-template-columns: 12vw 12vw 12vw;
+  gap: 15px;
+  margin-top: 15px;
+}

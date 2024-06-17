@@ -12,6 +12,7 @@ import PublicRoute from './routes/PublicRoute';
 
 
 import './global.css';
+import ProfileScreen from './pages/Profile/Profile';
 
 export const App = () => {
     return (
@@ -22,7 +23,9 @@ export const App = () => {
                     <Route path="/login" element={<PublicRoute element={<Login />} />} />
                     <Route path="/signup" element={<PublicRoute element={<SignUp />} />} />
                     {/*<Route path="/posts" element={<Posts/>} />*/}
-                    <Route path="/posts" element={<PrivateRoute element={<AdvertisementScreen />} />} />
+                    <Route path="/posts" element={<PublicRoute element={<AdvertisementScreen />} />} />
+                    
+                    <Route path="/profile" element={<PublicRoute element={<ProfileScreen />} />} />
                     </Routes>
                 </BrowserRouter>
         </AuthProvider>
