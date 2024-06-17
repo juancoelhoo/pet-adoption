@@ -4,27 +4,27 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-  z-index: 1000; /* Ensure it's above other content */
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
 }
 
 .popup {
   position: fixed;
   top: 0;
   right: 0;
-  width: 400px; /* Adjust as needed */
+  width: 400px;
   height: 100%;
   font-size: 25px;
   background-color: #fff;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5); /* Shadow on the left */
-  z-index: 1001; /* Ensure it's above the overlay */
-  overflow-y: auto; /* Enable scrolling if content overflows */
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5); 
+  z-index: 1001; 
+  overflow-y: auto; 
 }
 
 .popup-content {
   padding: 20px;
   position: relative;
-  font-family: 'Quicksand', sans-serif; /* Ensure consistent font */
+  font-family: 'Quicksand', sans-serif;
 }
 
 .close-btn {
@@ -45,8 +45,8 @@
 
 .dropdown-menu {
   position: absolute;
-  top: 40px; /* adjust based on your layout */
-  right: 0; /* Align to the right */
+  top: 40px;
+  right: 0; 
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -77,7 +77,7 @@
 }
 
 .popup-content h2 {
-  color: #333; /* Title color */
+  color: #333;
   margin-bottom: 10px;
 }
 
@@ -87,12 +87,12 @@
 }
 
 .popup-content strong {
-  color: #555; /* Label color */
+  color: #555;
 }
 
 .contact {
-  background-color: #4CAF50; /* Green background color */
-  color: white; /* Text color */
+  background-color: #4CAF50; 
+  color: white;
   border: none;
   width: 100%;
   padding: 10px 20px;
@@ -107,7 +107,7 @@
 }
 
 .contact:hover {
-  background-color: #45a049; /* Darker green on hover */
+  background-color: #45a049;
 }
 
 .btn-image {
@@ -117,8 +117,8 @@
 .profile-and-button {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Adjust as needed */
-  margin-top: 20px; /* Adjust margin as needed */
+  justify-content: space-between;
+  margin-top: 20px;
 }
 
 .profile {
@@ -128,19 +128,19 @@
 }
 
 .profile img {
-  width: 40px; /* Adjust size of profile photo as needed */
+  width: 40px; 
   height: 40px;
-  margin-right: 8px; /* Add margin between image and text */
+  margin-right: 8px;
 }
 
 .profile span {
-  font-family: 'Quicksand', sans-serif; /* Ensure consistent font */
+  font-family: 'Quicksand', sans-serif;
   cursor: pointer;
 }
 
 .contact {
-  background-color: #4CAF50; /* Green background color */
-  color: white; /* Text color */
+  background-color: #4CAF50; 
+  color: white;
   border: none;
   padding: 10px 20px;
   text-align: center;
@@ -152,7 +152,7 @@
 }
 
 .contact:hover {
-  background-color: #45a049; /* Darker green on hover */
+  background-color: #45a049;
 }
 
 .btn-image {
