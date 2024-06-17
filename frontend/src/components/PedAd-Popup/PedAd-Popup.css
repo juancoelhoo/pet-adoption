@@ -14,6 +14,7 @@
     right: 0;
     width: 400px; /* Adjust as needed */
     height: 100%;
+    font-size: 25px;
     background-color: #fff;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5); /* Shadow on the left */
     z-index: 1001; /* Ensure it's above the overlay */
@@ -74,5 +75,63 @@
 
   .btn-image{
     margin-left: 8px;
+  }
+
+
+  .profile-and-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Adjust as needed */
+    margin-top: 20px; /* Adjust margin as needed */
+  }
+  
+  .profile {
+    display: flex;
+    align-items: center;
+    margin-top: 70px;
+  }
+  
+  .profile img {
+    width: 40px; /* Adjust size of profile photo as needed */
+    height: 40px;
+    margin-right: 8px; /* Add margin between image and text */
+  }
+  
+  .profile span {
+    font-family: "Quicksand", sans-serif; /* Ensure consistent font */
+    cursor: pointer;
+  }
+  
+  .contact {
+    background-color: #4CAF50; /* Green background color */
+    color: white; /* Text color */
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: "Quicksand", sans-serif;
+  }
+  
+  .contact:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
+  
+  .btn-image {
+    margin-left: 8px;
+  }
+
+  .profile{
+    justify-content: space-between;
+  }
+
+  .profile-user{
+    display: flex;
+  }
+
+  .profile-access{
+    cursor: pointer;
   }
   
