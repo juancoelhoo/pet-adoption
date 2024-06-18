@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import api from '../api/api';
+import { api } from '../services/api';
 
 const usePostComplaints = (userId: number, postId: number) => {
   const [showPopup, setShowPopup] = useState(false);
