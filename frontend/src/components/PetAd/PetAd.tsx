@@ -25,7 +25,7 @@ const PetAd: React.FC<PetAdProps> = ({ onClick, name, breed, age, description}) 
         </div>
         <div className="pet-breed">
           <img src={breedimage} alt="" />
-          Raça: <span className="pet-info">Pastor alemão</span>
+          Raça: <span className="pet-info">{breed}</span>
         </div>
         <div className="pet-age">
           <img src={ageimage} alt="" />
@@ -33,7 +33,7 @@ const PetAd: React.FC<PetAdProps> = ({ onClick, name, breed, age, description}) 
         </div>
         <div className="pet-description">
           <img src={descimage} alt="" />
-          Descrição: <span className="pet-info">Lorem, ipsum dolor sit amet</span>
+          Descrição: <span className="pet-info">{description}</span>
         </div>
       </div>
     </div>
