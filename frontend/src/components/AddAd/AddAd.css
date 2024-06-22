@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+}
+
+.add-ad {
+    cursor: pointer;
+    width: 11vw;
+    height: 30vh;
+    padding: 5px;
+    border-radius: 5px;
+    border-width: 2px;
+    border-style: dashed;
+    border-color: #B4B4B4;
+    position: relative;
+    font-size: 1rem;
+    display: grid;
+    place-items: center;
+    height: 30vh; 
+    background-color: #EFEFEF;
+    
+}
+
