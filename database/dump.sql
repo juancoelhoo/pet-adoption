@@ -41,6 +41,16 @@ CREATE TABLE IF NOT EXISTS complaints (
     FOREIGN KEY (reported_post_id) REFERENCES posts (id)
 );
 
+CREATE TABLE IF NOT EXISTS reactions (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    post_id INTEGER NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users (id),
+    FOREIGN KEY (post_id) REFERENCES posts (id),
+    UNIQUE(user_id, post_id) 
+);
+
 INSERT INTO users (name, email, password, photo_url, description, address, phone, permissions)
 VALUES
     ('Eduardo Sereia', 'eduardo@mail.com', '123456*aB', 'https://i.imgur.com/tmUa2ir.png', 'Descricao 1', 'Rua Um, 74 - BH', '31 98765-4321', 1),
