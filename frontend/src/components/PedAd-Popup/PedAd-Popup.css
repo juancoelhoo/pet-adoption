@@ -1,0 +1,172 @@
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 400px;
+  height: 100%;
+  font-size: 25px;
+  background-color: #fff;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5); 
+  z-index: 1001; 
+  overflow-y: auto; 
+}
+
+.popup-content {
+  padding: 20px;
+  position: relative;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.dropdown-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 40px;
+  right: 0; 
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  font-size: 20px;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.dropdown-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-menu li {
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.dropdown-menu li:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown-menu img{
+  margin-left: 10px;
+}
+
+.popup-content h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.popup-content p {
+  margin: 10px 0;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.popup-content strong {
+  color: #555;
+}
+
+.contact {
+  background-color: #4CAF50; 
+  color: white;
+  border: none;
+  width: 100%;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.contact:hover {
+  background-color: #45a049;
+}
+
+.btn-image {
+  margin-left: 8px;
+}
+
+.profile-and-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  margin-top: 70px;
+}
+
+.profile img {
+  width: 40px; 
+  height: 40px;
+  margin-right: 8px;
+}
+
+.profile span {
+  font-family: 'Quicksand', sans-serif;
+  cursor: pointer;
+}
+
+.contact {
+  background-color: #4CAF50; 
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.contact:hover {
+  background-color: #45a049;
+}
+
+.btn-image {
+  margin-left: 8px;
+}
+
+.profile {
+  justify-content: space-between;
+}
+
+.profile-user {
+  display: flex;
+}
+
+.profile-access {
+  cursor: pointer;
+}
