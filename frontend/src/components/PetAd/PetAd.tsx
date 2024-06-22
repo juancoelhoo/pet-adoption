@@ -39,10 +39,10 @@ const PetAd: React.FC<PetAdProps> = ({ onClick, name, breed, age, description}) 
           Descrição: <span className="pet-info">{description}</span>
         </div>
         <div className="pet-likes">
-          <button onClick={handleLike}>
+          {/* <button onClick={}>
             <img src={likeimage} alt="Curtir" className="like-icon" />
-          </button>
-          <span>{likes} curtidas</span>
+          </button> */}
+          <span>{} curtidas</span>
         </div>
       </div>
     </div>
