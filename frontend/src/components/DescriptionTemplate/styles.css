@@ -2,16 +2,27 @@
     margin: 0;
 }
 
+.logo-petadopt{
+    margin-bottom: 30px;
+}
+
+.img1{
+    margin-bottom: 13px;
+}
+
+.img2{
+    margin-bottom: 13px;
+}
+
 .petAdoptContainer {
     width: 60%;
     background: linear-gradient(to bottom right, #d1ba21, #6f6a2a);
     color: white;
-    padding: 120px;
+    padding: 10px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: -10px;
     height: 100vh;
 }
 
