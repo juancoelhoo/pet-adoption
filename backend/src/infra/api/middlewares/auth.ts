@@ -8,7 +8,7 @@ import { UserModel } from "@src/infra/services/sequelize/users/usersModel";
 import { LoginError } from "../errors/LoginError";
 
 // Generates a JWT token for an authenticated user
-function generateJWT(user: UserModel, res: Response) {
+function generateJWT(user: UserModel, res: Response): string {
     const body = {
         id: user.id,
         email: user.email,
@@ -22,6 +22,8 @@ function generateJWT(user: UserModel, res: Response) {
         httpOnly: true,
         secure: process.env.NODE_ENV !== "development"
     });
+
+    return token;
 }
 
 // Extracts the JWT token from the HTTP cookie of the request
@@ -69,9 +71,9 @@ export async function login(req: Request, res: Response, next: NextFunction) {
             throw new PermissionError("Incorrect email and/or password!");
         }
 
-        generateJWT(user, res);
+        const jwt = generateJWT(user, res);
 
-        res.status(200).json("Login successful!");
+        res.status(200).json({token: jwt});
     } catch (error) {
         next(error);
     }

@@ -3,6 +3,7 @@ import axios from 'axios';
 
 interface AuthContextProps {
     isAuthenticated: boolean;
+    setIsAuthenticated: (value: boolean) => void;
     login: (email: string, password: string) => Promise<void>;
     logout: () => void;
 }
@@ -38,7 +39,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     };
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+        <AuthContext.Provider value={{ isAuthenticated, login, logout, setIsAuthenticated }}>
             {children}
         </AuthContext.Provider>
     );

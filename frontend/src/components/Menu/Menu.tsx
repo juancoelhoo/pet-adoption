@@ -5,11 +5,14 @@ import logo from '../../public/logo.svg';
 import ads from '../../public/menu/advertisement.svg';
 import report from '../../public/menu/report.svg';
 import search from '../../public/menu/search.svg';
-import logout from '../../public/menu/logout.svg';
+import logoutImg from '../../public/menu/logout.svg';
 import profile from '../../public/menu/profile.svg';
 import config from "../../public/menu/config.svg";
+import { useAuth } from '../../contexts/AuthContext';
 
 const Menu = () => {
+    const { logout } = useAuth();
+
   return (
     <div className='bar'>
         <div className="itens">
@@ -36,8 +39,8 @@ const Menu = () => {
                 <div className="options">
                 Opções
                     <div className="log-out">
-                        <img src={logout} alt="logout-image"/>
-                        <a href="/">Desconectar</a>
+                        <img src={logoutImg} alt="logout-image"/>
+                        <button onClick={logout}>Desconectar</button>
                     </div>
                 </div>
                 <div className="profile-access">

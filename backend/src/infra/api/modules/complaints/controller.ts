@@ -6,7 +6,7 @@ import { QueryError } from "../../errors/QueryError";
 class ComplaintsController {
   /**
    * @swagger
-   * /complaints:
+   * /complaints/all:
    *   get:
    *     summary: Returns the list of all complaints
    *     tags: [Complaints]

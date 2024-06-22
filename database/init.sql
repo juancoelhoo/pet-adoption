@@ -53,10 +53,10 @@ CREATE TABLE IF NOT EXISTS reactions (
 
 INSERT INTO users (name, email, password, photo_url, description, address, phone, permissions)
 VALUES
-    ('Eduardo Sereia', 'eduardo@mail.com', '123456*aB', 'https://i.imgur.com/tmUa2ir.png', 'Descricao 1', 'Rua Um, 74 - BH', '31 98765-4321', 1),
-    ('Juan Botelho', 'juan@mail.com', '123456*aB', 'https://i.imgur.com/tmUa2ir.png', 'Descricao 2', 'Rua Dois, 359 - BH', '31 98765-4321', 0),
-    ('Bernardo Emiliano', 'bernardo@mail.com', '123456*aB', 'https://i.imgur.com/tmUa2ir.png', 'Descricao 3', 'Rua Três, 465 - BH', '31 98765-4321', 1),
-    ('Rafael Schimidt', 'rafael@mail.com', '123456*aB', 'https://i.imgur.com/tmUa2ir.png', 'Descricao 4', 'Rua Quatro, 981 - BH', '31 98765-4321', 0);
+    ('Eduardo Sereia', 'eduardo@mail.com', '$2b$10$HRAqlhysuyI6369777gzWuIQOPJvylJqZOA0gFyb8M/4fwkY7qgHy', 'https://i.imgur.com/tmUa2ir.png', 'Descricao 1', 'Rua Um, 74 - BH', '31 98765-4321', 1),
+    ('Juan Botelho', 'juan@mail.com', '$2b$10$HRAqlhysuyI6369777gzWuIQOPJvylJqZOA0gFyb8M/4fwkY7qgHy', 'https://i.imgur.com/tmUa2ir.png', 'Descricao 2', 'Rua Dois, 359 - BH', '31 98765-4321', 0),
+    ('Bernardo Emiliano', 'bernardo@mail.com', '$2b$10$HRAqlhysuyI6369777gzWuIQOPJvylJqZOA0gFyb8M/4fwkY7qgHy', 'https://i.imgur.com/tmUa2ir.png', 'Descricao 3', 'Rua Três, 465 - BH', '31 98765-4321', 1),
+    ('Rafael Schimidt', 'rafael@mail.com', '$2b$10$HRAqlhysuyI6369777gzWuIQOPJvylJqZOA0gFyb8M/4fwkY7qgHy', 'https://i.imgur.com/tmUa2ir.png', 'Descricao 4', 'Rua Quatro, 981 - BH', '31 98765-4321', 0);
 
 INSERT INTO posts (photo_url, name, breed, age, description, owner_id, created_at)
 VALUES

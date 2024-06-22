@@ -99,9 +99,20 @@ a {
     margin-right: 5px;
 }
 
-.log-out a{
+.log-out button{
     position:relative;
     bottom: 13px;
+    font-family: "Quicksand";
+    text-decoration: none;
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.log-out button:hover{
+    color: #FBF345;
 }
 
 .profile-access{

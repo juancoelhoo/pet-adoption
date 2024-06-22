@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { api } from '../../services/api';
 import './PetAd.css';
 import dogimage from '../../public/pet-ad/pet-ad.svg';
 import nameimage from '../../public/pet-ad/pet-name.svg';
@@ -39,10 +38,10 @@ const PetAd: React.FC<PetAdProps> = ({ onClick, name, breed, age, description}) 
           Descrição: <span className="pet-info">{description}</span>
         </div>
         <div className="pet-likes">
-          <button onClick={handleLike}>
+          <button onClick={() => {} /*handleLike*/}>
             <img src={likeimage} alt="Curtir" className="like-icon" />
           </button>
-          <span>{likes} curtidas</span>
+          <span>{/*likes*/} curtidas</span>
         </div>
       </div>
     </div>
