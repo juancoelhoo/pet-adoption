@@ -1,5 +1,6 @@
 import { Router } from "express";
 import ratingsController from "./controller";
+import { verifyJWT } from "../../middlewares/auth";
 
 /**
  * @swagger
@@ -46,9 +47,9 @@ const router = Router();
 
 router.get("/all", ratingsController.getAll);
 router.get("/:id", ratingsController.getOne);
-router.post("/", ratingsController.create);
-router.put("/:id", ratingsController.update);
-router.delete("/:id", ratingsController.delete);
+router.post("/", verifyJWT, ratingsController.create);
+router.put("/:id", verifyJWT, ratingsController.update);
+router.delete("/:id", verifyJWT, ratingsController.delete);
 router.get("/average/:userId", ratingsController.calculateAverage);
 
 export default router;
