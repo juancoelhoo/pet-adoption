@@ -129,3 +129,105 @@
   gap: 15px;
   margin-top: 15px;
 }
+
+.popup-create-post {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 500px;
+  height: 100vh;
+  background: white;
+  border-radius: 16px 0 0 16px;
+  box-shadow: 4px 4px 5px 5px rgba(0, 0, 0, 0.2);
+  padding: 16px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.popup-create-post .close {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 12px;
+}
+
+.popup-create-post .close button {
+  background: none;
+  border: none;
+  font-size: 32px;
+  font-family: "Quicksand";
+  cursor: pointer;
+}
+
+.popup-create-post .post-input {
+  width: 100%;
+  height: 40px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.popup-create-post .description-box {
+  width: 100%;
+  height: 80px !important;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.popup-create-post .description-box input {
+  text-align: top;
+}
+
+.popup-create-post .post-input label {
+  padding: 0;
+  margin: 0 12px 0 0;
+}
+
+.popup-create-post .post-input label img {
+  width: 40px;
+  height: 40px;
+}
+
+.popup-create-post .post-input input {
+  height: 100%;
+  width: 100%;
+  box-shadow: 2px 2px 3px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  border: none;
+  outline: none;
+  padding: 4px 12px 4px 12px;
+  font-family: "Quicksand";
+}
+
+.popup-create-post .post-input textarea {
+  height: 100%;
+  width: 100%;
+  box-shadow: 2px 2px 3px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  border: none;
+  outline: none;
+  padding: 12px;
+  font-family: "Quicksand";
+  resize: none;
+}
+
+.popup-create-post .create-btn {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.popup-create-post .create-btn button {
+  width: calc(100% - 52px);
+  cursor: pointer;
+  font-family: "Quicksand";
+  background: #535204;
+  color: #CDB30C;
+  border: none;
+  outline: none;
+  border-radius: 2px;
+  font-size: 16px;
+}

@@ -1,0 +1,35 @@
+.img-upload-container {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 24px;
+}
+
+.img-upload-container .img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.img-upload-container .input {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    font-family: "Quicksand";
+    font-size: 160px;
+    border: 1px dashed grey;
+    color: grey;
+    background: lightgray;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-upload-container .input input {
+    display: none;
+}
+
+.img-upload-container .input p {
+    display: block;
+}

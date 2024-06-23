@@ -22,7 +22,7 @@ export const App = () => {
                         <Route path="/login" element={<PublicRoute element={<Login />} />} />
                         <Route path="/posts" element={<PrivateRoute element={<AdvertisementScreen />} />} />
                         <Route path="/complaints" element={<PrivateRoute element={<ComplaintsPage />} />} />
-                        <Route path="/profile" element={<PrivateRoute element={<ProfileScreen />} />} />
+                        <Route path="/profile" element={<ProfileScreen />} />
                     </Routes>
                 </BrowserRouter>
         </AuthProvider>

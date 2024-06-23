@@ -1,2 +1,6 @@
 /node_modules
 .env
+/tmp/*.jpeg
+/tmp/*.jpg
+/tmp/*.png
+/tmp/*.gif
