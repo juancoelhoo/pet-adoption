@@ -5,7 +5,7 @@ import nameimage from '../../public/pet-ad/pet-name.svg';
 import breedimage from '../../public/pet-ad/pet-breed.svg';
 import ageimage from '../../public/pet-ad/pet-age.svg';
 import descimage from '../../public/pet-ad/pet-description.svg';
-import likeimage from '../../public/pet-ad/like.svg'; 
+
 
 interface PetAdProps {
   onClick: (name: string, breed: string, age: number, description: string) => void;
@@ -16,6 +16,9 @@ interface PetAdProps {
 }
 
 const PetAd: React.FC<PetAdProps> = ({ onClick, name, breed, age, description}) => {
+
+  
+
   return (
     <div className='pet-ad' onClick={() => onClick(name, breed, age, description)}>
       <img src={dogimage} alt="pet-photo" />
@@ -36,12 +39,6 @@ const PetAd: React.FC<PetAdProps> = ({ onClick, name, breed, age, description}) 
         <div className="pet-description">
           <img src={descimage} alt="" />
           Descrição: <span className="pet-info">{description}</span>
-        </div>
-        <div className="pet-likes">
-          <button onClick={() => {} /*handleLike*/}>
-            <img src={likeimage} alt="Curtir" className="like-icon" />
-          </button>
-          <span>{/*likes*/} curtidas</span>
         </div>
       </div>
     </div>

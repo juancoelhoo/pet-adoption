@@ -8,6 +8,8 @@ import dropdown from '../../public/dropdown/dropdown.svg';
 import edit from '../../public/dropdown/edit.svg';
 import report from '../../public/dropdown/report.svg';
 import remove from '../../public/dropdown/remove.svg';
+import likeimage from '../../public/pet-ad/like.svg'; 
+import { api } from '../../services/api';
 
 interface PedAdPopupProps {
   trigger: boolean;
@@ -21,9 +23,43 @@ interface PedAdPopupProps {
 
 const PedAdPopup: React.FC<PedAdPopupProps> = ({ trigger, onClose, name, breed, age, description, photoUrl }) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [postLiked, setpostLiked] = useState(false);
+  const [likes, setLikes] = useState(0);
 
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
+  };
+
+  const toggleLike = () => {
+    setpostLiked(!postLiked);
+  }
+
+  const getLike = async () => {
+    try {
+      await api.post('/reactions/:id', {
+        postId: 0,
+      });
+      alert('Like handled successfully!');
+    } catch (error) {
+      console.error('Error handledling like:', error);
+      alert('Failed to handle like.');
+    }
+  };
+
+
+
+
+  const handleLike = async () => {
+    try {
+      await api.post('/reactions/toggleLike', {
+        userId: 0,
+        postId: 0,
+      });
+      alert('Like handled successfully!');
+    } catch (error) {
+      console.error('Error handledling like:', error);
+      alert('Failed to handle like.');
+    }
   };
 
   return trigger ? (
@@ -63,6 +99,12 @@ const PedAdPopup: React.FC<PedAdPopupProps> = ({ trigger, onClose, name, breed, 
             <p>Converse com o Dono</p>
             <img src={contato} alt="whatsapp-image" className='btn-image' />
           </button>
+          <div className="pet-likes">
+          <button onClick={() => {handleLike(), toggleLike()}} className={postLiked ? 'postliked' : 'postnotliked'}>
+            <img src={likeimage} alt="Curtir" className="like-icon" />
+          </button>
+          <span>{/*likes*/} Curtidas</span>
+        </div>
         </div>
       </div>
     </div>

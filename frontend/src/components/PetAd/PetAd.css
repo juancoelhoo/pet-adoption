@@ -37,34 +37,3 @@
     font-size: 16px;
     color: #333;
 }
-
-.pet-likes {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-}
-
-.pet-likes button {
-    margin-right: 10px;
-    padding: 5px 10px;
-    background-color: #d1ba21;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.pet-likes button:hover {
-    background-color: #6dcb09; 
-}
-
-.pet-likes .like-icon {
-    width: 20px;
-    height: 20px;
-}
-
-.pet-likes span {
-    font-size: 16px;
-    font-family: "Quicksand", sans-serif;
-    font-weight: 700;
-    color: #333;
-}
