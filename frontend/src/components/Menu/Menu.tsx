@@ -1,39 +1,40 @@
 import React from 'react';
-import "./Menu.css";
+import { Link } from "react-router-dom";
+import { useAuth } from '../../contexts/AuthContext';
 
 import logo from '../../public/logo.svg';
 import ads from '../../public/menu/advertisement.svg';
 import report from '../../public/menu/report.svg';
 import search from '../../public/menu/search.svg';
 import logoutImg from '../../public/menu/logout.svg';
-import profile from '../../public/menu/profile.svg';
 import config from "../../public/menu/config.svg";
-import { useAuth } from '../../contexts/AuthContext';
+
+import "./Menu.css";
 
 const Menu = () => {
-    const { logout } = useAuth();
+    const { logout, loggedUser } = useAuth();
 
   return (
-    <div className='bar'>
-        <div className="itens">
+    <div className='bar'>     
+        <div className="menu">
             <div className="title_logo">
                 <img className='logo' src={logo} alt="logo" />
                 <h1 className='title'>Pet Adopt</h1>
             </div>
-            <div className="menu">
-                Menu
+            <div className="buttons">
                 <div className="menu-items">
+                    Menu
                     <div className="ads">
                         <img src={ads} alt="ads-logo" />
-                        <a href="/">Anúncios</a>
+                        <Link to="/posts">Anúncios</Link>
                     </div>
                     <div className="search">
                         <img src={search} alt="search-logo" />
-                        <a href="/">Pesquisar</a>
+                        <Link to="#">Pesquisar</Link>
                     </div>
                     <div className="reports">
                         <img src={report} alt="" />
-                        <a href="/">Denúncia</a>
+                        <Link to="/complaints">Denúncias</Link>
                     </div>
                 </div>
                 <div className="options">
@@ -43,11 +44,13 @@ const Menu = () => {
                         <button onClick={logout}>Desconectar</button>
                     </div>
                 </div>
-                <div className="profile-access">
-                    <img src={profile} alt="profile-photo" />
-                    name
-                    <img className='config' src={config} alt="" />
+            </div>
+            <div className="profile-access">
+                <div>
+                    <img src={loggedUser?.profilePhoto} alt="profile-photo" />
+                    <p>{loggedUser?.name}</p>
                 </div>
+                <img className='config' src={config} alt="" />
             </div>
         </div>
     </div>

@@ -29,8 +29,11 @@ function generateJWT(user: UserModel, res: Response): string {
 // Extracts the JWT token from the HTTP cookie of the request
 function cookieExtractor(req: Request) {
     let token = null;
+    console.log(req.cookies);
+    
     if (req.cookies) {
         token = req.cookies["jwt"];
+        console.log(token);
     }
     return token;
 }
@@ -74,6 +77,36 @@ export async function login(req: Request, res: Response, next: NextFunction) {
         const jwt = generateJWT(user, res);
 
         res.status(200).json({token: jwt});
+    } catch (error) {
+        next(error);
+    }
+}
+
+export async function loggedUser(req: Request, res: Response, next: NextFunction) {
+    try {
+        const token = cookieExtractor(req);
+
+        if (!token) {
+            throw new TokenError("You need to be logged in to perform this action!");
+        }
+
+        const { user: { email } } = verify(token, process.env.SECRET_KEY || "") as JwtPayload;
+        const user = await UserModel.findOne({ where: { email } });
+
+        if (!user) {
+            throw new PermissionError("Invalid user!");
+        }
+
+        res.status(200).json({ user: {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            description: user.description,
+            profilePhoto: user.photo_url,
+            address: user.address,
+            phone: user.phone,
+            permissions: user.permissions
+        }});
     } catch (error) {
         next(error);
     }

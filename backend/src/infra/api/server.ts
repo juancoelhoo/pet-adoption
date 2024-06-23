@@ -44,8 +44,11 @@ export class SetupServer {
 
   private setupMiddlewares(): void {
     this.app.use(bodyParser.json());
-    this.app.use(cookieParser()); 
-    this.app.use(cors());
+    this.app.use(cookieParser());
+    this.app.use(cors({
+      credentials: true,
+      origin: "http://localhost:3000"
+    }));
   }
 
   private setupDocs(): void {
