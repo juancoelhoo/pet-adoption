@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS ratings (
     grade INTEGER NOT NULL,
     reporter_user_id INTEGER NOT NULL,
     reported_user_id INTEGER NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (reporter_user_id) REFERENCES users (id),
     FOREIGN KEY (reported_user_id) REFERENCES users (id)
 );
