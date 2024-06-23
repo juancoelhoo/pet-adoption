@@ -1,24 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './PetAd.css';
-import dogimage from '../../public/pet-ad/pet-ad.svg';
 import nameimage from '../../public/pet-ad/pet-name.svg';
 import breedimage from '../../public/pet-ad/pet-breed.svg';
 import ageimage from '../../public/pet-ad/pet-age.svg';
 import descimage from '../../public/pet-ad/pet-description.svg';
-import likeimage from '../../public/pet-ad/like.svg'; 
+import likeimage from '../../public/pet-ad/like.svg';
 
 interface PetAdProps {
-  onClick: (name: string, breed: string, age: number, description: string) => void;
+  onClick: (name: string, breed: string, age: number, description: string, photoUrl: string) => void;
   name: string;
   breed: string;
   age: number;
   description: string;
+  photoUrl: string;
 }
 
-const PetAd: React.FC<PetAdProps> = ({ onClick, name, breed, age, description}) => {
+const PetAd: React.FC<PetAdProps> = ({ onClick, name, breed, age, description, photoUrl }) => {
   return (
-    <div className='pet-ad' onClick={() => onClick(name, breed, age, description)}>
-      <img src={dogimage} alt="pet-photo" />
+    <div className='pet-ad' onClick={() => onClick(name, breed, age, description, photoUrl)}>
+      <div className="pet-photo">
+        <img src={photoUrl} alt="pet-photo" />
+      </div>
       <div className="pet-inf">
         <div className="pet-name">
           <img src={nameimage} alt="" />
@@ -36,12 +38,6 @@ const PetAd: React.FC<PetAdProps> = ({ onClick, name, breed, age, description}) 
         <div className="pet-description">
           <img src={descimage} alt="" />
           Descrição: <span className="pet-info">{description}</span>
-        </div>
-        <div className="pet-likes">
-          <button onClick={() => {} /*handleLike*/}>
-            <img src={likeimage} alt="Curtir" className="like-icon" />
-          </button>
-          <span>{/*likes*/} curtidas</span>
         </div>
       </div>
     </div>
