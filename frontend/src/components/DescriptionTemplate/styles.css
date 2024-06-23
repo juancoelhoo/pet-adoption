@@ -30,7 +30,7 @@
     max-width: 600px;
 }
 
-.title {
+.petAdoptContainer .title {
     font-family: 'Luckiest Guy', cursive;
     font-size: 36px;
     margin-bottom: 30px;

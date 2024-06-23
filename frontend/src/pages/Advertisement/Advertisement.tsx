@@ -60,7 +60,14 @@ const AdvertisementScreen: React.FC = () => {
             name="bolo"
             breed="pincher"
             age={4}
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut."
+            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+          />
+          <PetAd
+            onClick={(name, breed, age, description) => openPopup(name, breed, age, description)}
+            name="bolo"
+            breed="pincher"
+            age={4}
+            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
           />
           <PedAdPopup
             trigger={popupState.trigger}

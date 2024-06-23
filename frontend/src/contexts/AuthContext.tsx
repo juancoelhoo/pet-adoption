@@ -1,21 +1,30 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import axios from 'axios';
+import { api } from '../services/api';
+import { User } from '../domain/entities/User';
 
 interface AuthContextProps {
     isAuthenticated: boolean;
+    setIsAuthenticated: (value: boolean) => void;
     login: (email: string, password: string) => Promise<void>;
     logout: () => void;
+    token: string;
+    loggedUser: User | null;
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+    const [loggedUser, setLoggedUser] = useState<User | null>(null);
+    const [token, setToken] = useState<string>("");
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
     useEffect(() => {
         const token = document.cookie.split('; ').find(row => row.startsWith('jwt='));
         if (token) {
+            setToken(token);
             setIsAuthenticated(true);
+            loadLoggedUser();
         }
     }, []);
 
@@ -37,8 +46,15 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         setIsAuthenticated(false);
     };
 
+    async function loadLoggedUser() {
+        const res = await api.get("/users/loggedUser");
+        console.log(res.data.user);
+        
+        setLoggedUser(res.data.user);
+    }
+
     return (
-        <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+        <AuthContext.Provider value={{ isAuthenticated, login, logout, setIsAuthenticated, token, loggedUser }}>
             {children}
         </AuthContext.Provider>
     );

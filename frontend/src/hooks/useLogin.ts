@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../services/api";
+import { useAuth } from '../contexts/AuthContext';
 
 const useLogin = () => {
+    const { setIsAuthenticated } = useAuth();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
@@ -17,6 +19,7 @@ const useLogin = () => {
                 password: password
             });
             document.cookie = `jwt=${response.data.token}; path=/;`;
+            setIsAuthenticated(true);
             navigate("/posts");
         } catch (error) {
             setErrorMessage("Email ou senha inválidos. Por favor, tente novamente.");

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import usersController from "./controller";
-import { verifyJWT, login, notLoggedIn, checkPermission, logout } from "../../middlewares/auth";
+import { verifyJWT, login, notLoggedIn, checkPermission, logout, loggedUser } from "../../middlewares/auth";
 
 /**
  * @swagger
@@ -61,8 +61,9 @@ import { verifyJWT, login, notLoggedIn, checkPermission, logout } from "../../mi
 
 const router = Router();
 
-router.post("/login", notLoggedIn, login);
+router.post("/login", /*notLoggedIn,*/ login);
 router.post("/logout", verifyJWT, logout);
+router.get("/loggedUser", verifyJWT, loggedUser);
 
 router.get("/all", verifyJWT, usersController.getAll);
 router.get("/:id", verifyJWT, usersController.getOne);
