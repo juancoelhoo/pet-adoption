@@ -110,8 +110,9 @@ const ProfileScreen = () => {
             <div className="line-divider"></div>
 
             <div className="profile-posts">
-            <ProfileAd></ProfileAd>
-            <ProfileAd></ProfileAd>
+            {/* TODO: Fazer esses posts serem dinamicos */}
+            <ProfileAd id="1"/>
+            <ProfileAd id="5"/>
             <AddAd
               openPopup={() => setIsPopupOpen(true)}
             />
