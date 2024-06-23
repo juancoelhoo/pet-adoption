@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+}
+
+.profile-ad {
+    cursor: pointer;
+    width: 11vw;
+    height: 30vh;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 4px 4px 5px 5px rgba(0, 0, 0, 0.2);
+    position: relative;
+    font-size: 1rem;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+}
+
+.profile-pet-inf {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px; 
+    width: 100%; 
+}
+
+.options {
+    width: 100%;
+    height: 1px;
+    padding: 5px;
+}
+
+.optionsBtn {
+position: right;
+align-self: end;
+padding: 5px;
+
+}
+
+.profile-ad img {
+    max-width: 100%; 
+    height: 70%; 
+}
+
+.content{
+    font-size: 0.5rem;
+}
+
+.profile-pet-info {
+    font-family: "Luckiest Guy";
+    font-weight: 400; 
+    font-size: 18px;
+    color: #000; 
+}
+
+.line {
+    position:relative;
+    top: 10px;
+    height: 1px;
+    width: 100%;
+    background-color: #CDB30C;
+}
