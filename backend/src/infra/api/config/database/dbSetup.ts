@@ -4,6 +4,7 @@ import { PostModel } from "@src/infra/services/sequelize/posts/postModel";
 import { UserModel } from "@src/infra/services/sequelize/users/usersModel";
 import { ComplaintModel } from "@src/infra/services/sequelize/complaints/complaintsModel";
 import { ReactionModel } from "@src/infra/services/sequelize/reactions/reactionModel";
+import { RatingModel } from "@src/infra/services/sequelize/ratings/ratingsModel";
 
 export async function setupDb() {
     const sequelize: Sequelize = new Sequelize(
@@ -15,7 +16,8 @@ export async function setupDb() {
       ComplaintModel,
       UserModel,
       PostModel,
-      ReactionModel
+      ReactionModel,
+      RatingModel
     ]);
 
     await sequelize.sync();
