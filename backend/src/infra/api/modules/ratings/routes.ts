@@ -47,7 +47,7 @@ const router = Router();
 router.get("/all", ratingsController.getAll);
 router.get("/:id", ratingsController.getOne);
 router.post("/", ratingsController.create);
-router.put("/", ratingsController.update);
+router.put("/:id", ratingsController.update);
 router.delete("/:id", ratingsController.delete);
 router.get("/average/:userId", ratingsController.calculateAverage);
 

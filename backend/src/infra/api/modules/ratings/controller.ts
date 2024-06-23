@@ -109,10 +109,17 @@ class RatingsController {
 
   /**
    * @swagger
-   * /ratings:
+   * /ratings/{id}:
    *   put:
    *     summary: Update an existing rating
    *     tags: [Ratings]
+   *     parameters:
+   *       - in: path
+   *         name: id
+   *         schema:
+   *           type: number
+   *         required: true
+   *         description: The rating id
    *     requestBody:
    *       required: true
    *       content:
@@ -125,9 +132,10 @@ class RatingsController {
    */
   async update(req: Request, res: Response, next: NextFunction) {
     try {
+      const { id } = req.params;
       const ratingsFactory = updateRatingFactory();
 
-      const rating: Required<UpdateRatingRequest> = req.body;
+      const rating: Required<UpdateRatingRequest> = { ...req.body, id: Number(id) };
 
       await ratingsFactory.execute(rating);
 
