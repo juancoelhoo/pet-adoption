@@ -30,7 +30,7 @@ const Menu = () => {
                     </div>
                     <div className="search">
                         <img src={search} alt="search-logo" />
-                        <Link to="#">Pesquisar</Link>
+                        <Link to="/profile">Pesquisar</Link>
                     </div>
                     <div className="reports">
                         <img src={report} alt="" />

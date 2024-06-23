@@ -1,79 +1,70 @@
+import React, { useState } from 'react';
+
+import { api } from '../../services/api';
+import { useAuth } from '../../contexts/AuthContext';
+
 import Menu from '../../components/Menu/Menu';
-import profile from '../../public/profile/profile2.svg';
 import ProfileAd from '../../components/ProfileAd/ProfileAd';
+import AddAd from '../../components/AddAd/AddAd';
+
+import profile from '../../public/profile/profile2.svg';
 import dogPaw from '../../public/profile/dog-paw.svg';
 import dogPawEmpty from '../../public/profile/dog-paw-empty.svg';
 import locationPin from '../../public/profile/location-pin.svg';
 import descriptionImg from '../../public/profile/description.svg';
-import AddAd from '../../components/AddAd/AddAd';
-import edit from '../../public/dropdown/edit.svg';
-import report from '../../public/dropdown/report.svg';
-import remove from '../../public/dropdown/remove.svg';
-import dropdown from '../../public/dropdown/dropdown.svg';
-import { api } from "../../services/api";
-
-
-
+import nameImg from '../../public/pet-ad/pet-name.svg';
+import breedImg from '../../public/pet-ad/pet-breed.svg';
+import ageImg from '../../public/pet-ad/pet-age.svg';
+import descImg from '../../public/pet-ad/pet-description.svg';
 
 import './Profile.css';
-import ad from '../../public/advertisement/advertisement.svg';
-import { useState } from 'react';
+import ImageUpload from '../../components/ImageUpload';
+import { useNavigate } from 'react-router-dom';
 
-const ProfileScreen: React.FC = () => {
+const ProfileScreen = () => {
+  const { loggedUser } = useAuth();
+  const navigate = useNavigate();
 
+  const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
 
-  const [profileState, setProfileState] = useState({
-    name: 'Stefani Germanotta',
-    rating: 3,
-    pic: '',
-    local: 'Roma, Itália',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-  });
+  const [name, setName] = useState<string>("");
+  const [age, setAge] = useState<string>("");
+  const [breed, setBreed] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [photoUrl, setPhotoUrl] = useState<string>("");
 
-  const [dropdownVisible, setDropdownVisible] = useState(false);
+  async function setFile(file: File) {
+    const body = new FormData();
+    body.append("file", file);
 
-  const toggleDropdown = () => {
-    setDropdownVisible(!dropdownVisible);
-  };
+    const headers = { "Content-Type": "multipart/form-data" };
 
-  const handleRatingClick = (newRating: number) => {
-    setProfileState((prevState) => ({
-      ...prevState,
-      rating: newRating,
-    }));
-  };
+    const response = await api.post("/files/upload", body, { headers });
+    setPhotoUrl(response.data.body);
+  }
 
-  const renderRatingIcons = (rating: number) => {
-    const maxRating = 5;
-    const ratingIcons = [];
+  async function createPost() {
+    try {
+      const body = {
+        name,
+        breed,
+        age: Number(age),
+        description,
+        photoUrl,
+        ownerId: loggedUser?.id,
+        createdAt: new Date().toISOString()
+      };
 
-    for (let i = 0; i < maxRating; i++) {
-      if (i < rating) {
-        ratingIcons.push(
-          <button
-            key={i}
-            className="rateBtn"
-            onClick={() => handleRatingClick(i + 1)}
-          >
-            <img src={dogPaw} alt="dog-paw" />
-          </button>
-        );
-      } else {
-        ratingIcons.push(
-          <button
-            key={i}
-            className="rateBtn"
-            onClick={() => handleRatingClick(i + 1)}
-          >
-            <img src={dogPawEmpty} alt="empty-dog-paw" />
-          </button>
-        );
-      }
+      console.log(body);
+
+      await api.post("/posts", body);
+      setIsPopupOpen(false);
+      alert("Post criado com sucesso!");
+      navigate("/posts");
+    } catch (error) {
+      console.log(error);
     }
-
-    return ratingIcons;
-  };
-
+  }
 
   return (
 
@@ -90,21 +81,25 @@ const ProfileScreen: React.FC = () => {
           
             <div className="profile-description">
 
-              <div className="profile-name"><span>{profileState.name}</span></div>
+              <div className="profile-name"><span>Stefani Germanotta</span></div>
 
               <div className="profile-rating">
-              {renderRatingIcons(profileState.rating)}
-                <text className="rating"> {profileState.rating} </text>
+                <img src={dogPaw} alt="dog-paw" />
+                <img src={dogPaw} alt="dog-paw" />
+                <img src={dogPaw} alt="dog-paw" />
+                <img src={dogPaw} alt="dog-paw" />
+                <img src={dogPaw} alt="dog-paw" />
+                <text className="rating"> 3,2 </text>
               </div>
 
               <div className="profile-location">
                 <img src={locationPin} alt="location-pin" />
-                <span className="profile-string">{profileState.local}</span>
+                <span className="profile-string">Roma, Itália</span>
               </div>
 
               <div className="profile-text">
                 <img src={descriptionImg} alt="description-img" />
-                <span className="profile-string">{profileState.description}</span>
+                <span className="profile-string">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
               </div>
 
             </div>
@@ -135,15 +130,61 @@ const ProfileScreen: React.FC = () => {
             <div className="line-divider"></div>
 
             <div className="profile-posts">
-            <ProfileAd></ProfileAd>
-            <ProfileAd></ProfileAd>
-            <AddAd></AddAd>
+            {/* TODO: Fazer esses posts serem dinamicos */}
+            <ProfileAd id="1"/>
+            <ProfileAd id="5"/>
+            <AddAd
+              openPopup={() => setIsPopupOpen(true)}
+            />
           </div>
 
           </div>
 
+          {
+            isPopupOpen && (
+              <div className="popup-create-post">
+                <div className="close">
+                  <button onClick={() => setIsPopupOpen(false)} >x</button>
+                </div>
 
+                <ImageUpload
+                  setFile={setFile}
+                />
 
+                <div className="post-input">
+                  <label htmlFor="name">
+                    <img src={nameImg} alt="" />
+                  </label>
+                  <input type="text" id="name" placeholder="Nome do pet" onChange={e => setName(e.target.value)} />
+                </div>
+
+                <div className="post-input">
+                  <label htmlFor="breed">
+                    <img src={breedImg} alt="" />
+                  </label>
+                  <input type="text" id="breed" placeholder="Raça do pet" onChange={e => setBreed(e.target.value)} />
+                </div>
+
+                <div className="post-input">
+                  <label htmlFor="age">
+                    <img src={ageImg} alt="" />
+                  </label>
+                  <input type="number" id="age" placeholder="Idade do pet" onChange={e => setAge(e.target.value)} />
+                </div>
+
+                <div className="post-input description-box">
+                  <label htmlFor="description">
+                    <img src={descImg} alt="" />
+                  </label>
+                  <textarea id="description" placeholder="Descrição do pet" onChange={e => setDescription(e.target.value)} />
+                </div>
+
+                <div className="create-btn">
+                  <button onClick={createPost}>Criar</button>
+                </div>
+              </div>
+            )
+          }
 
           </div>
         </div>

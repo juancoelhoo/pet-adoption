@@ -76,6 +76,7 @@ const AdvertisementScreen: React.FC = () => {
             breed={popupState.breed}
             age={popupState.age}
             description={popupState.description}
+            photoUrl={'https://i.imgur.com/z9sCEqU.jpeg'}
           />
         </div>
       </div>

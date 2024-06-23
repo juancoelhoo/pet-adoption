@@ -12,26 +12,47 @@
   position: fixed;
   top: 0;
   right: 0;
-  width: 400px;
+  width: 500px;
   height: 100%;
   font-size: 25px;
   background-color: #fff;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5); 
-  z-index: 1001; 
-  overflow-y: auto; 
+  border-radius: 16px 0 0 16px;
+  z-index: 1001;
+  overflow-y: auto;
+  padding: 24px !important;
 }
 
 .popup-content {
   padding: 20px;
   position: relative;
   font-family: 'Quicksand', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .close-btn {
   background: none;
   border: none;
   cursor: pointer;
-  margin-bottom: 10px;
+  margin-bottom: 40px;
+  margin-right: auto;
+}
+
+.post-picture {
+  margin-top: 32px;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.post-picture img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
 }
 
 .dropdown-btn {
@@ -72,18 +93,19 @@
   background-color: #f1f1f1;
 }
 
-.dropdown-menu img{
+.dropdown-menu li img{
   margin-left: 10px;
 }
 
 .popup-content h2 {
   color: #333;
   margin-bottom: 10px;
+  margin-top: 32px;
 }
 
-.popup-content p {
+.popup-content p, b {
   margin: 10px 0;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Quicksand', sans-serif !important;
 }
 
 .popup-content strong {
@@ -124,13 +146,17 @@
 .profile {
   display: flex;
   align-items: center;
-  margin-top: 70px;
+  margin-top: 16px !important;
+  width: 100%;
+  padding-top: 16px !important;
+  border-top: 1px solid black;
 }
 
 .profile img {
-  width: 40px; 
-  height: 40px;
+  width: 32px; 
+  height: 32px;
   margin-right: 8px;
+  margin-bottom: 8px;
 }
 
 .profile span {
@@ -143,12 +169,20 @@
   color: white;
   border: none;
   padding: 10px 20px;
-  text-align: center;
   text-decoration: none;
   font-size: 16px;
   cursor: pointer;
   border-radius: 5px;
   font-family: 'Quicksand', sans-serif;
+  margin-top: 16px !important;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact img {
+  margin-left: 8px;
 }
 
 .contact:hover {

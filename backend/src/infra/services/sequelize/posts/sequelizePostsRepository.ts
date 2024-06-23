@@ -7,7 +7,7 @@ import { UpdatePost } from "@src/modules/posts/domain/entities/updatePost";
 export class SequelizePostsRepository implements PostsRepository {
   async findAll(): Promise<Post[]> {
     try {
-      const posts: PostModel[] = await PostModel.findAll();
+      const posts: PostModel[] = await PostModel.findAll({order: [['created_at', 'DESC']]});
       return posts.map(post => ({
         id: post.id,
         name: post.name,

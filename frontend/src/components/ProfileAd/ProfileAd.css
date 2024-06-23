@@ -68,12 +68,12 @@ padding: 5px;
     position: absolute;
     right: 10px;
     top: 10px;
-  }
-  
-  .dropdown-menu {
+}
+
+.dropdown-menu {
     position: absolute;
-    top: 40px;
-    right: 0; 
+    top: 48px;
+    right: 16px; 
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -81,25 +81,17 @@ padding: 5px;
     z-index: 1000;
     font-size: 20px;
     font-family: 'Quicksand', sans-serif;
-  }
-  
-  .dropdown-menu ul {
+}
+
+.dropdown-menu ul {
     list-style: none;
     margin: 0;
     padding: 0;
-  }
-  
-  .dropdown-menu li {
+}
+
+.dropdown-menu li {
     padding: 10px 20px;
     cursor: pointer;
     font-family: 'Quicksand', sans-serif;
-  }
-  
-  .dropdown-menu li:hover {
-    background-color: #f1f1f1;
-  }
-  
-  .dropdown-menu img{
-    margin-left: 10px;
-  }
-  
+    font-size: 14px;
+}

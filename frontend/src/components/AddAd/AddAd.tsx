@@ -1,10 +1,14 @@
 import './AddAd.css';
 import Add from '../../public/profile/btnadd.svg';
 
-function AddAd() {
+interface AddAdProps {
+  openPopup: () => void;
+}
+
+function AddAd({openPopup}: AddAdProps) {
   return (
-    <div className='add-ad'>
-    <img src={Add} alt="add" />
+    <div className='add-ad' onClick={openPopup}>
+      <img src={Add} alt="add" />
     </div>
   );
 }
