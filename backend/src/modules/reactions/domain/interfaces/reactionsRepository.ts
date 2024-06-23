@@ -6,4 +6,5 @@ export interface ReactionsRepository {
   findOne(id: number): Promise<Reaction | null>;
   create(reaction: CreateReactionRequest): Promise<void>;
   delete(id: number): Promise<void>;
+  findAllByPostId(postId: number): Promise<Reaction[]>; 
 }

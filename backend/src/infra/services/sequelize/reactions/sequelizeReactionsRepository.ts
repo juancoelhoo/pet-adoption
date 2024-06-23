@@ -121,4 +121,27 @@ export class SequelizeReactionsRepository implements ReactionsRepository {
       }
     }
   }
+
+  // Método adicionado para buscar todas as reações de um post específico
+  async findAllByPostId(postId: number): Promise<Reaction[]> {
+    try {
+      const reactions: ReactionModel[] = await ReactionModel.findAll({
+        where: {
+          post_id: postId
+        }
+      });
+      return reactions.map(reaction => ({
+        id: reaction.id,
+        userId: reaction.user_id,
+        postId: reaction.post_id,
+        createdAt: reaction.created_at,
+      }));
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new QueryError("Error in listing reactions by post ID: " + error.message);
+      } else {
+        throw new QueryError("Unknown error in listing reactions by post ID");
+      }
+    }
+  }
 }

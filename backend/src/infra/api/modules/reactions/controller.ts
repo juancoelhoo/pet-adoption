@@ -1,4 +1,4 @@
-import { createReactionFactory, deleteReactionFactory, getAllReactionsFactory, getSpecificReactionFactory } from "@src/modules/reactions/factory";
+import { createReactionFactory, deleteReactionFactory, getAllReactionsFactory, getSpecificReactionFactory, getAllReactionsByPostIdFactory } from "@src/modules/reactions/factory";
 import { Request, Response, NextFunction } from "express";
 import { InvalidParamError } from "../../errors/InvalidParamError";
 import { QueryError } from "../../errors/QueryError";
@@ -157,6 +157,52 @@ class ReactionsController {
 
   /**
    * @swagger
+   * /reactions/post/{postId}:
+   *   get:
+   *     summary: Returns all reactions for a specific post
+   *     tags: [Reactions]
+   *     parameters:
+   *       - in: path
+   *         name: postId
+   *         schema:
+   *           type: number
+   *         required: true
+   *         description: The post id
+   *     responses:
+   *       200:
+   *         description: The list of reactions for the specified post
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: array
+   *               items:
+   *                 $ref: '#/components/schemas/Reaction'
+   */
+  async getAllByPostId(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { postId } = req.params;
+      if (!postId) throw new InvalidParamError("Missing property 'postId'!");
+
+      const reactionsFactory = getAllReactionsByPostIdFactory();
+      const reactions = await reactionsFactory.execute(Number(postId));
+
+      return res.status(200).json({
+        message: "Reactions listed successfully!",
+        body: reactions,
+      });
+    } catch (error) {
+      if (error instanceof InvalidParamError) {
+        return res.status(400).json({ error: error.message });
+      }
+      if (error instanceof QueryError) {
+        return res.status(404).json({ error: "Reactions not found" });
+      }
+      return next(error);
+    }
+  }
+
+  /**
+   * @swagger
    * /reactions/toggleLike:
    *   post:
    *     summary: Toggles a like reaction for a post by a user
@@ -180,44 +226,82 @@ class ReactionsController {
    *       201:
    *         description: Like added successfully
    */
-
   async toggleLike(req: Request, res: Response, next: NextFunction) {
     try {
       const { userId, postId } = req.body;
-      console.log('toggleLike called with:', { userId, postId });
-  
-      if (!userId || !postId) {
-        console.error('Invalid parameters:', { userId, postId });
-        throw new InvalidParamError("Missing property 'userId' or 'postId'!");
-      }
-  
+      if (!userId || !postId) throw new InvalidParamError("Missing property 'userId' or 'postId'!");
+
       const reactionsRepository = new SequelizeReactionsRepository();
       const existingReaction = await reactionsRepository.findByUserAndPost(userId, postId);
-  
+
       if (existingReaction) {
         await reactionsRepository.deleteByUserAndPost(userId, postId);
-        console.log('Like removed for:', { userId, postId });
         return res.status(200).json({
           message: "Like removed successfully!"
         });
       } else {
         await reactionsRepository.create({ userId, postId });
-        console.log('Like added for:', { userId, postId });
         return res.status(201).json({
           message: "Like added successfully!"
         });
       }
     } catch (error) {
       if (error instanceof InvalidParamError || error instanceof QueryError) {
-        console.error('Known error:', error.message);
         return res.status(400).json({ error: error.message });
       }
-      console.error('Internal Server Error:', error); 
       return next(error);
     }
   }
-  
-  
+
+  /**
+   * @swagger
+   * /reactions/total/{postId}:
+   *   get:
+   *     summary: Returns the total number of reactions for a specific post
+   *     tags: [Reactions]
+   *     parameters:
+   *       - in: path
+   *         name: postId
+   *         schema:
+   *           type: number
+   *         required: true
+   *         description: The post id
+   *     responses:
+   *       200:
+   *         description: The total number of reactions for the specified post
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 total:
+   *                   type: number
+   *                   description: The total number of reactions
+   *                   example: 5
+   */
+  async getTotalReactionsByPostId(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { postId } = req.params;
+      if (!postId) throw new InvalidParamError("Missing property 'postId'!");
+
+      const reactionsFactory = getAllReactionsByPostIdFactory();
+      const reactions = await reactionsFactory.execute(Number(postId));
+      const totalReactions = reactions.length;
+
+      return res.status(200).json({
+        message: "Total reactions calculated successfully!",
+        body: { total: totalReactions },
+      });
+    } catch (error) {
+      if (error instanceof InvalidParamError) {
+        return res.status(400).json({ error: error.message });
+      }
+      if (error instanceof QueryError) {
+        return res.status(404).json({ error: "Reactions not found" });
+      }
+      return next(error);
+    }
+  }
 }
 
 export default new ReactionsController();
