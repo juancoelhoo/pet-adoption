@@ -6,6 +6,7 @@ import { User } from '../domain/entities/User';
 interface AuthContextProps {
     isAuthenticated: boolean;
     setIsAuthenticated: (value: boolean) => void;
+    setToken: (value: string) => void;
     login: (email: string, password: string) => Promise<void>;
     logout: () => void;
     token: string;
@@ -21,12 +22,16 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
     useEffect(() => {
         const token = document.cookie.split('; ').find(row => row.startsWith('jwt='));
+
         if (token) {
             setToken(token);
             setIsAuthenticated(true);
-            loadLoggedUser();
         }
     }, []);
+
+    useEffect(() => {
+        loadLoggedUser();
+    }, [token]);
 
     const login = async (email: string, password: string) => {
         try {
@@ -54,7 +59,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, login, logout, setIsAuthenticated, token, loggedUser }}>
+        <AuthContext.Provider value={{ isAuthenticated, login, logout, setIsAuthenticated, token, loggedUser, setToken }}>
             {children}
         </AuthContext.Provider>
     );
