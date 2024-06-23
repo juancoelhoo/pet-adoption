@@ -1,34 +1,65 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Menu from '../../components/Menu/Menu';
 import PetAd from '../../components/PetAd/PetAd';
 import PedAdPopup from '../../components/PedAd-Popup/PedAd-Popup';
-
+import adSvg from '../../public/advertisement/advertisement.svg';
 import './Advertisement.css';
-import ad from '../../public/advertisement/advertisement.svg';
+import { api } from '../../services/api';
+import { useAuth } from '../../contexts/AuthContext';
 
-const AdvertisementScreen: React.FC = () => {
+interface Ad {
+  id: number;
+  name: string;
+  breed: string;
+  age: number;
+  description: string;
+  photoUrl: string;
+}
+
+const AdvertisementPage: React.FC = () => {
+  const { token } = useAuth();
+  const [ads, setAds] = useState<Ad[]>([]);
   const [popupState, setPopupState] = useState({
     trigger: false,
     name: '',
     breed: '',
     age: 0,
     description: '',
+    photoUrl: ''
   });
 
-  const openPopup = (name: string, breed: string, age: number, description: string) => {
+  useEffect(() => {
+    loadAds();
+  }, []);
+
+  async function loadAds() {
+    try {
+      const response = await api.get("/posts/all", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      setAds(response.data.body);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  const openPopup = (name: string, breed: string, age: number, description: string, photoUrl: string) => {
     setPopupState({
       trigger: true,
       name,
       breed,
       age,
-      description
+      description,
+      photoUrl
     });
   };
 
   const closePopup = () => {
     setPopupState({
       ...popupState,
-      trigger: false
+      trigger: false,
     });
   };
 
@@ -36,52 +67,35 @@ const AdvertisementScreen: React.FC = () => {
     <div className="advertisement-container">
       <Menu />
       <div className="ad-screen">
-        <div className="post-title">
-          <img src={ad} alt="ad-logo" />
-          AnÃºncios
+        <div className="page-title">
+          <img src={adSvg} alt="ad-logo" />
+          <span>Anúncios</span>
         </div>
         <div className="pet-ads">
-          <PetAd
-            onClick={(name, breed, age, description) => openPopup(name, breed, age, description)}
-            name="biscoito"
-            breed="Pastor alemao"
-            age={2}
-            description="Lorem ipsum dolor sit amet"
-          />
-          <PetAd
-            onClick={(name, breed, age, description) => openPopup(name, breed, age, description)}
-            name="leao"
-            breed="poodle"
-            age={4}
-            description="Lorem ipsum dolor sit amet"
-          />
-          <PetAd
-            onClick={(name, breed, age, description) => openPopup(name, breed, age, description)}
-            name="bolo"
-            breed="pincher"
-            age={4}
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-          />
-          <PetAd
-            onClick={(name, breed, age, description) => openPopup(name, breed, age, description)}
-            name="bolo"
-            breed="pincher"
-            age={4}
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-          />
-          <PedAdPopup
-            trigger={popupState.trigger}
-            onClose={closePopup}
-            name={popupState.name}
-            breed={popupState.breed}
-            age={popupState.age}
-            description={popupState.description}
-            photoUrl={'https://i.imgur.com/z9sCEqU.jpeg'}
-          />
+          {ads.map((ad) => (
+            <PetAd
+              key={ad.id}
+              onClick={() => openPopup(ad.name, ad.breed, ad.age, ad.description, ad.photoUrl)}
+              name={ad.name}
+              breed={ad.breed}
+              age={ad.age}
+              description={ad.description}
+              photoUrl={ad.photoUrl}
+            />
+          ))}
         </div>
+        <PedAdPopup
+          trigger={popupState.trigger}
+          onClose={closePopup}
+          name={popupState.name}
+          breed={popupState.breed}
+          age={popupState.age}
+          description={popupState.description}
+          photoUrl={popupState.photoUrl}
+        />
       </div>
     </div>
   );
 };
 
-export default AdvertisementScreen;
+export default AdvertisementPage;
