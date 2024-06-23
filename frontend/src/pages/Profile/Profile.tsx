@@ -104,7 +104,7 @@ const ProfileScreen = () => {
 
             </div>
 
-            <button className='dropdown-btnp' onClick={toggleDropdown}>
+            {/* <button className='dropdown-btnp' onClick={toggleDropdown}>
             <img src={dropdown} alt="dropdown-menu" />
           </button>
           {dropdownVisible && (
@@ -121,7 +121,7 @@ const ProfileScreen = () => {
                 </li>
               </ul>
             </div>
-          )}
+          )} */}
 
           </div>
 
