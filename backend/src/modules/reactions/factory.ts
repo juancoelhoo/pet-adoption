@@ -1,9 +1,9 @@
 import { SequelizeReactionsRepository } from "@src/infra/services/sequelize/reactions/sequelizeReactionsRepository";
-
-import { GetAllReactionsUseCase } from "./domain/usecases/getAllReactionsUseCase";
-import { GetSpecificReactionUseCase } from "./domain/usecases/getSpecificReactionUseCase";
-import { CreateReactionUseCase } from "./domain/usecases/createReactionUseCase";
-import { DeleteReactionUseCase } from "./domain/usecases/deleteReactionUseCase";
+import { GetAllReactionsByPostIdUseCase } from "./domain/usecases/getAllReactionsByPostIdUseCase";
+import { GetAllReactionsUseCase } from "@src/modules/reactions/domain/usecases/getAllReactionsUseCase";
+import { GetSpecificReactionUseCase } from "@src/modules/reactions/domain/usecases/getSpecificReactionUseCase";
+import { CreateReactionUseCase } from "@src/modules/reactions/domain/usecases/createReactionUseCase";
+import { DeleteReactionUseCase } from "@src/modules/reactions/domain/usecases/deleteReactionUseCase";
 
 const reactionsRepository = new SequelizeReactionsRepository();
 
@@ -21,4 +21,8 @@ export const createReactionFactory = () => {
 
 export const deleteReactionFactory = () => {
   return new DeleteReactionUseCase(reactionsRepository);
+};
+
+export const getAllReactionsByPostIdFactory = () => {
+  return new GetAllReactionsByPostIdUseCase(reactionsRepository);
 };
