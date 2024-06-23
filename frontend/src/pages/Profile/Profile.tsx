@@ -7,8 +7,13 @@ import Menu from '../../components/Menu/Menu';
 import ProfileAd from '../../components/ProfileAd/ProfileAd';
 import AddAd from '../../components/AddAd/AddAd';
 
+import edit from '../../public/dropdown/edit.svg';
+import report from '../../public/dropdown/report.svg';
+import remove from '../../public/dropdown/remove.svg';
+import dropdown from '../../public/dropdown/dropdown.svg';
 import profile from '../../public/profile/profile2.svg';
 import dogPaw from '../../public/profile/dog-paw.svg';
+import dogPawEmpty from '../../public/profile/dog-paw-empty.svg';
 import locationPin from '../../public/profile/location-pin.svg';
 import descriptionImg from '../../public/profile/description.svg';
 import nameImg from '../../public/pet-ad/pet-name.svg';
@@ -65,7 +70,60 @@ const ProfileScreen = () => {
     }
   }
 
+  const [ratingState, setRatingState] = useState({
+    rating: 3,
+ });
+
+  const handleRatingClick = (newRating: number) => {
+    setRatingState((prevState) => ({
+      ...prevState,
+      rating: newRating,
+    }));
+  };
+
+  const renderRatingIcons = (rating: number) => {
+    const maxRating = 5;
+    const ratingIcons = [];
+
+    for (let i = 0; i < maxRating; i++) {
+      if (i < rating) {
+        ratingIcons.push(
+          <button
+            key={i}
+            className="rateBtn"
+            onClick={() => handleRatingClick(i + 1)}
+          >
+            <img src={dogPaw} alt="dog-paw" />
+          </button>
+        );
+      } else {
+        ratingIcons.push(
+          <button
+            key={i}
+            className="rateBtn"
+            onClick={() => handleRatingClick(i + 1)}
+          >
+            <img src={dogPawEmpty} alt="empty-dog-paw" />
+          </button>
+        );
+      }
+    }
+
+    return ratingIcons;
+  };
+
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+
+  const toggleDropdown = () => {
+    setDropdownVisible(!dropdownVisible);
+  };
+
+
+
+
   return (
+
+    
     <div className="profile-container">
       <Menu />
       <div className="profile-screen">
@@ -78,30 +136,43 @@ const ProfileScreen = () => {
           
             <div className="profile-description">
 
-              <div className="profile-name"><span>Stefani Germanotta</span></div>
+              <div className="profile-name"><span>{loggedUser?.name}</span></div>
 
               <div className="profile-rating">
-                <img src={dogPaw} alt="dog-paw" />
-                <img src={dogPaw} alt="dog-paw" />
-                <img src={dogPaw} alt="dog-paw" />
-                <img src={dogPaw} alt="dog-paw" />
-                <img src={dogPaw} alt="dog-paw" />
-                <text className="rating"> 3,2 </text>
+              {renderRatingIcons(ratingState.rating)}
+                <text className="rating"> {ratingState.rating} </text>
               </div>
 
               <div className="profile-location">
                 <img src={locationPin} alt="location-pin" />
-                <span className="profile-string">Roma, Itália</span>
+                <span className="profile-string">{loggedUser?.address}</span>
               </div>
 
               <div className="profile-text">
                 <img src={descriptionImg} alt="description-img" />
-                <span className="profile-string">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+                <span className="profile-string">{loggedUser?.description}</span>
               </div>
 
             </div>
 
-            <div className="dropDownMenu"><button className="dropDownMenuBtn">...</button></div>
+            <button className='dropdown-btnp' onClick={toggleDropdown}>
+            <img src={dropdown} alt="dropdown-menu" />
+          </button>
+          {dropdownVisible && (
+            <div className='dropdown-menup'>
+              <ul>
+                <li>Editar
+                  <img src={edit} alt="" />
+                </li>
+                <li>Denunciar
+                  <img src={report} alt="" />
+                </li>
+                <li>Excluir
+                  <img src={remove} alt="" />
+                </li>
+              </ul>
+            </div>
+          )}
 
           </div>
 
