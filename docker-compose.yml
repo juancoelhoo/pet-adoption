@@ -32,7 +32,6 @@ services:
   postgres:
     build:
       context: ./database
-    image: postgres:latest
     container_name: postgres
     env_file:
       - ./database/.env

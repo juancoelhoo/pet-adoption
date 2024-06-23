@@ -1,4 +1,4 @@
-* {
+.bar * {
     margin: 0;
     font-family: "Luckiest Guy";
 }
@@ -6,45 +6,55 @@
 .bar {
     display: flex;
     flex-direction: column;
-    height: 100vh; /* Set height to 100% of the viewport height */
+    height: 100vh;
     background-color: #535204;
     width: 20vw;
     position: fixed;
+    top: 0;
+    left: 0;
 }
 
-
 .itens {
-    margin: 30px 25px;
+    /* margin: 30px 25px; */
+    height: 100%;
 }
 
 h1 {
     color: #fff;
 }
 
-a {
+.menu-items a {
     font-family: "Quicksand";
     text-decoration: none;
     color: #fff;
 }
 
 .title_logo {
+    padding: 24px;
+    height: 48px;
     display: flex;
-    align-content: center;
-    margin-bottom: 50px;
 }
 
 .title_logo .logo {
-    margin-right: 20px;
+    height: 48px;
+    width: 48px;
+    margin-right: 12px;
+}
+
+.title_logo .title {
+    position: relative;
+    top: 14px;
 }
 
 .menu {
-    font-family: "Quicksand";
-    color: #fff;
-    font-size: 1.3rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
+}
+
+.menu .buttons {
+    padding: 24px;
 }
 
 .menu-items {
@@ -54,6 +64,9 @@ a {
     display: flex;
     flex-direction: column;
     gap:15px;
+    font-family: "Quicksand";
+    color: #fff;
+    font-size: 1.3rem;
 }
 
 .menu-items .ads {
@@ -92,40 +105,52 @@ a {
 
 .log-out{
     margin-top: 20px;
-    font-size: 1.0rem;
+    font-size: 1.3rem;
 }
 
 .log-out img{
     margin-right: 5px;
 }
 
-.log-out a{
+.log-out button{
     position:relative;
     bottom: 13px;
+    font-family: "Quicksand";
+    text-decoration: none;
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.3rem;
+    padding: 0;
+}
+
+.log-out button:hover{
+    color: #FBF345;
 }
 
 .profile-access{
+    border-top: 1px solid #fff;
+    padding: 24px 12px 12px 12px;
     display: flex;
     align-items: center;
-    margin-top: auto;
-    position: relative;
+    justify-content: space-between;
+}
+
+.profile-access div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .profile-access img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
     margin-right: 5px;
     cursor: pointer;
 }
 
-.profile-access img:last-child {
-    margin-left: auto; /* Push the last image to the end */
-}
-
-.profile-access::before {
-    content: '';
-    position: absolute; /* Position the line absolutely */
-    top: -10px; /* Place the line above the profile-access div */
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background-color: white; /* Color of the line */
+.profile-access p {
+    color: #fff;
 }

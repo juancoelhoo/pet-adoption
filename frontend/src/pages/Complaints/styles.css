@@ -1,0 +1,30 @@
+.complaints-container {
+    display: flex;
+    margin-left: 22vw;
+    width: calc(100% - 22vw);
+    height: 100%; 
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.complaints-screen {
+    flex: 1;
+    padding: 40px;
+    position: relative;
+    margin-right: 40px;
+}
+
+.complaints-screen .page-title {
+    display: flex;
+    align-items: center;
+    font-family: "Luckiest Guy";
+    font-size: 2rem;
+}
+
+.complaints-screen img {
+    margin-right: 5px;
+}
+
+.complaints-list {
+    margin-top: 50px;
+}

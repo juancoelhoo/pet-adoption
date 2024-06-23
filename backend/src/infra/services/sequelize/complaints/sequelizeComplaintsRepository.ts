@@ -4,17 +4,42 @@ import { CreateComplaintRequest } from "@src/modules/complaints/domain/entities/
 import { UpdateComplaintRequest } from "@src/modules/complaints/domain/entities/updateComplaintRequest";
 import { ComplaintModel } from "./complaintsModel";
 import { QueryError } from "@src/infra/api/errors/QueryError";
+import { UserModel } from "../users/usersModel";
 
 export class SequelizeComplaintsRepository implements ComplaintsRepository {
   async findAll(): Promise<Complaint[]> {
     try {
-      const complaints: ComplaintModel[] = await ComplaintModel.findAll();
+      const complaints: ComplaintModel[] = await ComplaintModel.findAll({
+        include: {all: true},
+      });
+
       return complaints.map(complaint => ({
         id: complaint.id,
         reporterUserId: complaint.reporter_user_id,
         reportedPostId: complaint.reported_post_id,
         createdAt: complaint.created_at,
         reason: complaint.reason,
+        reporter: {
+          id: complaint.reporterUser.id,
+          name: complaint.reporterUser.name,
+          email: complaint.reporterUser.email,
+          password: complaint.reporterUser.password,
+          profilePhoto: complaint.reporterUser.photo_url,
+          description: complaint.reporterUser.description,
+          address: complaint.reporterUser.address,
+          phone: complaint.reporterUser.phone,
+          permissions: complaint.reporterUser.permissions
+        },
+        post: {
+          id: complaint.reportedPost.id,
+          name: complaint.reportedPost.name,
+          description: complaint.reportedPost.description,
+          breed: complaint.reportedPost.breed,
+          age: complaint.reportedPost.age,
+          photoUrl: complaint.reportedPost.photo_url,
+          ownerId: complaint.reportedPost.owner_id,
+          createdAt: complaint.reportedPost.created_at
+        }
       }));
     } catch (error) {
       if (error instanceof Error) {

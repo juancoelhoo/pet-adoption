@@ -12,9 +12,9 @@ export async function setupDb() {
     );
 
     await sequelize.addModels([
+      ComplaintModel,
       UserModel,
       PostModel,
-      ComplaintModel
       ReactionModel
     ]);
 

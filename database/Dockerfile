@@ -1,6 +1,5 @@
-FROM postgres:12 as db
+FROM postgres:latest as db
 
-WORKDIR /app
+USER postgres
 
-COPY ./init.sh /docker-entrypoint-initdb.d
-COPY ./dump.sql ./scripts/db/dump.sql
+COPY ./init.sql /docker-entrypoint-initdb.d/
