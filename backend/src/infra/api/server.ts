@@ -7,12 +7,13 @@ import swaggerUi from "swagger-ui-express";
 import { Logger } from "@src/utils/logger";
 import { ErrorsHandler } from "./errors/errorsHandler";
 import { swaggerSpecs } from "./docs/docsSetup";
-import { setupDb } from "./database/dbSetup";
+import { setupDb } from "./config/database/dbSetup";
 
 import postsRouter from "./modules/posts/routes";
 import usersRouter from "./modules/users/routes"; 
 import complaintsRouter from "./modules/complaints/routes"; 
 import reactionsRouter from "./modules/reactions/routes";
+import filesRouter from "./modules/files/routes";
 
 export class SetupServer {
   private static LOG_TAG = "SetupServer";
@@ -60,6 +61,7 @@ export class SetupServer {
     this.app.use("/users", usersRouter); 
     this.app.use("/complaints", complaintsRouter);
     this.app.use("/reactions", reactionsRouter);
+    this.app.use("/files", filesRouter);
   }
 
   private setupErrorHandler(): void {

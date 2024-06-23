@@ -29,11 +29,9 @@ function generateJWT(user: UserModel, res: Response): string {
 // Extracts the JWT token from the HTTP cookie of the request
 function cookieExtractor(req: Request) {
     let token = null;
-    console.log(req.cookies);
     
     if (req.cookies) {
         token = req.cookies["jwt"];
-        console.log(token);
     }
     return token;
 }
