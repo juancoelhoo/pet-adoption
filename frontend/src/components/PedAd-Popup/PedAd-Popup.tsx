@@ -10,6 +10,7 @@ import report from '../../public/dropdown/report.svg';
 import remove from '../../public/dropdown/remove.svg';
 import likeimage from '../../public/pet-ad/like.svg'; 
 import { api } from '../../services/api';
+import { useAuth } from '../../contexts/AuthContext';
 
 interface PedAdPopupProps {
   trigger: boolean;
@@ -19,12 +20,14 @@ interface PedAdPopupProps {
   age: number;
   description: string;
   photoUrl: string;
+  id: number;
 }
 
-const PedAdPopup: React.FC<PedAdPopupProps> = ({ trigger, onClose, name, breed, age, description, photoUrl }) => {
+const PedAdPopup: React.FC<PedAdPopupProps> = ({ trigger, onClose, name, breed, age, description, photoUrl, id }) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [postLiked, setpostLiked] = useState(false);
   const [likes, setLikes] = useState(0);
+  const { loggedUser } = useAuth();
 
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
@@ -36,10 +39,9 @@ const PedAdPopup: React.FC<PedAdPopupProps> = ({ trigger, onClose, name, breed, 
 
   const getLike = async () => {
     try {
-      await api.post('/reactions/:id', {
-        postId: 0,
+      await api.post("/reactions/${id}", {
+        postId: {id},
       });
-      alert('Like handled successfully!');
     } catch (error) {
       console.error('Error handledling like:', error);
       alert('Failed to handle like.');
@@ -52,13 +54,13 @@ const PedAdPopup: React.FC<PedAdPopupProps> = ({ trigger, onClose, name, breed, 
   const handleLike = async () => {
     try {
       await api.post('/reactions/toggleLike', {
-        userId: 0,
-        postId: 0,
+        userId: loggedUser?.id,
+        postId: id,
       });
-      alert('Like handled successfully!');
     } catch (error) {
       console.error('Error handledling like:', error);
       alert('Failed to handle like.');
+      toggleLike();
     }
   };
 
