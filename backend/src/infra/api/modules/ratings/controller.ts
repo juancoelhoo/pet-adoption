@@ -66,6 +66,12 @@ class RatingsController {
 
       const rating = await ratingsFactory.execute(Number(id));
 
+      if (!rating) {
+        return res.status(404).json({
+          message: "Rating not found!",
+        });
+      }
+
       return res.status(200).json({
         message: "Rating listed successfully!",
         body: rating,
@@ -133,11 +139,21 @@ class RatingsController {
   async update(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
-      const ratingsFactory = updateRatingFactory();
+      if (!id) throw new Error("Missing property 'id'!");
 
+      const ratingsFactory = getSpecificRatingFactory();
+      const existingRating = await ratingsFactory.execute(Number(id));
+
+      if (!existingRating) {
+        return res.status(404).json({
+          message: "Rating not found!",
+        });
+      }
+
+      const updateFactory = updateRatingFactory();
       const rating: Required<UpdateRatingRequest> = { ...req.body, id: Number(id) };
 
-      await ratingsFactory.execute(rating);
+      await updateFactory.execute(rating);
 
       return res.status(200).json({
         message: "Rating updated successfully!"
@@ -167,12 +183,19 @@ class RatingsController {
   async delete(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
-
       if (!id) throw new Error("Missing property 'id'!");
 
-      const ratingsFactory = deleteRatingFactory();
+      const ratingsFactory = getSpecificRatingFactory();
+      const existingRating = await ratingsFactory.execute(Number(id));
 
-      await ratingsFactory.execute(Number(id));
+      if (!existingRating) {
+        return res.status(404).json({
+          message: "Rating not found!",
+        });
+      }
+
+      const deleteFactory = deleteRatingFactory();
+      await deleteFactory.execute(Number(id));
 
       return res.status(200).json({
         message: "Rating deleted successfully!"
