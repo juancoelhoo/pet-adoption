@@ -14,6 +14,7 @@ import usersRouter from "./modules/users/routes";
 import complaintsRouter from "./modules/complaints/routes"; 
 import reactionsRouter from "./modules/reactions/routes";
 import filesRouter from "./modules/files/routes";
+import ratingsRouter from "./modules/ratings/routes";
 
 export class SetupServer {
   private static LOG_TAG = "SetupServer";
@@ -62,6 +63,7 @@ export class SetupServer {
     this.app.use("/complaints", complaintsRouter);
     this.app.use("/reactions", reactionsRouter);
     this.app.use("/files", filesRouter);
+    this.app.use("/ratings", ratingsRouter);
   }
 
   private setupErrorHandler(): void {
