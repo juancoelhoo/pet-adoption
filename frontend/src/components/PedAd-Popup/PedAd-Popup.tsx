@@ -16,9 +16,10 @@ interface PedAdPopupProps {
   breed: string;
   age: number;
   description: string;
+  photoUrl: string;
 }
 
-const PedAdPopup: React.FC<PedAdPopupProps> = ({ trigger, onClose, name, breed, age, description }) => {
+const PedAdPopup: React.FC<PedAdPopupProps> = ({ trigger, onClose, name, breed, age, description, photoUrl }) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
   const toggleDropdown = () => {
@@ -38,22 +39,19 @@ const PedAdPopup: React.FC<PedAdPopupProps> = ({ trigger, onClose, name, breed, 
           {dropdownVisible && (
             <div className='dropdown-menu'>
               <ul>
-                <li>Editar
-                  <img src={edit} alt="" />
-                </li>
                 <li>Denunciar
                   <img src={report} alt="" />
-                </li>
-                <li>Excluir
-                  <img src={remove} alt="" />
                 </li>
               </ul>
             </div>
           )}
-          <h2>{name}</h2>
-          <p><strong>Raça:</strong> {breed}</p>
-          <p><strong>Idade:</strong> {age} anos</p>
-          <p><strong>Descrição:</strong> {description}</p>
+          <div className="post-picture">
+            <img src={photoUrl} alt="" />
+          </div>
+          <p><b>Nome:</b> {name}</p>
+          <p><b>Raça:</b> {breed}</p>
+          <p><b>Idade:</b> {age} anos</p>
+          <p><b>Descrição:</b> {description}</p>
           <div className="profile">
             <div className="profile-user">
               <img src={profile} alt="profile-photo" />
@@ -62,7 +60,7 @@ const PedAdPopup: React.FC<PedAdPopupProps> = ({ trigger, onClose, name, breed, 
             <img src={profileAccess} alt="profile-access" className="profile-access" />
           </div>
           <button className='contact'>
-            Converse com o Dono
+            <p>Converse com o Dono</p>
             <img src={contato} alt="whatsapp-image" className='btn-image' />
           </button>
         </div>
