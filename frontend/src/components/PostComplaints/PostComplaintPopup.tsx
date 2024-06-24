@@ -19,6 +19,12 @@ const PostComplaintPopup: React.FC<PostComplaintPopupProps> = ({
   const [isError, setIsError] = useState(false);
 
   const handleSubmit = async () => {
+    if (reason.trim() === '') {
+      setMessage('O motivo da denúncia não pode estar vazio.');
+      setIsError(true);
+      return;
+    }
+
     try {
       await api.post('/complaints/', {
         reporterUserId,
@@ -57,7 +63,7 @@ const PostComplaintPopup: React.FC<PostComplaintPopupProps> = ({
         <textarea
           value={reason}
           onChange={(e) => setReason(e.target.value)}
-          placeholder="Escreva aqui a razão da sua denúncia."
+          placeholder="Escreva aqui o motivo da sua denúncia."
         ></textarea>
         <div className="button-group">
           <button onClick={handleSubmit}>Enviar denúncia</button>
