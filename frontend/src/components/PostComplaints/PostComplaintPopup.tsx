@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import { AxiosError } from 'axios';
 import { api } from '../../services/api'; 
 import './PostComplaintPopup.css';
@@ -20,7 +20,13 @@ const PostComplaintPopup: React.FC<PostComplaintPopupProps> = ({
 
   const handleSubmit = async () => {
     if (reason.trim() === '') {
-      setMessage('O motivo da denúncia não pode estar vazio.');
+      setMessage('A razão da denúncia não pode estar vazia.');
+      setIsError(true);
+      return;
+    }
+
+    if (reason.length > 120) {
+      setMessage('A razão da denúncia não pode ter mais de 120 caracteres.');
       setIsError(true);
       return;
     }
@@ -62,8 +68,10 @@ const PostComplaintPopup: React.FC<PostComplaintPopupProps> = ({
         <h3>Denúncia de publicação</h3>
         <textarea
           value={reason}
-          onChange={(e) => setReason(e.target.value)}
-          placeholder="Escreva aqui o motivo da sua denúncia."
+          onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setReason(e.target.value)}
+          placeholder="Escreva aqui a razão da sua denúncia."
+          maxLength={120}
+          title="A denúncia deve ter entre 1 e 120 caracteres."
         ></textarea>
         <div className="button-group">
           <button onClick={handleSubmit}>Enviar denúncia</button>
