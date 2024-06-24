@@ -199,7 +199,7 @@ const ProfileScreen = () => {
           <div className="profile-top">
 
             <div className="profile-pic">
-              <img src={profile} alt="profile-photo" />
+              <img src={loggedUser?.profilePhoto} alt="profile-photo" />
             </div>
           
             <div className="profile-description">

@@ -82,6 +82,7 @@ const ProfileId = () => {
     } catch (e) {
       console.log(e);
     }
+    
   }
   
 
@@ -109,15 +110,15 @@ const ProfileId = () => {
           if (response) {
             setUserData(response.data.body);
           } else {
-            alert('Dados do usuário não encontrados na resposta da API.');
+            console.log('Dados do usuário não encontrados na resposta da API.');
           }
         } catch (error) {
-          alert('Erro ao carregar dados do usuário:');
+          console.log('Erro ao carregar dados do usuário:');
         }
     };
 
     fetchUserData();
-  }}, [idUser]);
+  }}, [loggedUser, idUser]);
 
 
 
