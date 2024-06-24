@@ -14,6 +14,7 @@ interface Ad {
   age: number;
   description: string;
   photoUrl: string;
+  ownerId: number;
 }
 
 const AdvertisementPage: React.FC = () => {
@@ -69,7 +70,7 @@ const AdvertisementPage: React.FC = () => {
       <div className="ad-screen">
         <div className="page-title">
           <img src={adSvg} alt="ad-logo" />
-          <span>Anúncios</span>
+          <span>Anï¿½ncios</span>
         </div>
         <div className="pet-ads">
           {ads.map((ad) => (

@@ -14,10 +14,12 @@ import './ProfileAd.css';
 import { api } from '../../services/api';
 
 interface ProfileAdProps {
-  id: string;
+  id: number;
+  name: string;
+  photoUrl: string;
 }
 
-function ProfileAd({id}: ProfileAdProps) {
+const ProfileAd: React.FC<ProfileAdProps> = ({ id, name, photoUrl }) =>{
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
   const toggleDropdown = () => {
@@ -47,12 +49,13 @@ function ProfileAd({id}: ProfileAdProps) {
           </ul>
         </div>
       )}
-
-      <img src={dogimage} alt="pet-photo" />
+      <div className='profileadphoto'>
+      <img src={photoUrl} alt="pet-photo"/>
+      </div>
       <div className="profile-pet-inf">
         <div className="line"></div>
         <div className="pet-name">
-          <span className="profile-pet-info">caramelo</span>
+          <span className="profile-pet-info">{name}</span>
         </div>
       </div>  
     </div>

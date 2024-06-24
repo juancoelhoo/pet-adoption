@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { api } from '../../services/api';
 import { useAuth } from '../../contexts/AuthContext';
@@ -25,12 +25,24 @@ import './Profile.css';
 import ImageUpload from '../../components/ImageUpload';
 import { useNavigate } from 'react-router-dom';
 
+interface Ad {
+  id: number;
+  name: string;
+  breed: string;
+  age: number;
+  description: string;
+  photoUrl: string;
+  ownerId: number;
+}
+
 const ProfileScreen = () => {
+  const { token } = useAuth();
   const { loggedUser } = useAuth();
   const navigate = useNavigate();
 
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
 
+  const [ads, setAds] = useState<Ad[]>([]);
   const [name, setName] = useState<string>("");
   const [age, setAge] = useState<string>("");
   const [breed, setBreed] = useState<string>("");
@@ -70,16 +82,70 @@ const ProfileScreen = () => {
     }
   }
 
+  
   const [ratingState, setRatingState] = useState({
-    rating: 3,
+    rating: 0
  });
 
-  const handleRatingClick = (newRating: number) => {
+  const handleRatingClick = async (newRating: number) => {
+    await sendRating(newRating);
     setRatingState((prevState) => ({
       ...prevState,
       rating: newRating,
     }));
   };
+
+  async function getRating() {
+    let id = loggedUser?.id;
+    try {
+      const response = await api.get(`/ratings/${id}`, {
+        headers: {
+          userId: loggedUser?.id
+        }
+      });
+      setRatingState(response.data.body);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async function sendRating(newRating: number) {
+    const id = loggedUser?.id;
+    try {
+      const response = await api.post(`/ratings`, {
+          grade: newRating,
+          reporterUserId: loggedUser?.id,
+          reportedUserId: loggedUser?.id,
+          createdAt: new Date().toISOString()
+      });
+      return response.data.body;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async function averageRating() {
+    try {
+      let id = loggedUser?.id;
+      const response = await api.post(`/avarage/${id}`, {
+        headers: {
+          userId: loggedUser?.id
+        }
+      });
+      setRatingState(response.data.body.avarage);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  useEffect(() => {
+    if (loggedUser) {
+      averageRating();
+      loadAds();
+    }
+  }, [loggedUser]);
+
+
 
   const renderRatingIcons = (rating: number) => {
     const maxRating = 5;
@@ -91,7 +157,7 @@ const ProfileScreen = () => {
           <button
             key={i}
             className="rateBtn"
-            onClick={() => handleRatingClick(i + 1)}
+            onClick={() => {handleRatingClick(i + 1)}}
           >
             <img src={dogPaw} alt="dog-paw" />
           </button>
@@ -118,6 +184,19 @@ const ProfileScreen = () => {
     setDropdownVisible(!dropdownVisible);
   };
 
+
+  async function loadAds() {
+    try {
+      const response = await api.get("/posts/all", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      setAds(response.data.body);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
 
 
@@ -181,9 +260,17 @@ const ProfileScreen = () => {
             <div className="line-divider"></div>
 
             <div className="profile-posts">
-            {/* TODO: Fazer esses posts serem dinamicos */}
-            <ProfileAd id="1"/>
-            <ProfileAd id="5"/>
+            {ads.map((ad) => (
+              ad.ownerId === loggedUser?.id && (
+              <ProfileAd
+                key={ad.id}
+                id={ad.id}
+                name={ad.name}
+                photoUrl={ad.photoUrl}
+              />
+  )
+))}
+
             <AddAd
               openPopup={() => setIsPopupOpen(true)}
             />

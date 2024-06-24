@@ -95,3 +95,17 @@ padding: 5px;
     font-family: 'Quicksand', sans-serif;
     font-size: 14px;
 }
+
+.profileadphoto {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.profileadphoto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
