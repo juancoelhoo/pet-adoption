@@ -12,6 +12,7 @@ import PublicRoute from './routes/PublicRoute';
 
 import './global.css';
 import ProfileScreen from './pages/Profile/Profile';
+import ProfileId from './pages/ProfileId/ProfileId'
 
 export const App = () => {
     return (
@@ -23,6 +24,7 @@ export const App = () => {
                         <Route path="/posts" element={<PrivateRoute element={<AdvertisementScreen />} />} />
                         <Route path="/complaints" element={<PrivateRoute element={<ComplaintsPage />} />} />
                         <Route path="/profile" element={<ProfileScreen />} />
+                        <Route path="/profile/:id" element={<ProfileId />} />
                     </Routes>
                 </BrowserRouter>
         </AuthProvider>

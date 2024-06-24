@@ -87,13 +87,6 @@ const ProfileScreen = () => {
     rating: 0
  });
 
-  const handleRatingClick = async (newRating: number) => {
-    await sendRating(newRating);
-    setRatingState((prevState) => ({
-      ...prevState,
-      rating: newRating,
-    }));
-  };
 
   async function getRating() {
     let id = loggedUser?.id;
@@ -109,20 +102,6 @@ const ProfileScreen = () => {
     }
   }
 
-  async function sendRating(newRating: number) {
-    const id = loggedUser?.id;
-    try {
-      const response = await api.post(`/ratings`, {
-          grade: newRating,
-          reporterUserId: loggedUser?.id,
-          reportedUserId: loggedUser?.id,
-          createdAt: new Date().toISOString()
-      });
-      return response.data.body;
-    } catch (e) {
-      console.log(e);
-    }
-  }
 
   async function averageRating() {
     try {
@@ -157,7 +136,7 @@ const ProfileScreen = () => {
           <button
             key={i}
             className="rateBtn"
-            onClick={() => {handleRatingClick(i + 1)}}
+            onClick={() => {}}
           >
             <img src={dogPaw} alt="dog-paw" />
           </button>
@@ -167,7 +146,7 @@ const ProfileScreen = () => {
           <button
             key={i}
             className="rateBtn"
-            onClick={() => handleRatingClick(i + 1)}
+            onClick={() => {}}
           >
             <img src={dogPawEmpty} alt="empty-dog-paw" />
           </button>
@@ -177,6 +156,19 @@ const ProfileScreen = () => {
 
     return ratingIcons;
   };
+
+  async function deleteProfile() {
+    let id = loggedUser?.id;
+    try {
+      const response = await api.delete(`/users/${id}`, {
+        headers: {
+          userId: loggedUser?.id
+        }
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
@@ -188,9 +180,6 @@ const ProfileScreen = () => {
   async function loadAds() {
     try {
       const response = await api.get("/posts/all", {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
       });
       setAds(response.data.body);
     } catch (e) {
@@ -240,15 +229,18 @@ const ProfileScreen = () => {
           {dropdownVisible && (
             <div className='dropdown-menup'>
               <ul>
-                <li>Editar
+              <li>
+                  <button>
+                  Editar
                   <img src={edit} alt="" />
-                </li>
-                <li>Denunciar
-                  <img src={report} alt="" />
-                </li>
-                <li>Excluir
+                </button>
+                 </li>
+              <li>
+                  <button onClick={deleteProfile}>
+                  Excluir
                   <img src={remove} alt="" />
-                </li>
+                </button>
+              </li>
               </ul>
             </div>
           )}

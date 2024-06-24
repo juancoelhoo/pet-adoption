@@ -17,10 +17,12 @@ interface ProfileAdProps {
   id: number;
   name: string;
   photoUrl: string;
+  showButton?: boolean;
 }
 
-const ProfileAd: React.FC<ProfileAdProps> = ({ id, name, photoUrl }) =>{
+const ProfileAd: React.FC<ProfileAdProps> = ({ id, name, photoUrl, showButton }) =>{
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  
 
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
@@ -28,27 +30,28 @@ const ProfileAd: React.FC<ProfileAdProps> = ({ id, name, photoUrl }) =>{
 
   async function deletePost() {
     await api.delete(`/posts/${id}`);
+    window.location.reload();
   }
 
   return (
     <div className='profile-ad'>
-      <button className='dropdown-btn' onClick={toggleDropdown}>
-        <img src={dropdown} alt="dropdown-menu" />
-      </button>
-      {dropdownVisible && (
-        <div className='dropdown-menu'>
-          <ul>
-            <li>
-              Editar
-              <img src={edit} alt="" />
-            </li>
-            <li onClick={deletePost}>
-              Excluir
-              <img src={remove} alt="" />
-            </li>
-          </ul>
-        </div>
-      )}
+     {showButton !== false && (
+  <button className='dropdown-btn' onClick={toggleDropdown}>
+    <img src={dropdown} alt="dropdown-menu" />
+  </button>
+)}
+
+{dropdownVisible && showButton !== false && (
+  <div className='dropdown-menu'>
+    <ul>
+      <li onClick={deletePost}>
+        Excluir
+        <img src={remove} alt="" />
+      </li>
+    </ul>
+  </div>
+)}
+      
       <div className='profileadphoto'>
       <img src={photoUrl} alt="pet-photo"/>
       </div>
