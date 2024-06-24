@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import './PedAd-Popup.css';
+import PostComplaintPopup from '../PostComplaints/PostComplaintPopup';
+import { api } from '../../services/api';
+import { useAuth } from '../../contexts/AuthContext';
 import close from '../../public/pet-ad/close-btn.svg';
 import contato from '../../public/pet-ad/whatsapp.svg';
 import profile from '../../public/menu/profile.svg';
 import profileAccess from '../../public/pet-ad/profile-access.svg';
 import dropdown from '../../public/dropdown/dropdown.svg';
-import edit from '../../public/dropdown/edit.svg';
 import report from '../../public/dropdown/report.svg';
-import remove from '../../public/dropdown/remove.svg';
 import likeimage from '../../public/pet-ad/like.svg'; 
-import { api } from '../../services/api';
-import { useAuth } from '../../contexts/AuthContext';
 
 interface PedAdPopupProps {
   trigger: boolean;
@@ -23,10 +22,14 @@ interface PedAdPopupProps {
   id: number;
 }
 
-const PedAdPopup: React.FC<PedAdPopupProps> = ({ trigger, onClose, name, breed, age, description, photoUrl, id }) => {
+const PedAdPopup: React.FC<PedAdPopupProps> = ({
+  trigger, onClose, name, breed, age, description, photoUrl, id
+}) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
-  const [postLiked, setpostLiked] = useState(false);
-  const [likes, setLikes] = useState();
+  const [postLiked, setPostLiked] = useState(false);
+  const [likes, setLikes] = useState(0);
+  const [complaintPopupVisible, setComplaintPopupVisible] = useState(false);
+  const [reason, setReason] = useState('');
   const { loggedUser } = useAuth();
 
   const toggleDropdown = () => {
@@ -34,20 +37,16 @@ const PedAdPopup: React.FC<PedAdPopupProps> = ({ trigger, onClose, name, breed, 
   };
 
   const toggleLike = () => {
-    setpostLiked(!postLiked);
-  }
+    setPostLiked(!postLiked);
+  };
 
   const getLike = async () => {
     try {
-      const response = await api.get(`/reactions/total/${id}`, {
-        headers: {
-          postId: id
-        }
-      });
-      setLikes(response.data.body.total)
+      const response = await api.get(`/reactions/total/${id}`);
+      setLikes(response.data.body.total);
     } catch (error) {
-      console.error('Error handledling like:', error);
-      alert('Failed to handle like.');
+      console.error('Error getting likes:', error);
+      alert('Failed to get likes.');
     }
   };
 
@@ -55,9 +54,7 @@ const PedAdPopup: React.FC<PedAdPopupProps> = ({ trigger, onClose, name, breed, 
     if (id) {
       getLike();
     }
-  }, [id]); 
-
-
+  }, [id]);
 
   const handleLike = async () => {
     try {
@@ -66,9 +63,24 @@ const PedAdPopup: React.FC<PedAdPopupProps> = ({ trigger, onClose, name, breed, 
         postId: id,
       });
     } catch (error) {
-      console.error('Error handledling like:', error);
+      console.error('Error handling like:', error);
       alert('Failed to handle like.');
       toggleLike();
+    }
+  };
+
+  const handleSubmit = async () => {
+    try {
+      await api.post('/complaints/', {
+        reporterUserId: loggedUser?.id,
+        reportedPostId: id,
+        reason,
+      });
+      alert('Complaint submitted successfully.');
+      setComplaintPopupVisible(false);
+    } catch (error) {
+      console.error('Error submitting complaint:', error);
+      alert('Failed to submit complaint.');
     }
   };
 
@@ -85,7 +97,7 @@ const PedAdPopup: React.FC<PedAdPopupProps> = ({ trigger, onClose, name, breed, 
           {dropdownVisible && (
             <div className='dropdown-menu'>
               <ul>
-                <li>Denunciar
+                <li onClick={() => setComplaintPopupVisible(true)}>Denunciar
                   <img src={report} alt="" />
                 </li>
               </ul>
@@ -110,11 +122,21 @@ const PedAdPopup: React.FC<PedAdPopupProps> = ({ trigger, onClose, name, breed, 
             <img src={contato} alt="whatsapp-image" className='btn-image' />
           </button>
           <div className="pet-likes">
-          <button onClick={async () => {await handleLike(), await toggleLike(), await getLike()}} className={postLiked ? 'postliked' : 'postnotliked'}>
-            <img src={likeimage} alt="Curtir" className="like-icon" />
-          </button>
-          <span>{likes} Curtidas</span>
-        </div>
+            <button onClick={async () => { await handleLike(); toggleLike(); await getLike(); }} className={postLiked ? 'postliked' : 'postnotliked'}>
+              <img src={likeimage} alt="Curtir" className="like-icon" />
+            </button>
+            <span>{likes} Curtidas</span>
+          </div>
+          {complaintPopupVisible && loggedUser && (
+            <PostComplaintPopup
+              reason={reason}
+              setReason={setReason}
+              handleSubmit={handleSubmit}
+              handleClosePopup={() => setComplaintPopupVisible(false)}
+              reporterUserId={loggedUser.id}
+              reportedPostId={id}
+            />
+          )}
         </div>
       </div>
     </div>

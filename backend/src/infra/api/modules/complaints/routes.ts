@@ -48,7 +48,7 @@ const router = Router();
 router.get("/all", verifyJWT, complaintsController.getAll);
 router.get("/:id", verifyJWT, complaintsController.getOne);
 router.post("/", verifyJWT, complaintsController.create);
-router.put("/:id", verifyJWT, complaintsController.update); // Adicionado
+router.put("/:id", verifyJWT, complaintsController.update); 
 router.delete("/:id", verifyJWT, complaintsController.delete);
 
 export default router;

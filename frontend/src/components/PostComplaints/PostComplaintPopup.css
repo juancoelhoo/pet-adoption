@@ -1,27 +1,83 @@
-.popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .popup-content {
-    background: white;
-    padding: 20px;
-    border-radius: 5px;
-    width: 300px;
-    max-width: 80%;
-    text-align: center;
-  }
-  
-  .popup-content textarea {
-    width: 100%;
-    height: 100px;
-    margin-bottom: 10px;
-  }
-  
+.post-complaint-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1100;
+}
+
+.post-complaint-popup-content {
+  background: #FFFFFF;
+  padding: 40px;
+  border-radius: 16px;
+  width: 400px;
+  max-width: 80%;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.post-complaint-popup-content h3 {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.post-complaint-popup-content textarea {
+  font-family: 'Quicksand', sans-serif;
+  width: 100%;
+  height: 100px;
+  padding: 12px;
+  margin: 10px 0 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  resize: none;
+}
+
+.post-complaint-popup-content .button-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 5px;
+}
+
+.post-complaint-popup-content button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+  width: 60%;
+  margin: 5px 0;
+}
+
+.post-complaint-popup-content button:hover {
+  background-color: #45a049;
+}
+
+.post-complaint-popup-content .cancel-button {
+  background-color: #f44336;
+}
+
+.post-complaint-popup-content .cancel-button:hover {
+  background-color: #e53935;
+}
+
+.post-complaint-popup-content .message {
+  margin-top: 20px;
+  font-family: 'Quicksand', sans-serif;
+  color: #4CAF50; 
+}
+
+.post-complaint-popup-content .message.error {
+  color: #f44336; 
+}
