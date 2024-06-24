@@ -25,12 +25,6 @@ const PostComplaintPopup: React.FC<PostComplaintPopupProps> = ({
       return;
     }
 
-    if (reason.length > 120) {
-      setMessage('A razão da denúncia não pode ter mais de 120 caracteres.');
-      setIsError(true);
-      return;
-    }
-
     try {
       await api.post('/complaints/', {
         reporterUserId,
