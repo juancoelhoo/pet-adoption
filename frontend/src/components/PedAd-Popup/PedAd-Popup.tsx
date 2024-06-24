@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './PedAd-Popup.css';
 import close from '../../public/pet-ad/close-btn.svg';
 import contato from '../../public/pet-ad/whatsapp.svg';
@@ -10,6 +10,7 @@ import report from '../../public/dropdown/report.svg';
 import remove from '../../public/dropdown/remove.svg';
 import likeimage from '../../public/pet-ad/like.svg'; 
 import { api } from '../../services/api';
+import { useAuth } from '../../contexts/AuthContext';
 
 interface PedAdPopupProps {
   trigger: boolean;
@@ -19,12 +20,14 @@ interface PedAdPopupProps {
   age: number;
   description: string;
   photoUrl: string;
+  id: number;
 }
 
-const PedAdPopup: React.FC<PedAdPopupProps> = ({ trigger, onClose, name, breed, age, description, photoUrl }) => {
+const PedAdPopup: React.FC<PedAdPopupProps> = ({ trigger, onClose, name, breed, age, description, photoUrl, id }) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [postLiked, setpostLiked] = useState(false);
-  const [likes, setLikes] = useState(0);
+  const [likes, setLikes] = useState();
+  const { loggedUser } = useAuth();
 
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
@@ -36,29 +39,36 @@ const PedAdPopup: React.FC<PedAdPopupProps> = ({ trigger, onClose, name, breed, 
 
   const getLike = async () => {
     try {
-      await api.post('/reactions/:id', {
-        postId: 0,
+      const response = await api.get(`/reactions/total/${id}`, {
+        headers: {
+          postId: id
+        }
       });
-      alert('Like handled successfully!');
+      setLikes(response.data.body.total)
     } catch (error) {
       console.error('Error handledling like:', error);
       alert('Failed to handle like.');
     }
   };
 
+  useEffect(() => {
+    if (id) {
+      getLike();
+    }
+  }, [id]); 
 
 
 
   const handleLike = async () => {
     try {
       await api.post('/reactions/toggleLike', {
-        userId: 0,
-        postId: 0,
+        userId: loggedUser?.id,
+        postId: id,
       });
-      alert('Like handled successfully!');
     } catch (error) {
       console.error('Error handledling like:', error);
       alert('Failed to handle like.');
+      toggleLike();
     }
   };
 
@@ -100,10 +110,10 @@ const PedAdPopup: React.FC<PedAdPopupProps> = ({ trigger, onClose, name, breed, 
             <img src={contato} alt="whatsapp-image" className='btn-image' />
           </button>
           <div className="pet-likes">
-          <button onClick={() => {handleLike(), toggleLike()}} className={postLiked ? 'postliked' : 'postnotliked'}>
+          <button onClick={async () => {await handleLike(), await toggleLike(), await getLike()}} className={postLiked ? 'postliked' : 'postnotliked'}>
             <img src={likeimage} alt="Curtir" className="like-icon" />
           </button>
-          <span>{/*likes*/} Curtidas</span>
+          <span>{likes} Curtidas</span>
         </div>
         </div>
       </div>
