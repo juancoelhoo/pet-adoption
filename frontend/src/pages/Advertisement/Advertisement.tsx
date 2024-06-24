@@ -26,7 +26,8 @@ const AdvertisementPage: React.FC = () => {
     breed: '',
     age: 0,
     description: '',
-    photoUrl: ''
+    photoUrl: '',
+    id: 0,
   });
 
   useEffect(() => {
@@ -46,14 +47,15 @@ const AdvertisementPage: React.FC = () => {
     }
   }
 
-  const openPopup = (name: string, breed: string, age: number, description: string, photoUrl: string) => {
+  const openPopup = (name: string, breed: string, age: number, description: string, photoUrl: string, id: number) => {
     setPopupState({
       trigger: true,
       name,
       breed,
       age,
       description,
-      photoUrl
+      photoUrl,
+      id
     });
   };
 
@@ -76,7 +78,7 @@ const AdvertisementPage: React.FC = () => {
           {ads.map((ad) => (
             <PetAd
               key={ad.id}
-              onClick={() => openPopup(ad.name, ad.breed, ad.age, ad.description, ad.photoUrl)}
+              onClick={() => openPopup(ad.name, ad.breed, ad.age, ad.description, ad.photoUrl, ad.id)}
               name={ad.name}
               breed={ad.breed}
               age={ad.age}
@@ -93,6 +95,7 @@ const AdvertisementPage: React.FC = () => {
           age={popupState.age}
           description={popupState.description}
           photoUrl={popupState.photoUrl}
+          id={popupState.id}
         />
       </div>
     </div>
