@@ -39,10 +39,17 @@
     width: 100%;
     box-shadow: none;
     height: 80%;
+    object-fit: fill;
+
   }
   
   .profile-pic{
-    align-items:baseline
+    align-items:baseline;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 50px;
   }
 
 

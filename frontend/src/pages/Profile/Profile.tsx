@@ -20,6 +20,7 @@ import nameImg from '../../public/pet-ad/pet-name.svg';
 import breedImg from '../../public/pet-ad/pet-breed.svg';
 import ageImg from '../../public/pet-ad/pet-age.svg';
 import descImg from '../../public/pet-ad/pet-description.svg';
+import telephone from '../../public/profile/telephone.svg';
 
 import './Profile.css';
 import ImageUpload from '../../components/ImageUpload';
@@ -55,6 +56,7 @@ const ProfileScreen = () => {
   const [profileDescription, setProfileDescription] = useState<string>("");
   const [profilePhotoUrl, setProfilePhotoUrl] = useState<string>("");
   const [profileAddress, setProfileAddress] = useState<string>("");
+  const [profileNumber, setProfileNumber] = useState<string>("");
 
   async function setFile(file: File) {
     const body = new FormData();
@@ -105,17 +107,26 @@ const ProfileScreen = () => {
         profileName,
         profileDescription,
         profilePhotoUrl,
-        profileAddress
+        profileAddress,
+        profileNumber
       };
+
+      console.log(body);
   
   
-      const response = await api.put(`/users/${loggedUser?.id}`, body);
+      const response = await api.put(`/users/${loggedUser?.id}`, {
+        name: profileName,
+        description: profileDescription,
+        profilePhoto: profilePhotoUrl,
+        address: profileAddress,
+        phone: profileNumber
+      });
   
       // Check if the response is successful
       if (response.status === 200) {
         setIsProfilePopupOpen(false);
         alert("Perfil alterado com sucesso!");
-        window.location.reload(); // Add parentheses to invoke the function
+        window.location.reload;
       } else {
         alert("Erro ao atualizar o perfil.");
       }
@@ -342,7 +353,7 @@ const ProfileScreen = () => {
                 </div>
 
                 <ImageUpload
-                  setFile={setFile}
+                  setFile={setProfileFile}
                 />
 
                 <div className="post-input">
@@ -357,6 +368,13 @@ const ProfileScreen = () => {
                     <img src={locationPin} alt="" />
                   </label>
                   <input type="text" id="location" placeholder="Localização" onChange={e => setProfileAddress(e.target.value)} />
+                </div>
+
+                <div className="post-input">
+                  <label htmlFor="Telefone">
+                    <img src={telephone} alt="" />
+                  </label>
+                  <input type="tel" id="telefone" placeholder="Telefone" onChange={e => setProfileNumber(e.target.value)} />
                 </div>
 
                 <div className="post-input description-box">
