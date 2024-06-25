@@ -59,11 +59,15 @@ const AdvertisementPage: React.FC = () => {
     });
   };
 
-  const closePopup = () => {
+  const closePopup = (shouldReload: boolean) => {
     setPopupState({
       ...popupState,
       trigger: false,
     });
+
+    if (shouldReload) {
+      loadAds();
+    }
   };
 
   return (
