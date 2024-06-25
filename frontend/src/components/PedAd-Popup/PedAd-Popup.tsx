@@ -9,13 +9,14 @@ import profile from '../../public/menu/profile.svg';
 import profileAccess from '../../public/pet-ad/profile-access.svg';
 import dropdown from '../../public/dropdown/dropdown.svg';
 import report from '../../public/dropdown/report.svg';
+import remove from '../../public/dropdown/remove.svg';
 import likeimage from '../../public/pet-ad/like.svg'; 
 import { User } from '../../domain/entities/User';
 import { Link } from 'react-router-dom';
 
 interface PedAdPopupProps {
   trigger: boolean;
-  onClose: () => void;
+  onClose: (shouldReload: boolean) => void;
   name: string;
   breed: string;
   age: number;
@@ -87,11 +88,22 @@ const PedAdPopup: React.FC<PedAdPopupProps> = ({
     }
   };
 
+  async function deletePost() {
+    try {
+      await api.delete(`/posts/${id}`);
+      alert('Post deleted successfully.');
+      onClose(true);
+    } catch (error) {
+      console.error('Error submitting complaint:', error);
+      alert('Failed to submit complaint.');
+    }
+  }
+
   return trigger ? (
     <div className='popup-overlay'>
       <div className='popup'>
         <div className='popup-content'>
-          <button className='close-btn' onClick={onClose}>
+          <button className='close-btn' onClick={() => onClose(false)}>
             <img src={close} alt="close button" />
           </button>
           <button className='dropdown-btn' onClick={toggleDropdown}>
@@ -103,6 +115,11 @@ const PedAdPopup: React.FC<PedAdPopupProps> = ({
                 <li onClick={() => setComplaintPopupVisible(true)}>Denunciar
                   <img src={report} alt="" />
                 </li>
+                {loggedUser?.permissions == 1 /*isAdmin*/ && (
+                  <li onClick={deletePost}>Excluir
+                    <img src={remove} alt="excluir" />
+                  </li>
+                )}
               </ul>
             </div>
           )}
