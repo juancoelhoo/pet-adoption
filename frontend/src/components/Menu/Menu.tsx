@@ -32,10 +32,12 @@ const Menu = () => {
                         <img src={search} alt="search-logo" />
                         <Link to="#">Pesquisar</Link>
                     </div>
-                    <div className="reports">
-                        <img src={report} alt="" />
-                        <Link to="/complaints">Denúncias</Link>
-                    </div>
+                    {loggedUser?.permissions == 1 /*isAdmin*/ && (
+                        <div className="reports">
+                            <img src={report} alt="" />
+                            <Link to="/complaints">Denúncias</Link>
+                        </div>
+                    )}
                 </div>
                 <div className="options">
                 Opções
