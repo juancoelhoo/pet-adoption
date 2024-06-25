@@ -57,19 +57,6 @@ const ProfileId = () => {
     }));
   };
 
-  async function getRating() {
-    try {
-      const response = await api.get(`/ratings/${idUser}`, {
-        headers: {
-          userId: idUser
-        }
-      });
-      setRatingState(response.data.body);
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
   async function sendRating(newRating: number) {
     try {
       const response = await api.post(`/ratings`, {
@@ -82,17 +69,12 @@ const ProfileId = () => {
     } catch (e) {
       console.log(e);
     }
-    
+  
   }
   
-
   async function averageRating() {
     try {
-      const response = await api.get(`/ratings/average/${id}`, {
-        headers: {
-          userId: idUser
-        }
-      });
+      const response = await api.get(`/ratings/average/${id}`);
       setRatingState({rating: response.data.body.average});
     } catch (e) {
       console.log(e);
