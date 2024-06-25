@@ -106,12 +106,12 @@ const ProfileScreen = () => {
   async function averageRating() {
     try {
       let id = loggedUser?.id;
-      const response = await api.post(`/avarage/${id}`, {
+      const response = await api.get(`/ratings/average/${id}`, {
         headers: {
           userId: loggedUser?.id
         }
       });
-      setRatingState(response.data.body.avarage);
+      setRatingState({rating: response.data.body.average});
     } catch (e) {
       console.log(e);
     }

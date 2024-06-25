@@ -88,12 +88,12 @@ const ProfileId = () => {
 
   async function averageRating() {
     try {
-      const response = await api.post(`/avarage/${id}`, {
+      const response = await api.get(`/ratings/average/${id}`, {
         headers: {
           userId: idUser
         }
       });
-      setRatingState(response.data.body.avarage);
+      setRatingState({rating: response.data.body.average});
     } catch (e) {
       console.log(e);
     }
