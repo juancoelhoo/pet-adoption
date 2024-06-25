@@ -2,6 +2,7 @@ import React from "react";
 import DescriptionPage from "../../components/DescriptionTemplate";
 import useSignUp from "../../hooks/useSignUp";
 import "./styles.css";
+import { Link } from "react-router-dom";
 
 const SignUp: React.FC = () => {
     const {
@@ -69,7 +70,7 @@ const SignUp: React.FC = () => {
                     </div>
                 </form>
                 <div className="signup-links">
-                    <a href="/login">Já tem uma conta? Faça login</a>
+                    <Link to="/">Já tem uma conta? Faça login</Link>
                 </div>
             </div>
         </div>

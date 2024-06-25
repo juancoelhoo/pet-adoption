@@ -5,9 +5,8 @@ import breedimage from '../../public/pet-ad/pet-breed.svg';
 import ageimage from '../../public/pet-ad/pet-age.svg';
 import descimage from '../../public/pet-ad/pet-description.svg';
 
-
 interface PetAdProps {
-  onClick: (name: string, breed: string, age: number, description: string, photoUrl: string) => void;
+  onClick: () => void;
   name: string;
   breed: string;
   age: number;
@@ -15,10 +14,9 @@ interface PetAdProps {
   photoUrl: string;
 }
 
-
 const PetAd: React.FC<PetAdProps> = ({ onClick, name, breed, age, description, photoUrl }) => {
   return (
-    <div className='pet-ad' onClick={() => onClick(name, breed, age, description, photoUrl)}>
+    <div className='pet-ad' onClick={onClick}>
       <div className="pet-photo">
         <img src={photoUrl} alt="pet-photo" />
       </div>

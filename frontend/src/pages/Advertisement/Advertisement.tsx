@@ -6,6 +6,7 @@ import adSvg from '../../public/advertisement/advertisement.svg';
 import './Advertisement.css';
 import { api } from '../../services/api';
 import { useAuth } from '../../contexts/AuthContext';
+import { User } from '../../domain/entities/User';
 
 interface Ad {
   id: number;
@@ -15,6 +16,7 @@ interface Ad {
   description: string;
   photoUrl: string;
   ownerId: number;
+  owner: User;
 }
 
 const AdvertisementPage: React.FC = () => {
@@ -28,6 +30,7 @@ const AdvertisementPage: React.FC = () => {
     description: '',
     photoUrl: '',
     id: 0,
+    owner: {} as User
   });
 
   useEffect(() => {
@@ -36,18 +39,14 @@ const AdvertisementPage: React.FC = () => {
 
   async function loadAds() {
     try {
-      const response = await api.get("/posts/all", {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+      const response = await api.get("/posts/all");
       setAds(response.data.body);
     } catch (e) {
       console.log(e);
     }
   }
 
-  const openPopup = (name: string, breed: string, age: number, description: string, photoUrl: string, id: number) => {
+  const openPopup = (name: string, breed: string, age: number, description: string, photoUrl: string, id: number, owner: User) => {
     setPopupState({
       trigger: true,
       name,
@@ -55,7 +54,8 @@ const AdvertisementPage: React.FC = () => {
       age,
       description,
       photoUrl,
-      id
+      id,
+      owner
     });
   };
 
@@ -72,13 +72,13 @@ const AdvertisementPage: React.FC = () => {
       <div className="ad-screen">
         <div className="page-title">
           <img src={adSvg} alt="ad-logo" />
-          <span>An�ncios</span>
+          <span>Anúncios</span>
         </div>
         <div className="pet-ads">
           {ads.map((ad) => (
             <PetAd
               key={ad.id}
-              onClick={() => openPopup(ad.name, ad.breed, ad.age, ad.description, ad.photoUrl, ad.id)}
+              onClick={() => openPopup(ad.name, ad.breed, ad.age, ad.description, ad.photoUrl, ad.id, ad.owner)}
               name={ad.name}
               breed={ad.breed}
               age={ad.age}
@@ -96,6 +96,7 @@ const AdvertisementPage: React.FC = () => {
           description={popupState.description}
           photoUrl={popupState.photoUrl}
           id={popupState.id}
+          owner={popupState.owner}
         />
       </div>
     </div>

@@ -199,9 +199,11 @@
 
 .profile-user {
   display: flex;
+  text-decoration: none;
+  color:black;
 }
 
-.profile-access {
+.popup-overlay .profile-access {
   cursor: pointer;
 }
 

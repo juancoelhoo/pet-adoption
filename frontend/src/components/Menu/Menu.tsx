@@ -30,7 +30,7 @@ const Menu = () => {
                     </div>
                     <div className="search">
                         <img src={search} alt="search-logo" />
-                        <Link to="/profile">Pesquisar</Link>
+                        <Link to="#">Pesquisar</Link>
                     </div>
                     <div className="reports">
                         <img src={report} alt="" />
@@ -50,7 +50,7 @@ const Menu = () => {
                     <img src={loggedUser?.profilePhoto} alt="profile-photo" />
                     <p>{loggedUser?.name}</p>
                 </div>
-                <img className='config' src={config} alt="" />
+                <Link to="/profile"><img className='config' src={config} alt=""/></Link>
             </div>
         </div>
     </div>
