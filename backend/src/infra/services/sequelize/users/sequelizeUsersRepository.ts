@@ -70,6 +70,7 @@ export class SequelizeUsersRepository implements UsersRepository {
 
   async create(user: CreateUserRequest): Promise<void> {
     try {
+      // TODO: Move to this to use case
       if (!isValidEmail(user.email)) {
         throw new InvalidParamError("Invalid email format");
       }

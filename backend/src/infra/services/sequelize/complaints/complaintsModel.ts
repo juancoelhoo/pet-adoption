@@ -17,14 +17,14 @@ export class ComplaintModel extends Model {
   @Column({ allowNull: false })
   reporter_user_id: number;
 
-  @BelongsTo(() => UserModel, 'reporter_user_id')
+  @BelongsTo(() => UserModel,  {onDelete: "cascade", foreignKey: "reporter_user_id"})
   reporterUser: UserModel;
 
   @ForeignKey(() => PostModel)
   @Column({ allowNull: false })
   reported_post_id: number;
 
-  @BelongsTo(() => PostModel, 'reported_post_id')
+  @BelongsTo(() => PostModel, {onDelete: "cascade", foreignKey: "reported_post_id"})
   reportedPost: PostModel;
 
   @Column({ allowNull: false, defaultValue: DataTypes.NOW })

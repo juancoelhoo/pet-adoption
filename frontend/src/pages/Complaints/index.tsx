@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 
 import Menu from '../../components/Menu/Menu';
 
@@ -12,7 +13,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { Post } from '../../domain/entities/Post';
 
 const ComplaintsPage: React.FC = () => {
-  const { token } = useAuth();
+  const { loggedUser } = useAuth();
   const [complaints, setComplaints] = useState<any>([]);
 
   useEffect(() => {
@@ -29,7 +30,7 @@ const ComplaintsPage: React.FC = () => {
     }
   }
 
-  return (
+  return loggedUser?.permissions == 1 ? (
     <div className="complaints-container">
       <Menu />
 
@@ -53,7 +54,7 @@ const ComplaintsPage: React.FC = () => {
         </div>
       </div>
     </div>
-  );
+  ) : <Navigate to="/posts" />;
 };
 
 export default ComplaintsPage;

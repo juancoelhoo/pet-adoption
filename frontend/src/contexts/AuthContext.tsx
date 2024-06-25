@@ -4,6 +4,7 @@ import { api } from '../services/api';
 import { User } from '../domain/entities/User';
 
 interface AuthContextProps {
+    isLoading: boolean;
     isAuthenticated: boolean;
     setIsAuthenticated: (value: boolean) => void;
     setToken: (value: string) => void;
@@ -19,6 +20,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const [loggedUser, setLoggedUser] = useState<User | null>(null);
     const [token, setToken] = useState<string>("");
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
         const token = document.cookie.split('; ').find(row => row.startsWith('jwt='));
@@ -52,14 +54,25 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     };
 
     async function loadLoggedUser() {
-        const res = await api.get("/users/loggedUser");
-        console.log(res.data.user);
-        
-        setLoggedUser(res.data.user);
+        try {
+            const res = await api.get("/users/loggedUser");
+            console.log(res.data.user);
+            
+            setLoggedUser(res.data.user);
+
+            if (res.data.user.id) {
+                setIsAuthenticated(true);
+            }
+        } catch (error) {
+            console.error("Error fetching logged user", error);
+            setIsAuthenticated(false);
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, login, logout, setIsAuthenticated, token, loggedUser, setToken }}>
+        <AuthContext.Provider value={{ isAuthenticated, login, logout, setIsAuthenticated, token, loggedUser, setToken, isLoading }}>
             {children}
         </AuthContext.Provider>
     );

@@ -30,9 +30,9 @@ export class PostModel extends Model {
     created_at: Date;
 
     @ForeignKey(() => UserModel)
-    @Column({ allowNull: false, onDelete: "CASCADE" })
+    @Column({ allowNull: false, onDelete: "cascade" })
     owner_id: number;
 
-    @BelongsTo(() => UserModel)
+    @BelongsTo(() => UserModel, {onDelete: "cascade"})
     owner: UserModel;
 }

@@ -2,6 +2,7 @@ import React from "react";
 import DescriptionPage from "../../components/DescriptionTemplate";
 import useLogin from "../../hooks/useLogin";
 import './styles.css';
+import { Link } from "react-router-dom";
 
 const Login: React.FC = () => {
     const { email, setEmail, password, setPassword, errorMessage, handleSubmit } = useLogin();
@@ -33,7 +34,7 @@ const Login: React.FC = () => {
                     <div className="button-group">
                         <button type="submit" className="access-button">Acessar</button>
                         <div className="signup">
-                            <a href="/signup">Se cadastrar</a>
+                            <Link to="/signup">Se cadastrar</Link>
                         </div>
                     </div>
                     {errorMessage && <p style={{ color: 'red', fontFamily: 'Quicksand' }}>{errorMessage}</p>}

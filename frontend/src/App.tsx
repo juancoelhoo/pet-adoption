@@ -19,12 +19,12 @@ export const App = () => {
         <AuthProvider>
                 <BrowserRouter>
                     <Routes>
-                        <Route path="/" element={<PublicRoute element={<SignUp />} />} />
-                        <Route path="/login" element={<PublicRoute element={<Login />} />} />
+                        <Route path="/" element={<PublicRoute element={<Login />} />} />
+                        <Route path="/signup" element={<PublicRoute element={<SignUp />} />} />
                         <Route path="/posts" element={<PrivateRoute element={<AdvertisementScreen />} />} />
                         <Route path="/complaints" element={<PrivateRoute element={<ComplaintsPage />} />} />
-                        <Route path="/profile" element={<ProfileScreen />} />
-                        <Route path="/profile/:id" element={<ProfileId />} />
+                        <Route path="/profile" element={<PrivateRoute element={<ProfileScreen />} />} />
+                        <Route path="/profile/:id" element={<PrivateRoute element={<ProfileId />} />} />
                     </Routes>
                 </BrowserRouter>
         </AuthProvider>

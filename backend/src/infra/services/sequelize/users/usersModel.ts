@@ -35,6 +35,6 @@ export class UserModel extends Model {
     @Column({ allowNull: false, defaultValue: 0 })
     permissions: number;
 
-    @HasMany(() => PostModel)
+    @HasMany(() => PostModel, {onDelete: "cascade"})
     posts: PostModel[];
 }

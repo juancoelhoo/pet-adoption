@@ -1,3 +1,5 @@
+import { User } from "@src/modules/users/domain/entities/user";
+
 export interface Post {
   id: number;
   name: string;
@@ -6,6 +8,6 @@ export interface Post {
   age: number;
   description: string;
   ownerId: number;
-  // owner: User;
   createdAt: Date;
+  owner?: User;
 }

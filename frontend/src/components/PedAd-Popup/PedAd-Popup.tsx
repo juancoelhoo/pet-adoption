@@ -10,6 +10,8 @@ import profileAccess from '../../public/pet-ad/profile-access.svg';
 import dropdown from '../../public/dropdown/dropdown.svg';
 import report from '../../public/dropdown/report.svg';
 import likeimage from '../../public/pet-ad/like.svg'; 
+import { User } from '../../domain/entities/User';
+import { Link } from 'react-router-dom';
 
 interface PedAdPopupProps {
   trigger: boolean;
@@ -20,10 +22,11 @@ interface PedAdPopupProps {
   description: string;
   photoUrl: string;
   id: number;
+  owner: User;
 }
 
 const PedAdPopup: React.FC<PedAdPopupProps> = ({
-  trigger, onClose, name, breed, age, description, photoUrl, id
+  trigger, onClose, name, breed, age, description, photoUrl, id, owner
 }) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [postLiked, setPostLiked] = useState(false);
@@ -111,16 +114,16 @@ const PedAdPopup: React.FC<PedAdPopupProps> = ({
           <p><b>Idade:</b> {age} anos</p>
           <p><b>Descrição:</b> {description}</p>
           <div className="profile">
-            <div className="profile-user">
-              <img src={profile} alt="profile-photo" />
-              <span>Stephanie</span>
-            </div>
+            <Link to={`/profile/${owner.id}`} className="profile-user">
+              <img src={owner.profilePhoto} alt="profile-photo" />
+              <span>{owner.name}</span>
+            </Link>
             <img src={profileAccess} alt="profile-access" className="profile-access" />
           </div>
-          <button className='contact'>
+          <a className='contact' href={`https://wa.me/55${owner.phone?.replace(" ", "").replace("-", "").trim()}`} target="_blank">
             <p>Converse com o Dono</p>
             <img src={contato} alt="whatsapp-image" className='btn-image' />
-          </button>
+          </a>
           <div className="pet-likes">
             <button onClick={async () => { await handleLike(); toggleLike(); await getLike(); }} className={postLiked ? 'postliked' : 'postnotliked'}>
               <img src={likeimage} alt="Curtir" className="like-icon" />

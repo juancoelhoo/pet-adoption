@@ -81,37 +81,16 @@ const ProfileScreen = () => {
       console.log(error);
     }
   }
-
   
   const [ratingState, setRatingState] = useState({
     rating: 0
  });
 
-
-  async function getRating() {
-    let id = loggedUser?.id;
-    try {
-      const response = await api.get(`/ratings/${id}`, {
-        headers: {
-          userId: loggedUser?.id
-        }
-      });
-      setRatingState(response.data.body);
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-
   async function averageRating() {
     try {
       let id = loggedUser?.id;
-      const response = await api.post(`/avarage/${id}`, {
-        headers: {
-          userId: loggedUser?.id
-        }
-      });
-      setRatingState(response.data.body.avarage);
+      const response = await api.get(`/ratings/average/${id}`);
+      setRatingState({rating: response.data.body.average});
     } catch (e) {
       console.log(e);
     }

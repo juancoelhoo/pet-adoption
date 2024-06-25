@@ -18,6 +18,7 @@ import nameImg from '../../public/pet-ad/pet-name.svg';
 import breedImg from '../../public/pet-ad/pet-breed.svg';
 import ageImg from '../../public/pet-ad/pet-age.svg';
 import descImg from '../../public/pet-ad/pet-description.svg';
+import remove from '../../public/dropdown/remove.svg';
 
 import './ProfileId.css';
 import { useNavigate } from 'react-router-dom';
@@ -57,19 +58,6 @@ const ProfileId = () => {
     }));
   };
 
-  async function getRating() {
-    try {
-      const response = await api.get(`/ratings/${idUser}`, {
-        headers: {
-          userId: idUser
-        }
-      });
-      setRatingState(response.data.body);
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
   async function sendRating(newRating: number) {
     try {
       const response = await api.post(`/ratings`, {
@@ -82,18 +70,13 @@ const ProfileId = () => {
     } catch (e) {
       console.log(e);
     }
-    
+  
   }
   
-
   async function averageRating() {
     try {
-      const response = await api.post(`/avarage/${id}`, {
-        headers: {
-          userId: idUser
-        }
-      });
-      setRatingState(response.data.body.avarage);
+      const response = await api.get(`/ratings/average/${id}`);
+      setRatingState({rating: response.data.body.average});
     } catch (e) {
       console.log(e);
     }
@@ -162,19 +145,24 @@ const ProfileId = () => {
 
   async function loadAds() {
     try {
-      const response = await api.get("/posts/all", {
-      });
+      const response = await api.get("/posts/all");
       setAds(response.data.body);
     } catch (e) {
       console.log(e);
     }
   }
 
-
+  async function banUser() {
+    try {
+      await api.delete(`/users/${id}`);
+      alert("Usuário banido com sucesso!");
+      navigate("/complaints");
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   return (
-
-    
     <div className="profile-container">
       <Menu />
       <div className="profile-screen">
@@ -206,17 +194,21 @@ const ProfileId = () => {
               </div>
             </div>)}
 
-            <button className='dropdown-btnp' onClick={toggleDropdown}>
-            <img src={dropdown} alt="dropdown-menu" />
-          </button>
-          {dropdownVisible && (
-            <div className='dropdown-menup'>
-              <ul>
-                <li>Denunciar
-                  <img src={report} alt="" />
-                </li>
-              </ul>
-            </div>
+          {(loggedUser?.permissions == 1) && (Number(id) !== loggedUser?.id) && (
+            <>
+              <button className='dropdown-btnp' onClick={toggleDropdown}>
+                <img src={dropdown} alt="dropdown-menu" />
+              </button>
+              {dropdownVisible && (
+                <div className='dropdown-menup'>
+                  <ul>
+                    <li onClick={banUser}>Banir
+                      <img src={remove} alt="" />
+                    </li>
+                  </ul>
+                </div>
+              )}
+            </>
           )}
           </div>
 
