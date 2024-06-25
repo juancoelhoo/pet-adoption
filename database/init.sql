@@ -16,8 +16,8 @@ CREATE TABLE IF NOT EXISTS ratings (
     reporter_user_id INTEGER NOT NULL,
     reported_user_id INTEGER NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (reporter_user_id) REFERENCES users (id),
-    FOREIGN KEY (reported_user_id) REFERENCES users (id)
+    FOREIGN KEY (reporter_user_id) REFERENCES users (id) ON DELETE CASCADE,
+    FOREIGN KEY (reported_user_id) REFERENCES users (id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS posts (
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS posts (
     description TEXT,
     owner_id INTEGER NOT NULL,
     created_at TIMESTAMP NOT NULL,
-    FOREIGN KEY (owner_id) REFERENCES users (id)
+    FOREIGN KEY (owner_id) REFERENCES users (id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS complaints (
@@ -38,8 +38,8 @@ CREATE TABLE IF NOT EXISTS complaints (
     reported_post_id INTEGER NOT NULL,
     created_at TIMESTAMP NOT NULL,
     reason TEXT,
-    FOREIGN KEY (reporter_user_id) REFERENCES users (id),
-    FOREIGN KEY (reported_post_id) REFERENCES posts (id)
+    FOREIGN KEY (reporter_user_id) REFERENCES users (id) ON DELETE CASCADE,
+    FOREIGN KEY (reported_post_id) REFERENCES posts (id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS reactions (
@@ -47,8 +47,8 @@ CREATE TABLE IF NOT EXISTS reactions (
     user_id INTEGER NOT NULL,
     post_id INTEGER NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users (id),
-    FOREIGN KEY (post_id) REFERENCES posts (id),
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
+    FOREIGN KEY (post_id) REFERENCES posts (id) ON DELETE CASCADE,
     UNIQUE(user_id, post_id) 
 );
 

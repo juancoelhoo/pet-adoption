@@ -25,9 +25,9 @@ export class RatingModel extends Model {
     @Column({ allowNull: false })
     created_at: Date;
 
-    @BelongsTo(() => UserModel, 'reporter_user_id')
+    @BelongsTo(() => UserModel, {onDelete: "cascade", foreignKey: "reporter_user_id"})
     reporter: UserModel;
 
-    @BelongsTo(() => UserModel, 'reported_user_id')
+    @BelongsTo(() => UserModel, {onDelete: "cascade", foreignKey: "reported_user_id"})
     reported: UserModel;
 }

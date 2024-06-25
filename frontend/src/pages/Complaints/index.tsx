@@ -30,7 +30,7 @@ const ComplaintsPage: React.FC = () => {
     }
   }
 
-  return loggedUser?.permissions == 0 ? (
+  return loggedUser?.permissions == 1 ? (
     <div className="complaints-container">
       <Menu />
 
