@@ -306,7 +306,7 @@ const ProfileScreen = () => {
                 </div>
 
                 <ImageUpload
-                  setFile={setProfileFile}
+                  setFile={setFile}
                 />
 
                 <div className="post-input">
