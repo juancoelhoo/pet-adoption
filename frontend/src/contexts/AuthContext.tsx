@@ -52,10 +52,14 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     };
 
     async function loadLoggedUser() {
-        const res = await api.get("/users/loggedUser");
-        console.log(res.data.user);
-        
-        setLoggedUser(res.data.user);
+        try {
+            const res = await api.get("/users/loggedUser");
+            console.log(res.data.user);
+            
+            setLoggedUser(res.data.user);
+        } catch (error) {
+            console.error("Error fetching logged user", error);
+        }
     }
 
     return (
