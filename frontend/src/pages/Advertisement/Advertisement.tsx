@@ -14,6 +14,7 @@ interface Ad {
   age: number;
   description: string;
   photoUrl: string;
+  ownerId: number;
 }
 
 const AdvertisementPage: React.FC = () => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { api } from '../../services/api';
 import { useAuth } from '../../contexts/AuthContext';
@@ -25,12 +25,24 @@ import './Profile.css';
 import ImageUpload from '../../components/ImageUpload';
 import { useNavigate } from 'react-router-dom';
 
+interface Ad {
+  id: number;
+  name: string;
+  breed: string;
+  age: number;
+  description: string;
+  photoUrl: string;
+  ownerId: number;
+}
+
 const ProfileScreen = () => {
+  const { token } = useAuth();
   const { loggedUser } = useAuth();
   const navigate = useNavigate();
 
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
 
+  const [ads, setAds] = useState<Ad[]>([]);
   const [name, setName] = useState<string>("");
   const [age, setAge] = useState<string>("");
   const [breed, setBreed] = useState<string>("");
@@ -70,16 +82,49 @@ const ProfileScreen = () => {
     }
   }
 
+  
   const [ratingState, setRatingState] = useState({
-    rating: 3,
+    rating: 0
  });
 
-  const handleRatingClick = (newRating: number) => {
-    setRatingState((prevState) => ({
-      ...prevState,
-      rating: newRating,
-    }));
-  };
+
+  async function getRating() {
+    let id = loggedUser?.id;
+    try {
+      const response = await api.get(`/ratings/${id}`, {
+        headers: {
+          userId: loggedUser?.id
+        }
+      });
+      setRatingState(response.data.body);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+
+  async function averageRating() {
+    try {
+      let id = loggedUser?.id;
+      const response = await api.post(`/avarage/${id}`, {
+        headers: {
+          userId: loggedUser?.id
+        }
+      });
+      setRatingState(response.data.body.avarage);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  useEffect(() => {
+    if (loggedUser) {
+      averageRating();
+      loadAds();
+    }
+  }, [loggedUser]);
+
+
 
   const renderRatingIcons = (rating: number) => {
     const maxRating = 5;
@@ -91,7 +136,7 @@ const ProfileScreen = () => {
           <button
             key={i}
             className="rateBtn"
-            onClick={() => handleRatingClick(i + 1)}
+            onClick={() => {}}
           >
             <img src={dogPaw} alt="dog-paw" />
           </button>
@@ -101,7 +146,7 @@ const ProfileScreen = () => {
           <button
             key={i}
             className="rateBtn"
-            onClick={() => handleRatingClick(i + 1)}
+            onClick={() => {}}
           >
             <img src={dogPawEmpty} alt="empty-dog-paw" />
           </button>
@@ -112,12 +157,35 @@ const ProfileScreen = () => {
     return ratingIcons;
   };
 
+  async function deleteProfile() {
+    let id = loggedUser?.id;
+    try {
+      const response = await api.delete(`/users/${id}`, {
+        headers: {
+          userId: loggedUser?.id
+        }
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
   };
 
+
+  async function loadAds() {
+    try {
+      const response = await api.get("/posts/all", {
+      });
+      setAds(response.data.body);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
 
 
@@ -131,7 +199,7 @@ const ProfileScreen = () => {
           <div className="profile-top">
 
             <div className="profile-pic">
-              <img src={profile} alt="profile-photo" />
+              <img src={loggedUser?.profilePhoto} alt="profile-photo" />
             </div>
           
             <div className="profile-description">
@@ -161,15 +229,18 @@ const ProfileScreen = () => {
           {dropdownVisible && (
             <div className='dropdown-menup'>
               <ul>
-                <li>Editar
+              <li>
+                  <button>
+                  Editar
                   <img src={edit} alt="" />
-                </li>
-                <li>Denunciar
-                  <img src={report} alt="" />
-                </li>
-                <li>Excluir
+                </button>
+                 </li>
+              <li>
+                  <button onClick={deleteProfile}>
+                  Excluir
                   <img src={remove} alt="" />
-                </li>
+                </button>
+              </li>
               </ul>
             </div>
           )}
@@ -181,9 +252,17 @@ const ProfileScreen = () => {
             <div className="line-divider"></div>
 
             <div className="profile-posts">
-            {/* TODO: Fazer esses posts serem dinamicos */}
-            <ProfileAd id="1"/>
-            <ProfileAd id="5"/>
+            {ads.map((ad) => (
+              ad.ownerId === loggedUser?.id && (
+              <ProfileAd
+                key={ad.id}
+                id={ad.id}
+                name={ad.name}
+                photoUrl={ad.photoUrl}
+              />
+  )
+))}
+
             <AddAd
               openPopup={() => setIsPopupOpen(true)}
             />

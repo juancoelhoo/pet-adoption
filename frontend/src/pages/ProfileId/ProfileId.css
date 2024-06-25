@@ -274,17 +274,9 @@
   font-family: 'Quicksand', sans-serif;
 }
 
-.dropdown-menup button {
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  font-family: 'Quicksand', sans-serif;
-}
-
 .dropdown-menup li:hover {
   background-color: #f1f1f1;
 }
-
 
 .dropdown-menup img{
   margin-left: 10px;
