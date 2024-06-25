@@ -41,6 +41,7 @@ const ProfileScreen = () => {
   const navigate = useNavigate();
 
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
+  const [isProfilePopupOpen, setIsProfilePopupOpen] = useState<boolean>(false);
 
   const [ads, setAds] = useState<Ad[]>([]);
   const [name, setName] = useState<string>("");
@@ -48,6 +49,12 @@ const ProfileScreen = () => {
   const [breed, setBreed] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [photoUrl, setPhotoUrl] = useState<string>("");
+
+
+  const [profileName, setProfileName] = useState<string>("");
+  const [profileDescription, setProfileDescription] = useState<string>("");
+  const [profilePhotoUrl, setProfilePhotoUrl] = useState<string>("");
+  const [profileAddress, setProfileAddress] = useState<string>("");
 
   async function setFile(file: File) {
     const body = new FormData();
@@ -57,6 +64,16 @@ const ProfileScreen = () => {
 
     const response = await api.post("/files/upload", body, { headers });
     setPhotoUrl(response.data.body);
+  }
+
+  async function setProfileFile(file: File) {
+    const body = new FormData();
+    body.append("file", file);
+
+    const headers = { "Content-Type": "multipart/form-data" };
+
+    const response = await api.post("/files/upload", body, { headers });
+    setProfilePhotoUrl(response.data.body);
   }
 
   async function createPost() {
@@ -79,6 +96,31 @@ const ProfileScreen = () => {
       navigate("/posts");
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  async function updateProfile() {
+    try {
+      const body = {
+        profileName,
+        profileDescription,
+        profilePhotoUrl,
+        profileAddress
+      };
+  
+  
+      const response = await api.put(`/users/${loggedUser?.id}`, body);
+  
+      // Check if the response is successful
+      if (response.status === 200) {
+        setIsProfilePopupOpen(false);
+        alert("Perfil alterado com sucesso!");
+        window.location.reload(); // Add parentheses to invoke the function
+      } else {
+        alert("Erro ao atualizar o perfil.");
+      }
+    } catch (error) {
+      console.error("Erro ao atualizar o perfil:", error);
     }
   }
   
@@ -137,13 +179,9 @@ const ProfileScreen = () => {
   };
 
   async function deleteProfile() {
-    let id = loggedUser?.id;
     try {
-      const response = await api.delete(`/users/${id}`, {
-        headers: {
-          userId: loggedUser?.id
-        }
-      });
+      await api.delete(`/users/${loggedUser?.id}`);
+      alert("Usuário removido com sucesso!");
     } catch (e) {
       console.log(e);
     }
@@ -209,7 +247,7 @@ const ProfileScreen = () => {
             <div className='dropdown-menup'>
               <ul>
               <li>
-                  <button>
+                  <button onClick={() => {toggleDropdown(), setIsProfilePopupOpen(true)}}>
                   Editar
                   <img src={edit} alt="" />
                 </button>
@@ -257,7 +295,7 @@ const ProfileScreen = () => {
                 </div>
 
                 <ImageUpload
-                  setFile={setFile}
+                  setFile={setProfileFile}
                 />
 
                 <div className="post-input">
@@ -290,6 +328,46 @@ const ProfileScreen = () => {
 
                 <div className="create-btn">
                   <button onClick={createPost}>Criar</button>
+                </div>
+              </div>
+            )
+          }
+
+
+{
+            isProfilePopupOpen && (
+              <div className="popup-create-post">
+                <div className="close">
+                  <button onClick={() => setIsProfilePopupOpen(false)} >x</button>
+                </div>
+
+                <ImageUpload
+                  setFile={setFile}
+                />
+
+                <div className="post-input">
+                  <label htmlFor="name">
+                    <img src={nameImg} alt="" />
+                  </label>
+                  <input type="text" id="name" placeholder="Nome de usuário" onChange={e => setProfileName(e.target.value)} />
+                </div>
+
+                <div className="post-input">
+                  <label htmlFor="Localização">
+                    <img src={locationPin} alt="" />
+                  </label>
+                  <input type="text" id="location" placeholder="Localização" onChange={e => setProfileAddress(e.target.value)} />
+                </div>
+
+                <div className="post-input description-box">
+                  <label htmlFor="description">
+                    <img src={descImg} alt="" />
+                  </label>
+                  <textarea id="description" placeholder="Descrição de perfil" onChange={e => setProfileDescription(e.target.value)} />
+                </div>
+
+                <div className="create-btn">
+                  <button onClick={updateProfile}>Editar</button>
                 </div>
               </div>
             )
