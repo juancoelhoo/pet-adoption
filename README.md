@@ -50,56 +50,68 @@ Principais features:
 ## Backlog da Sprint 2
 
 •	História #1: Como usuário comum, quero poder me cadastrar na plataforma.
+•	Status: ✅
 •	Tarefas e responsáveis: 
-   1. Setup do Banco de Dados [Rafael Chimicatti] ✅
-   2. Definição do backend [Eduardo Correia] ✅
-   3. Definição do frontend [Juan Coelho] ✅
-   4.	Implementar tela inicial. [Bernardo Viggiano] ✅
-   5.	Implementar tela de cadastro. [Bernardo Viggiano] ✅
-   6.	Implementar rota de cadastro. [Bernardo Viggiano] ✅
-   7.	Implementar rota de login. [Bernardo Viggiano] ✅
-   8.	Implementar no backend a lógica de autenticação. [Bernardo Viggiano] ✅
+   1. Setup do Banco de Dados [Rafael Chimicatti]
+   2. Definição do backend [Eduardo Correia]
+   3. Definição do frontend [Juan Coelho]
+   4.	Implementar tela inicial. [Bernardo Viggiano]
+   5.	Implementar tela de cadastro. [Bernardo Viggiano]
+   6.	Implementar rota de cadastro. [Bernardo Viggiano]
+   7.	Implementar rota de login. [Bernardo Viggiano]
+   8.	Implementar no backend a lógica de autenticação. [Bernardo Viggiano]
 
 •	História #2: Como usuário comum, quero poder criar, deletar e editar um anúncio PET.
+•	Status: ✅
 •	Tarefas e responsáveis: 
    1.	Implementar tela de gerenciamento de anúncio. [Eduardo Correia]
-   2.	Implementar rota de criação. [Eduardo Correia] ✅
-   3.	Implementar rota de edição. [Eduardo Correia] ✅
-   4.	Implementar rota de exclusão. [Eduardo Correia] ✅
+   2.	Implementar rota de criação. [Eduardo Correia]
+   3.	Implementar rota de edição. [Eduardo Correia]
+   4.	Implementar rota de exclusão. [Eduardo Correia]
 
 
 •	História #3: Como usuário comum, quero poder ter acesso a informações do anúncio do PET.
+•	Status: ✅
 •	Tarefas e responsáveis: 
-   1.	Implementação da tela de anúncios. [Juan Coelho] ✅
+   1.	Implementação da tela de anúncios. [Juan Coelho]
    2.	Implementação da tela de anúncios específicos (um a um). [Juan Coelho]
-   3.	Implementar rota de listagem. [Juan Coelho] ✅
+   3.	Implementar rota de listagem. [Juan Coelho]
 
-•	História #4: Como usuário comum, gostaria de reagir ao anúncio de um PET para demonstrar interesse. 
-•	Tarefas e responsáveis: 
-   1.	Implementar botões de reação. [Bernardo Viggiano] 
-   2.	Implementar rota de adição de reações. [Bernardo Viggiano] ✅
+•	História #4: Como usuário comum, gostaria de reagir ao anúncio de um PET para demonstrar interesse.
+•	Status: ✅
+•	Tarefas e responsáveis:
+   1.	Implementar botões de reação. [Bernardo Viggiano]
+   2.	Implementar rota de adição de reações. [Bernardo Viggiano]
 
-•	História #5: Como usuário comum, gostaria de avaliar outro usuário. 
+•	História #5: Como usuário comum, gostaria de avaliar outro usuário.
+•	Status: ✅
 •	Tarefas e responsáveis: 
    1.	Criação do perfil do usuário. [Rafael Chimicatti] 
    2.	Criação da lógica de avaliação do usuário. [Rafael Chimicatti] 
    3.	Implementar rota de avaliação de usuário. [Rafael Chimicatti] 
 
-•	História #6: Como usuário comum, gostaria de denunciar posts de outros usuários. 
+•	História #6: Como usuário comum, gostaria de denunciar posts de outros usuários.
+•	Status: ✅
 •	Tarefas e responsáveis: 
-  1.	Criação da lógica de denúncia de posts. [Bernardo Viggiano] ✅
-  2.	Criação do pop-up. [Bernardo Viggiano] ✅
-  3.	Implementar rota de denúncia de posts. [Bernardo Viggiano] ✅
+  1.	Criação da lógica de denúncia de posts. [Bernardo Viggiano]
+  2.	Criação do pop-up. [Bernardo Viggiano]
+  3.	Implementar rota de denúncia de posts. [Bernardo Viggiano]
 
 •	História #7: Como usuário administrador, quero banir um usuário comum do aplicativo. 
+•	Status: ✅
 •	Tarefas e responsáveis:
    1.	Criação de tela de denúncias. [Eduardo Correia]
    2.	Criação do botão de banir usuário. [Eduardo Correia]
    3.	Implementação da lógica de banimento do usuário, baseado na permissão. [Eduardo Correia]
    4.	Implementação da rota de banimento do usuário comum do aplicativo. [Eduardo Correia]
 
-•	História #8: Como usuário administrador, gostaria de excluir posts para maior organização do aplicativo. 
+•	História #8: Como usuário administrador, gostaria de excluir posts para maior organização do aplicativo.
+•	Status: ✅
 •	Tarefas e responsáveis: 
    1.	Criação do botão de exclusão de posts, baseado na permissão. [Juan Coelho]
-   2.	Lógica de exclusão de posts. [Juan Coelho] 
-   3.	Implementação da rota da exclusão de posts. [Juan Coelho] ✅
+   2.	Lógica de exclusão de posts. [Juan Coelho]
+   3.	Implementação da rota da exclusão de posts. [Juan Coelho]
+
+## Arquitetura
+
+Disponível em [docs/README.md](https://github.com/juancoelhoo/pet-adoption/tree/main/frontend/docs/README.md)

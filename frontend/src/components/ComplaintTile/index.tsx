@@ -4,6 +4,7 @@ import { User } from '../../domain/entities/User';
 
 import './styles.css';
 import { Post } from '../../domain/entities/Post';
+import { Link } from 'react-router-dom';
 
 interface ComplaintTileProps {
     reporter: User;
@@ -14,7 +15,7 @@ interface ComplaintTileProps {
 
 const ComplaintTile = ({reporter, post, date, reason}: ComplaintTileProps) => {
   return (
-    <div className="complaint-tile">
+    <Link className="complaint-tile" to={`/profile/${post.ownerId}`}>
       <header>
         <img src={reporter.profilePhoto} alt="reporter" />
         <p>Usuário <b>{reporter.name}</b> reportou</p>
@@ -33,7 +34,7 @@ const ComplaintTile = ({reporter, post, date, reason}: ComplaintTileProps) => {
             {reason}
         </p>
       </section>
-    </div>
+    </Link>
   );
 };
 
