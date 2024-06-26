@@ -12,6 +12,7 @@ interface AuthContextProps {
     logout: () => void;
     token: string;
     loggedUser: User | null;
+    loadLoggedUser: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
@@ -72,7 +73,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, login, logout, setIsAuthenticated, token, loggedUser, setToken, isLoading }}>
+        <AuthContext.Provider value={{ isAuthenticated, login, logout, setIsAuthenticated, token, loggedUser, setToken, isLoading, loadLoggedUser }}>
             {children}
         </AuthContext.Provider>
     );

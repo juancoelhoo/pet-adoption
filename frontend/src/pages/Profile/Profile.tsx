@@ -38,7 +38,7 @@ interface Ad {
 
 const ProfileScreen = () => {
   const { token } = useAuth();
-  const { loggedUser } = useAuth();
+  const { loggedUser, loadLoggedUser } = useAuth();
   const navigate = useNavigate();
 
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
@@ -126,7 +126,7 @@ const ProfileScreen = () => {
       if (response.status === 200) {
         setIsProfilePopupOpen(false);
         alert("Perfil alterado com sucesso!");
-        window.location.reload;
+        loadLoggedUser();
       } else {
         alert("Erro ao atualizar o perfil.");
       }
