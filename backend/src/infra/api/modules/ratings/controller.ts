@@ -234,21 +234,24 @@ class RatingsController {
   async calculateAverage(req: Request, res: Response, next: NextFunction) {
     try {
       const { userId } = req.params;
-
+  
       if (!userId) throw new Error("Missing property 'userId'!");
-
+  
       const ratingsFactory = calculateUserAverageRatingFactory();
-
+  
       const average = await ratingsFactory.execute(Number(userId));
-
+  
+      const roundedAverage = Math.round(average);
+  
       return res.status(200).json({
         message: "User average rating calculated successfully!",
-        body: { average },
+        body: { average: roundedAverage },
       });
     } catch (error) {
       return next(error);
     }
   }
+  
 }
 
 export default new RatingsController();
