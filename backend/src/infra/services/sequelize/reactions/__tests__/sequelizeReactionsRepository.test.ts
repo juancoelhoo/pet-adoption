@@ -81,6 +81,8 @@ describe('SequelizeReactionsRepository', () => {
 
   describe('delete', () => {
     it('should delete a reaction', async () => {
+      (ReactionModel.destroy as jest.Mock).mockResolvedValue(1);
+
       await repository.delete(1);
 
       expect(ReactionModel.destroy).toHaveBeenCalledWith({ where: { id: 1 } });
@@ -122,6 +124,8 @@ describe('SequelizeReactionsRepository', () => {
 
   describe('deleteByUserAndPost', () => {
     it('should delete a reaction by user and post', async () => {
+      (ReactionModel.destroy as jest.Mock).mockResolvedValue(1);
+
       await repository.deleteByUserAndPost(1, 1);
 
       expect(ReactionModel.destroy).toHaveBeenCalledWith({ where: { user_id: 1, post_id: 1 } });
