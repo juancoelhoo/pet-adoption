@@ -10,12 +10,12 @@ jest.mock('@src/modules/users/factory');
 describe('UsersController', () => {
   let req: MockProxy<Request>;
   let res: MockProxy<Response>;
-  let next: MockProxy<NextFunction>;
+  let next: jest.Mock;
 
   beforeEach(() => {
     req = mock<Request>();
     res = mock<Response>();
-    next = mock<NextFunction>();
+    next = jest.fn();
     res.status.mockReturnThis();
     res.json.mockReturnThis();
   });
@@ -224,7 +224,7 @@ describe('UsersController', () => {
     });
 
     it('should handle invalid param errors', async () => {
-      const error = new InvalidParamError('Invalid data');
+      const error = new InvalidParamError('Missing property \'id\'!');
       const usersFactory = {
         execute: jest.fn().mockRejectedValue(error),
       };
@@ -234,7 +234,7 @@ describe('UsersController', () => {
       await UsersController.delete(req, res, next);
 
       expect(res.status).toHaveBeenCalledWith(400);
-      expect(res.json).toHaveBeenCalledWith({ error: 'Invalid data' });
+      expect(res.json).toHaveBeenCalledWith({ error: 'Missing property \'id\'!' });
     });
 
     it('should handle query errors when user not found', async () => {
