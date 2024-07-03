@@ -34,6 +34,13 @@ describe('SequelizeReactionsRepository', () => {
       await expect(repository.findAll()).rejects.toThrow(QueryError);
       await expect(repository.findAll()).rejects.toThrow('Error in listing reactions: Error');
     });
+
+    it('should throw Unknown QueryError on non-Error failure', async () => {
+      (ReactionModel.findAll as jest.Mock).mockRejectedValue('Unknown error');
+
+      await expect(repository.findAll()).rejects.toThrow(QueryError);
+      await expect(repository.findAll()).rejects.toThrow('Unknown error in listing reactions');
+    });
   });
 
   describe('findOne', () => {
@@ -60,6 +67,13 @@ describe('SequelizeReactionsRepository', () => {
       await expect(repository.findOne(1)).rejects.toThrow(QueryError);
       await expect(repository.findOne(1)).rejects.toThrow('Error in listing specific reaction: Error');
     });
+
+    it('should throw Unknown QueryError on non-Error failure', async () => {
+      (ReactionModel.findOne as jest.Mock).mockRejectedValue('Unknown error');
+
+      await expect(repository.findOne(1)).rejects.toThrow(QueryError);
+      await expect(repository.findOne(1)).rejects.toThrow('Unknown error in listing specific reaction');
+    });
   });
 
   describe('create', () => {
@@ -77,6 +91,13 @@ describe('SequelizeReactionsRepository', () => {
       await expect(repository.create({ userId: 1, postId: 1 })).rejects.toThrow(QueryError);
       await expect(repository.create({ userId: 1, postId: 1 })).rejects.toThrow('Error in creating reaction: Error');
     });
+
+    it('should throw Unknown QueryError on non-Error failure', async () => {
+      (ReactionModel.create as jest.Mock).mockRejectedValue('Unknown error');
+
+      await expect(repository.create({ userId: 1, postId: 1 })).rejects.toThrow(QueryError);
+      await expect(repository.create({ userId: 1, postId: 1 })).rejects.toThrow('Unknown error in creating reaction');
+    });
   });
 
   describe('delete', () => {
@@ -93,6 +114,13 @@ describe('SequelizeReactionsRepository', () => {
 
       await expect(repository.delete(1)).rejects.toThrow(QueryError);
       await expect(repository.delete(1)).rejects.toThrow('Error in deleting reaction: Error');
+    });
+
+    it('should throw Unknown QueryError on non-Error failure', async () => {
+      (ReactionModel.destroy as jest.Mock).mockRejectedValue('Unknown error');
+
+      await expect(repository.delete(1)).rejects.toThrow(QueryError);
+      await expect(repository.delete(1)).rejects.toThrow('Unknown error in deleting reaction');
     });
   });
 
@@ -120,6 +148,13 @@ describe('SequelizeReactionsRepository', () => {
       await expect(repository.findByUserAndPost(1, 1)).rejects.toThrow(QueryError);
       await expect(repository.findByUserAndPost(1, 1)).rejects.toThrow('Error in finding reaction: Error');
     });
+
+    it('should throw Unknown QueryError on non-Error failure', async () => {
+      (ReactionModel.findOne as jest.Mock).mockRejectedValue('Unknown error');
+
+      await expect(repository.findByUserAndPost(1, 1)).rejects.toThrow(QueryError);
+      await expect(repository.findByUserAndPost(1, 1)).rejects.toThrow('Unknown error in finding reaction');
+    });
   });
 
   describe('deleteByUserAndPost', () => {
@@ -136,6 +171,13 @@ describe('SequelizeReactionsRepository', () => {
 
       await expect(repository.deleteByUserAndPost(1, 1)).rejects.toThrow(QueryError);
       await expect(repository.deleteByUserAndPost(1, 1)).rejects.toThrow('Error in deleting reaction: Error');
+    });
+
+    it('should throw Unknown QueryError on non-Error failure', async () => {
+      (ReactionModel.destroy as jest.Mock).mockRejectedValue('Unknown error');
+
+      await expect(repository.deleteByUserAndPost(1, 1)).rejects.toThrow(QueryError);
+      await expect(repository.deleteByUserAndPost(1, 1)).rejects.toThrow('Unknown error in deleting reaction');
     });
   });
 
@@ -160,6 +202,13 @@ describe('SequelizeReactionsRepository', () => {
 
       await expect(repository.findAllByPostId(1)).rejects.toThrow(QueryError);
       await expect(repository.findAllByPostId(1)).rejects.toThrow('Error in listing reactions by post ID: Error');
+    });
+
+    it('should throw Unknown QueryError on non-Error failure', async () => {
+      (ReactionModel.findAll as jest.Mock).mockRejectedValue('Unknown error');
+
+      await expect(repository.findAllByPostId(1)).rejects.toThrow(QueryError);
+      await expect(repository.findAllByPostId(1)).rejects.toThrow('Unknown error in listing reactions by post ID');
     });
   });
 });
