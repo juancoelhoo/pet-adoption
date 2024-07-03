@@ -59,6 +59,12 @@ describe('SequelizeUsersRepository', () => {
   
 		await expect(repository.findAll()).rejects.toThrow(QueryError);
 	  });
+  
+	  it('should throw a QueryError if an unknown error occurs', async () => {
+		(UserModel.findAll as jest.Mock).mockRejectedValue({});
+  
+		await expect(repository.findAll()).rejects.toThrow(QueryError);
+	  });
 	});
   
 	describe('findOne', () => {
@@ -100,6 +106,12 @@ describe('SequelizeUsersRepository', () => {
   
 	  it('should throw a QueryError if an error occurs', async () => {
 		(UserModel.findOne as jest.Mock).mockRejectedValue(new Error('Error'));
+  
+		await expect(repository.findOne(1)).rejects.toThrow(QueryError);
+	  });
+  
+	  it('should throw a QueryError if an unknown error occurs', async () => {
+		(UserModel.findOne as jest.Mock).mockRejectedValue({});
   
 		await expect(repository.findOne(1)).rejects.toThrow(QueryError);
 	  });
@@ -203,6 +215,26 @@ describe('SequelizeUsersRepository', () => {
   
 		await expect(repository.create(user)).rejects.toThrow(QueryError);
 	  });
+  
+	  it('should throw a QueryError if an unknown error occurs', async () => {
+		(isValidEmail as jest.Mock).mockReturnValue(true);
+		(isValidPassword as jest.Mock).mockReturnValue(true);
+		(bcrypt.hash as jest.Mock).mockResolvedValue('hashed_password');
+		(UserModel.create as jest.Mock).mockRejectedValue({});
+  
+		const user: CreateUserRequest = {
+		  name: 'User1',
+		  email: 'user1@example.com',
+		  password: 'password',
+		  profilePhoto: 'url',
+		  description: 'desc',
+		  address: 'addr',
+		  phone: 'phone',
+		  permissions: 0,
+		};
+  
+		await expect(repository.create(user)).rejects.toThrow(QueryError);
+	  });
 	});
   
 	describe('update', () => {
@@ -251,6 +283,22 @@ describe('SequelizeUsersRepository', () => {
   
 		await expect(repository.update(1, user)).rejects.toThrow(QueryError);
 	  });
+  
+	  it('should throw a QueryError if an unknown error occurs', async () => {
+		(UserModel.update as jest.Mock).mockRejectedValue({});
+  
+		const user: Omit<UpdateUserRequest, 'id' | 'email'> = {
+		  name: 'Updated User',
+		  password: 'password',
+		  profilePhoto: 'url',
+		  description: 'desc',
+		  address: 'addr',
+		  phone: 'phone',
+		  permissions: 0,
+		};
+  
+		await expect(repository.update(1, user)).rejects.toThrow(QueryError);
+	  });
 	});
   
 	describe('delete', () => {
@@ -264,6 +312,12 @@ describe('SequelizeUsersRepository', () => {
   
 	  it('should throw a QueryError if an error occurs', async () => {
 		(UserModel.destroy as jest.Mock).mockRejectedValue(new Error('Error'));
+  
+		await expect(repository.delete(1)).rejects.toThrow(QueryError);
+	  });
+  
+	  it('should throw a QueryError if an unknown error occurs', async () => {
+		(UserModel.destroy as jest.Mock).mockRejectedValue({});
   
 		await expect(repository.delete(1)).rejects.toThrow(QueryError);
 	  });
