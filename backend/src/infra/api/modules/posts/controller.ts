@@ -2,6 +2,7 @@ import { CreatePostRequest } from "@src/modules/posts/domain/entities/createPost
 import { UpdatePostRequest } from "@src/modules/posts/domain/entities/updatePostRequest";
 import { createPostFactory, deletePostFactory, getAllPostsFactory, getSpecificPostFactory, updatePostFactory } from "@src/modules/posts/factory";
 import { Request, Response, NextFunction } from "express";
+import { InvalidParamError } from "../../errors/InvalidParamError";
 
 class PostsController {
   /**
@@ -66,6 +67,12 @@ class PostsController {
 
       const post = await postsFactory.execute(Number(id));
 
+      if (!post) {
+        return res.status(404).json({
+          message: "Post not found!",
+        });
+      }
+
       return res.status(200).json({
         message: "Post listed successfully!",
         body: post,
@@ -125,9 +132,20 @@ class PostsController {
    */
   async update(req: Request, res: Response, next: NextFunction) {
     try {
-      const postsFactory = updatePostFactory();
-
       const post: Required<UpdatePostRequest> = req.body;
+
+      if (!post.id) throw new InvalidParamError("Missing property 'id'!");
+
+      const getPostFactory = getSpecificPostFactory();
+      const existingRating = await getPostFactory.execute(Number(post.id));
+
+      if (!existingRating) {
+        return res.status(404).json({
+          message: "Post not found!",
+        });
+      }
+
+      const postsFactory = updatePostFactory();
 
       await postsFactory.execute(post);
 
@@ -161,6 +179,15 @@ class PostsController {
       const { id } = req.params;
 
       if (!id) throw new Error("Missing property 'id'!");
+
+      const getPostFactory = getSpecificPostFactory();
+      const existingRating = await getPostFactory.execute(Number(id));
+
+      if (!existingRating) {
+        return res.status(404).json({
+          message: "Post not found!",
+        });
+      }
 
       const postsFactory = deletePostFactory();
 

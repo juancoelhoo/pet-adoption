@@ -29,9 +29,6 @@ class ComplaintsController {
         body: complaints,
       });
     } catch (error) {
-      if (error instanceof QueryError) {
-        return res.status(400).json({ error: error.message });
-      }
       return next(error);
     }
   }
@@ -65,17 +62,17 @@ class ComplaintsController {
       const complaintsFactory = getSpecificComplaintFactory();
       const complaint = await complaintsFactory.execute(Number(id));
 
+      if (!complaint) {
+        return res.status(404).json({
+          message: "Complaint not found!",
+        });
+      }
+
       return res.status(200).json({
         message: "Complaint listed successfully!",
         body: complaint,
       });
     } catch (error) {
-      if (error instanceof InvalidParamError) {
-        return res.status(400).json({ error: error.message });
-      }
-      if (error instanceof QueryError) {
-        return res.status(404).json({ error: "Complaint not found" });
-      }
       return next(error);
     }
   }
@@ -106,9 +103,6 @@ class ComplaintsController {
         message: "Complaint created successfully!"
       });
     } catch (error) {
-      if (error instanceof InvalidParamError || error instanceof QueryError) {
-        return res.status(400).json({ error: error.message });
-      }
       return next(error);
     }
   }
@@ -142,6 +136,16 @@ class ComplaintsController {
       if (!id) throw new InvalidParamError("Missing property 'id'!");
 
       const complaint = req.body;
+
+      const getComplaintFactory = getSpecificComplaintFactory();
+      const existingComplaint = await getComplaintFactory.execute(Number(id));
+
+      if (!existingComplaint) {
+        return res.status(404).json({
+          message: "Complaint not found!",
+        });
+      }
+
       const complaintsFactory = updateComplaintFactory();
       await complaintsFactory.execute(Number(id), complaint);
 
@@ -149,9 +153,6 @@ class ComplaintsController {
         message: "Complaint updated successfully!"
       });
     } catch (error) {
-      if (error instanceof InvalidParamError || error instanceof QueryError) {
-        return res.status(400).json({ error: error.message });
-      }
       return next(error);
     }
   }
@@ -178,6 +179,15 @@ class ComplaintsController {
       const { id } = req.params;
       if (!id) throw new InvalidParamError("Missing property 'id'!");
 
+      const getComplaintFactory = getSpecificComplaintFactory();
+      const existingComplaint = await getComplaintFactory.execute(Number(id));
+
+      if (!existingComplaint) {
+        return res.status(404).json({
+          message: "Complaint not found!",
+        });
+      }
+
       const complaintsFactory = deleteComplaintFactory();
       await complaintsFactory.execute(Number(id));
 
@@ -185,12 +195,6 @@ class ComplaintsController {
         message: "Complaint deleted successfully!"
       });
     } catch (error) {
-      if (error instanceof InvalidParamError) {
-        return res.status(400).json({ error: error.message });
-      }
-      if (error instanceof QueryError) {
-        return res.status(404).json({ error: "Complaint not found" });
-      }
       return next(error);
     }
   }
