@@ -69,16 +69,15 @@ export class SequelizeUsersRepository implements UsersRepository {
   }
 
   async create(user: CreateUserRequest): Promise<void> {
+    if (!isValidEmail(user.email)) {
+      throw new InvalidParamError("Invalid email format");
+    }
+
+    if (!isValidPassword(user.password)) {
+      throw new InvalidParamError("Password does not meet security criteria");
+    }
+
     try {
-      // TODO: Move to this to use case
-      if (!isValidEmail(user.email)) {
-        throw new InvalidParamError("Invalid email format");
-      }
-
-      if (!isValidPassword(user.password)) {
-        throw new InvalidParamError("Password does not meet security criteria");
-      }
-
       const encryptedPassword = await this.encryptPassword(user.password);
       await UserModel.create({
         name: user.name,

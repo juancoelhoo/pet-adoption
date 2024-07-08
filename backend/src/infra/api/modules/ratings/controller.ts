@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { CreateRatingRequest } from "@src/modules/ratings/domain/entities/createRatingRequest";
 import { UpdateRatingRequest } from "@src/modules/ratings/domain/entities/updateRatingRequest";
 import { createRatingFactory, deleteRatingFactory, getAllRatingsFactory, getSpecificRatingFactory, updateRatingFactory, calculateUserAverageRatingFactory } from "@src/modules/ratings/factory";
+import { InvalidParamError } from "../../errors/InvalidParamError";
 
 class RatingsController {
   /**
@@ -60,7 +61,7 @@ class RatingsController {
     try {
       const { id } = req.params;
 
-      if (!id) throw new Error("Missing property 'id'!");
+      if (!id) throw new InvalidParamError("Missing property 'id'!");
 
       const ratingsFactory = getSpecificRatingFactory();
 
@@ -139,7 +140,7 @@ class RatingsController {
   async update(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
-      if (!id) throw new Error("Missing property 'id'!");
+      if (!id) throw new InvalidParamError("Missing property 'id'!");
 
       const ratingsFactory = getSpecificRatingFactory();
       const existingRating = await ratingsFactory.execute(Number(id));
@@ -183,7 +184,7 @@ class RatingsController {
   async delete(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
-      if (!id) throw new Error("Missing property 'id'!");
+      if (!id) throw new InvalidParamError("Missing property 'id'!");
 
       const ratingsFactory = getSpecificRatingFactory();
       const existingRating = await ratingsFactory.execute(Number(id));
