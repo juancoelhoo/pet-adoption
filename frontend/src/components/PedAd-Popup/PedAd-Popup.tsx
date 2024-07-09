@@ -133,7 +133,7 @@ const PedAdPopup: React.FC<PedAdPopupProps> = ({
           <div className="profile">
             <Link to={`/profile/${owner.id}`} className="profile-user">
               <img src={owner.profilePhoto} alt="profile-photo" />
-              <span>{owner.name}</span>
+              <span className='profile-link'>{owner.name}</span>
             </Link>
             <img src={profileAccess} alt="profile-access" className="profile-access" />
           </div>

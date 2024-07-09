@@ -61,6 +61,7 @@ const PostComplaintPopup: React.FC<PostComplaintPopupProps> = ({
       <div className="post-complaint-popup-content">
         <h3>Denúncia de publicação</h3>
         <textarea
+          className='reason'
           value={reason}
           onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setReason(e.target.value)}
           placeholder="Escreva aqui a razão da sua denúncia."
@@ -68,7 +69,7 @@ const PostComplaintPopup: React.FC<PostComplaintPopupProps> = ({
           title="A denúncia deve ter entre 1 e 120 caracteres."
         ></textarea>
         <div className="button-group">
-          <button onClick={handleSubmit}>Enviar denúncia</button>
+          <button className='submit-complaint' onClick={handleSubmit}>Enviar denúncia</button>
           <button className="cancel-button" onClick={handleClosePopup}>Cancelar</button>
         </div>
         {message && (

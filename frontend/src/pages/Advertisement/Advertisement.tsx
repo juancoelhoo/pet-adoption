@@ -78,10 +78,12 @@ const AdvertisementPage: React.FC = () => {
           <img src={adSvg} alt="ad-logo" />
           <span>Anúncios</span>
         </div>
-        <div className="pet-ads">
+        <div className="pet-ads" data-testid="petads">
           {ads.map((ad) => (
             <PetAd
+
               key={ad.id}
+              data-testid={`pet-ad-${ad.id}`}
               onClick={() => openPopup(ad.name, ad.breed, ad.age, ad.description, ad.photoUrl, ad.id, ad.owner)}
               name={ad.name}
               breed={ad.breed}
