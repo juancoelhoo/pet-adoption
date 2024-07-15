@@ -115,3 +115,11 @@ Principais features:
 ## Arquitetura
 
 Disponível em [docs/README.md](https://github.com/juancoelhoo/pet-adoption/tree/main/frontend/docs/README.md)
+
+## Testes
+
+**Testes unitários e de integração (Back-End):**
+Para os testes unitários e de integração feitos no Back-End, foi usada a biblioteca Jest, ela juntamente da arquitetura hexagonal facilitou muito para testarmos e cobrirmos o nosso código. Atualmente temos cerca de **90%** de cobertura de testes.
+
+**Testes E2E (Front-End):**
+Para os testes de ponta a ponta (end-to-end, E2E) do Front-End foi usado o framework Cypress que nos possibilita rodar um teste automatizado clicando e interagrindo com os componentes da tela, por meio de uma janela flutuante.
